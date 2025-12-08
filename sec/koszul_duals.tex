@@ -1,0 +1,143 @@
+% !TEX root = ../ck2.tex
+
+\subsection{Koszul duality}\label{ss:koszul_duals}
+
+%Koszul duality for operads associates to a quadratic operad \(\mathrm{O}\) a cooperad \(\mathrm{O}^\ac\) which records the coalgebraic shadows of the generators and relations, and whose cobar construction provides a canonical cofibrant resolution of \(\mathrm{O}\) when \(\mathrm{O}\) is Koszul.
+%Starting from a presentation \(\mathrm{O} \cong \P(E,R)\), one considers the cofree conilpotent cooperad on \(E\) and then cuts out the smallest subcooperad containing \(E\) and the suspended relations; its linear dual, up to the usual suspension, gives the Koszul dual operad \(\mathrm{O}^!\).
+%In the homogeneous quadratic case this recovers the classical Koszul duality picture of Ginzburg–Kapranov, while in the inhomogeneous (quadratic–linear) case one has to twist the cooperad by a coderivation determined by the linear part of the relations.
+%We recall these constructions in a form adapted to the operads \(\mathrm{Com}\) and \(\cBV\) and refer to \cite{LodayVallette12, GCTV12} for a systematic exposition.
+%Our ultimate goal in this subsection is to construct the Koszul dual cooperad \(\cBV^\ac\).
+%This requires extending Koszul duality to the differential graded inhomogeneous setting.
+
+Let \(E\) be an \(\Sy\)-module and let \(\cT^{c}(E)\) denote the cofree conilpotent cooperad on \(E\).
+Let \(R \subset \cT^{c}(E)\) be an \(\Sy\)-submodule.
+We define \defn{\(\cC(E; R)\)} to be the smallest subcooperad of \(\cT^{c}(E)\) containing \(E\) and \(R\).
+
+\subsubsection{Homogeneous quadratic case}
+
+The \defn{Koszul dual cooperad} of an operad \(\mathrm{O} \cong \P(E, R)\) presented by quadratic data \((E, R)\) is
+\[
+\mathrm{O}^\ac \defeq \cC(sE; s^{2}R),
+\]
+where \(s\) denotes the homological suspension of \(\Sy\)-modules.
+The \defn{Koszul dual operad} is the shifted linear dual of the cooperadic suspension of \(\mathrm{O}^\ac\):
+\begin{equation}\label{eq:koszul_dual_operad}
+	\mathrm{O}^! \defeq \mathrm{S} \otimes_H \big(\mathrm{O}^{\ac}\big)^*,
+\end{equation}
+where \(\mathrm{S} \defeq \mathrm{End}_{\KK s^{-1}}\) is the suspension operad.
+
+\begin{example}\label{ex:Comac}
+	The Koszul dual cooperad and operad associated to the quadratic presentation \((V, S)\) of the operad \(\Com\) given in \cref{def:com_operad} are
+	\[
+	\Com^\ac \cong \Lie^c_1
+	\quad\text{and}\quad
+	\Com^! \cong \Lie,
+	\]
+	where \(\Lie^c_1\) stands for the cooperad encoding Lie coalgebras with cobrackets of degree \(1\) and \(\Lie\) is the operad encoding Lie algebras.
+\end{example}
+
+\subsubsection{Inhomogeneous quadratic case}
+
+To deal with operads \(\mathrm{O} \cong \P(E,R)\) presented by inhomogeneous quadratic data, like the operad \(\BV\), one considers the projection \(\q \colon \cT(E) \to \cT(E)^{(2)}\) and defines its \defn{analogue quadratic data} as \((E, \q R)\).
+The \defn{quadratic analogue operad} of \(\rO\) is \(\q\mathrm{O} \defeq \P(E,\q R)\).
+
+\begin{definition}
+	The \defn{quadratic-linear conditions} for a quadratic-linear presentation \((E, R)\) are
+	\begin{description}
+		\item[\rm (\(ql_1\))] \(R \cap E = 0\)~,
+		\item[\rm (\(ql_2\))] \(\big\{R \circ_{(1)} E + E \circ_{(1)} R\big\} \cap \cT(E)^{(2)} \subset R \cap \cT(E)^{(2)} = 0\).
+	\end{description}
+\end{definition}
+
+Intuitively, these conditions express respectively the minimality of the generators and the maximality of the weight two part of the relations.
+
+\begin{lemma}[{\cite[Lemma~37]{GCTV12}}]\leavevmode
+	\begin{enumerate}
+		\item Condition~(\(ql_1\)) implies that the space of relations \(R\) can be written as the graph of a map \(\varphi \colon \q R \to E\).
+		\item Condition~\((ql_2)\) implies that there exists a square-zero coderivation \(d_\varphi\) on the Koszul dual cooperad of the quadratic analogue presentation extending
+		\[
+		\cC\big(sE, s^2 \q R\big) \to s^2 \q R \xra{s^{-1}\varphi} sE.
+		\]
+	\end{enumerate}
+\end{lemma}
+
+The \defn{Koszul dual cooperad} of an operad \(\mathrm{O} \cong \P(E, R)\) presented by an inhomogeneous quadratic data satisfying the quadratic-linear conditions is
+\[
+\mathrm{O}^\ac \defeq \big(\q \mathrm{O}^\ac, d_\varphi\big) = \big(\cC(sE, s^2 \q R), d_\varphi\big).
+\]
+The \defn{Koszul dual operad} \(\mathrm{O}^!\) is defined as in the homogeneous case \eqref{eq:koszul_dual_operad}.
+
+\begin{example}\label{ex:qlCondition}
+	The inhomogeneous quadratic presentation of the operad \(\BV\) given in \cref{lemma:presentationBV}
+	satisfies the quadratic-linear conditions: the Jacobi relation and the derivation relation were included in this presentation in order to satisfy Condition~\((ql_2)\).
+	In this case, the map
+	\(\varphi \colon \q R \to E\) is given by
+	\[
+	\DM{1}{2} - \MDL{1}{2} - \MDR{1}{2} \mapsto \BB{1}{2}
+	\]
+	and by \(0\) otherwise.
+\end{example}
+
+\subsubsection{Inhomogeneous dg quadratic case}
+
+In order to work with the operad \(\cBV\), we need to develop a Koszul duality theory for \emph{differential graded} quadratic-linear data  \((E_\bullet, R_\bullet)\).
+If this data satisfies the quadratic-linear conditions, then there exists a chain map \(\psi \colon (\q R_\bullet, \partial) \to (E_\bullet, \partial)\), whose graph coincides with the space \(R_\bullet\) of quadratic-linear relations.
+This chain map induces a square-zero coderivation \(d_\psi\) on the Koszul dual cooperad of the quadratic analogue
+\(\cC(sE_\bullet, s^2 \q R_\bullet)\),
+which extends the map
+\[
+\cC(sE_\bullet, s^2 \q R_\bullet) \twoheadrightarrow s^2 \q R_\bullet \xra{s^{-1}\psi} sE_\bullet.
+\]
+The internal differential \(\partial\) of the dg quadratic-linear data \(\big(E_\bullet, R_\bullet\big)\) also induces a square-zero coderivation \(d_1\) on \(\cC(sE_\bullet, s^2 \q R_\bullet)\).
+
+\begin{lemma}\label{lemma:commutingcodiff}
+	For any dg quadratic-linear data \(\big(E_\bullet, R_\bullet\big)\) satisfying the quadratic-linear conditions,
+	the two codifferentials \(d_1\) and \(d_\psi\) of the cooperad \(\cC(sE_\bullet, s^2 \q R_\bullet)\) anti-commute.
+\end{lemma}
+
+\begin{proof*}
+	The commutator \([d_1, d_\psi] \defeq d_1 d_\psi + d_\psi d_1\) is a coderivation of the quadratic
+	cooperad \(\cC\big(sE_\bullet,s^2 \q R_\bullet\big)\), therefore it is completely characterised by its projection onto the
+	space \(sE_\bullet\) of cogenerators.
+	The coderivation \(d_1\) preserves the weight and the coderivation \(d_\psi\) lowers the weight by \(1\), so it is enough to compute
+	\([d_1, d_\psi]= d_1 d_\psi + d_\psi d_1\) on \(s^2\q R_\bullet\).
+	This relation is a direct consequence of the fact that the map \(\psi\) preserves the differential induced by \(\partial\) since it coincides with the following commutative diagram:
+	\[
+	\begin{tikzcd}[column sep=huge, row sep=large]
+		s^2\q R_\bullet \arrow[r, "d_\psi=s^{-1}\psi"] \arrow[d, "d_1=s^2\partial"'] & s E_\bullet\ \arrow[d, "-d_1=s\partial"]\\
+		s^2\q R_\bullet \arrow[r, "d_\psi=s^{-1}\psi"] & s E_\bullet.
+	\end{tikzcd}
+	\]
+	This is the case for the operad \(\cBV\) by \cref{lemme:qlsforcBV} and the map \(\psi\) is explicitly given by
+	\[
+	\DM{1}{2} - \MDL{1}{2} - \MDR{1}{2} \mapsto \BB{1}{2} \qquad \text{and} \qquad
+	\BoxM{1}{2} - \MBoxL{1}{2} - \MBoxR{1}{2} \mapsto \CC{1}{2},
+	\]
+	and by \(0\) otherwise.
+	The two commuting diagrams are here given by
+	\[
+	\begin{tikzcd}
+		\DMsusp{1}{2} + \MDLsusp{1}{2} + \MDRsusp{1}{2}  \arrow[r, |->] \arrow[d, |->] &
+		-\BBsusp{1}{2} \arrow[d, |->] \\
+		\BoxMsusp{1}{2} - \MBoxLsusp{1}{2} - \MBoxRsusp{1}{2} \arrow[r, |->] & \CCsusp{1}{2}
+	\end{tikzcd}
+	\quad \text{and}
+	\]
+	\[
+	\begin{tikzcd}
+		\BoxMsusp{1}{2} - \MBoxLsusp{1}{2} - \MBoxRsusp{1}{2}  \arrow[r, |->] \arrow[d, |->] &
+		\CCsusp{1}{2} \arrow[d, |->] \\
+		0 \arrow[r, |->] & 0.
+	\end{tikzcd}
+	\]
+\end{proof*}
+
+\cref{lemma:commutingcodiff} allows us to introduce the following.
+
+\begin{definition}
+	The \defn{Koszul dual cooperad} of an operad \(\mathrm{O} \cong \P(E_\bullet, R_\bullet)\) presented by inhomogeneous dg quadratic data satisfying the quadratic-linear conditions is
+	\[
+	\mathrm{O}^\ac \defeq \big(\q \mathrm{O}^\ac, d_1+d_\psi\big) = \big(\cC(sE_\bullet, s^2 \q R_\bullet), d_1+d_\psi\big).
+	\]
+	The \defn{Koszul dual operad} \(\mathrm{O}^!\) is defined the same formula \eqref{eq:koszul_dual_operad} as in the homogeneous case.
+\end{definition}

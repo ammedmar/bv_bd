@@ -1,0 +1,177 @@
+% !TEX root = ../ck2.tex
+
+\subsubsection{Koszul resolution}\label{ss:cofibrant_operads}
+
+Homotopy \(\rO\)-algebras are defined as algebras over a \defn{cofibrant replacement} of the operad \(\rO\), that is, a cofibrant operad \(\rQ\rO\) with an acyclic fibration
+\(
+\begin{tikzcd}[column sep=15pt]
+	\rQ\rO \arrow[r, ->>, "\sim\ "] & \rO.
+\end{tikzcd}
+\)
+A \defn{Koszul resolution} is a cofibrant replacement of the specific form
+\begin{equation}\label{eq:Omega Oac->O}
+	\begin{tikzcd}[column sep=22pt]
+		\Omega\rO^{\ac} \arrow[r, ->>, "\sim\ "] & \rO,
+	\end{tikzcd}
+\end{equation}
+where \(\rO^{\ac}\) is the Koszul dual cooperad associated to a chosen presentation of \(\rO\), \(\Omega\) is the cobar construction, and the morphism \eqref{eq:Omega Oac->O} is induced by the canonical \textit{twisting morphism} \(\rO^{\ac} \to \rO\).
+
+\subsubsection{Twisting morphisms}
+
+A \defn{twisting morphism} between a cooperad \(\rC\) and a operad \(\rO\) is a degree \(-1\) map of \(\Sy\)-modules \(\tau \colon \rC \to \rO\) satisfying the Maurer--Cartan equation in the convolution dg Lie algebra \(\Hom_{\Sy}(\rC,\rO)\):
+\[
+\partial_{\rO} \circ \tau + \tau \circ \partial_{\rC} + \tau \star \tau = 0.
+\]
+
+\begin{lemma}\label{lemma:KDdgInhomo}
+	Let \(\big(E_\bullet, R_\bullet\big)\) be dg quadratic-linear data satisfying the quadratic-linear conditions.
+	Then, the canonical \(\Sy\)-module map
+	\[
+	\kappa \colon \mathcal{C}\big(sE_\bullet, s^2 qR_\bullet\big) \twoheadrightarrow sE_\bullet
+	\xrightarrow{s^{-1}} E_\bullet \to \mathcal{P}\big(E_\bullet, R_\bullet\big)
+	\]
+	is a twisting morphism.
+	Additionally, \(\kappa\) induces a twisting morphism
+	\[
+	\bar{\kappa} \colon \big(H_\bullet(\rO^{\ac}, d_1), \bar{d}_\psi\big) \to \big(H_\bullet(\rO, \partial), 0\big).
+	\]
+	where \(\bar{d}_\psi\) is the differential in the \(d_1\)-homology of \(\rO^\ac\) induced by \(d_\psi\).
+\end{lemma}
+
+\begin{proof*}
+%	This extends the case of quadratic-linear data with trivial differential treated in \cite[Section~7.8.4]{LodayVallette12}, but the arguments are similar.
+	We have to show that the assignment \(\kappa\) satisfies the Maurer--Cartan equation
+	\[
+	\dif \kappa + \kappa\,(d_1 + d_\psi) + \kappa \star \kappa = 0.
+	\]
+	By definition of the various maps, the left-hand side of this equation vanishes on elements of weight \(0\) and of weight greater or equal to \(3\).
+	For elements \(sE_\bullet\) of weight one, the only possibly non-trivial terms are the first two, which are equal to
+	\[
+	\partial s^{-1} + s^{-1}(-\partial) = 0.
+	\]
+	For elements of \(s^2 qR_\bullet\) that are also in \(s^2 R_\bullet\), that is homogeneous quadratic relations, their image under \(\kappa \star \kappa\) vanishes in \(\rO\) since they are initial homogeneous quadratic relations there.
+	Their image under \(\kappa d_\psi\) vanishes by definition of \(\psi\), and their image under \(\dif \kappa + \kappa d_1\) vanishes for weight reasons.
+
+	For elements \(s^2 \rho\) of \(s^2 qR_\bullet\) that are not in \(s^2 R_\bullet\), that is inhomogeneous quadratic relations, there exists a non-trivial \(\varepsilon \in E_\bullet\) such that \(\rho + \varepsilon \in R_\bullet\).
+	In this case, the image of \(s^2 \rho\) under \(\dif \kappa + \kappa d_1\) still vanishes for weight reasons.
+	The remaining non-trivial part of the Maurer--Cartan equation is equal to
+	\[
+	\kappa\big(d_\psi(s^2\rho)\big) + (\kappa \star \kappa)(s^2\rho)
+	=
+	\kappa(-s\varepsilon) + \varepsilon
+	=
+	-\varepsilon + \varepsilon
+	=
+	0
+	\]
+	in \(\rO\).
+
+	Finally, since the internal codifferential \(d_1\) preserves the weight grading, the map \(\bar{\kappa}\) is well defined and equal to
+	\[
+	\bar{\kappa} \colon H_\bullet\big(\rO^{\ac}, d_1\big) \twoheadrightarrow H_\bullet\big(s E_\bullet,-\partial\big)
+	\xrightarrow{s^{-1}} H_\bullet\big(E_\bullet,\partial\big) \to H_\bullet\big(\rO, \partial\big).
+	\]
+	The Maurer--Cartan equation on the chain level satisfied by \(\kappa\) implies the Maurer--Cartan equation on homology satisfied by \(\bar{\kappa}\).
+\end{proof*}
+
+%\begin{lemma}
+%	It induces a twisting morphism
+%	\[
+%	\bar{\kappa} \colon H_\bullet\big(\rO^{\ac}, d_1\big) \to H_\bullet\big(\rO,\partial\big)
+%	\]
+%	from the homology of the Koszul dual cooperad equipped with the induced codifferential \(\bar{d}_\psi\) to the homology operad.
+%\end{lemma}
+
+\subsubsection{Koszul property}
+
+A twisting morphism \(\tau \colon \rC \to \rO\) is called \defn{Koszul} when its associated operad morphism \(\Omega\rC \to \rO\), which is always a fibration, is a weak equivalence.
+This morphism is the unique operad map whose restriction to the generators \(s^{-1}\overline{\rC} \subset \Omega\rC\) sends \(s^{-1}c\) to \(\tau(c)\) for each \(c \in \overline{\rC}\).
+
+\begin{definition}
+	An operad \(\rO = \mathcal{P}\big(E_\bullet, R_\bullet\big)\) given by dg quadratic-linear data satisfying the
+	quadratic-linear conditions is called \defn{Koszul} when \(\bar{\kappa}\) is a Koszul morphism.
+\end{definition}
+
+\begin{theorem}\label{t:koszul_main}
+	The cobar construction \(\Omega\rO^\ac\) of the Koszul dual cooperad of an Koszul operad \(\rO = \mathcal{P}\big(E_\bullet, R_\bullet\big)\) is cofibrant and the canonical projection
+	\[
+	\begin{tikzcd}[column sep=0.7cm]
+		\rO_\infty \defeq \Omega \rO^{\ac}
+		\arrow[r, ->>, "\sim"]  & \rO
+	\end{tikzcd}
+	\]
+	is an acyclic fibration.
+\end{theorem}
+
+\begin{proof*}
+	This twisting morphism \(\kappa\) of \cref{lemma:KDdgInhomo} induces a morphism of operads
+	\[
+	g_\kappa \colon \rO_\infty = \Omega \rO^{\ac} \twoheadrightarrow \rO,
+	\]
+	which is surjective since it reaches all the generators of \(\rO\), so it is a fibration.
+	Let us recall that the cobar construction of the Koszul dual cooperad is given by
+	\[
+	\Omega \rO^{\ac} =
+	\Big(
+	\mathcal{T}\big(s^{-1}\overline{\mathcal{C}}\big(sE_\bullet, s^2 qR_\bullet\big)\big),
+	d_1 + d_\psi + d_2
+	\Big),
+	\]
+	where we use the same notation for the differentials induced by \(d_1\) and \(d_\psi\), by a slight abuse of notation.
+	In order to prove that the map \(g_\kappa\) is a quasi-isomorphism, we consider, on the left-hand side, the increasing filtration
+	\[
+	\mathcal{F}_k \Omega \rO^{\ac} \defeq \bigoplus_{l \leqslant k} \Omega_l \rO^{\ac},
+	\qquad
+	0 = \mathcal{F}_{-1} \subset \mathcal{F}_0 \subset \mathcal{F}_1 \subset \mathcal{F}_2 \subset \cdots \subset \mathcal{F}_k \subset \mathcal{F}_{k+1} \subset \cdots \subset \Omega\rO^{\ac}
+	\]
+	given by the syzygy degree, which is defined for every element of \(\Omega\rO^{\ac}\) by the sum over the vertices of the weight of the labeling elements minus \(1\), see \cite[Section~7.3]{LodayVallette12}.
+	The differential \(d_1\) preserves this filtration and the two differentials \(d_\psi\) and \(d_2\) lower it by \(1\).
+	On the right-hand side, we consider the trivial filtration
+	\[
+	0 = \mathcal{G}_{-1} \subset \mathcal{G}_0 = \rO = \mathcal{G}_1 = \cdots = \mathcal{G}_k = \cdots = \rO.
+	\]
+	The assignment \(g_\kappa\) obviously preserves the respective filtrations.
+	On the left-hand side, the first page of the associated spectral sequence is isomorphic to
+	\[
+	\big(E^0 \Omega \rO^{\ac}, d^0\big) \cong \Big(\mathcal{T}\big(s^{-1}\overline{\mathcal{C}}\big(sE_\bullet,
+	s^2 qR_\bullet\big)\big), d_1\Big).
+	\]
+	The operadic Künneth theorem \cite[Proposition~6.2.3]{LodayVallette12} implies that
+	the second page of this spectral sequence is isomorphic to the cobar construction of the homology of the Koszul dual cooperad equipped with the codifferential \(\bar{d}_\psi\):
+	\[
+	\big(E^1 \Omega \rO^{\ac}, d^1\big) \cong \Omega H_\bullet\big(\rO^\ac, d_1\big).
+	\]
+	On the right-hand side, the first page of the associated spectral sequence is isomorphic to
+	\[
+	\big(E^0 \rO, d^0\big) \cong \big(\rO, \dif\big),
+	\]
+	so its second page is isomorphic to the homology operad equipped with trivial differential:
+	\[
+	\big(E^1 \rO, d^1\big) \cong \big(H_\bullet(\rO, \partial), 0\big).
+	\]
+	The induced map
+	\[
+	\begin{tikzcd}
+		E^1 g_\kappa = g_{\bar\kappa} \colon \Omega H_\bullet\big(\rO^\ac, d_1\big)
+		\arrow[r, "\sim"]  & H_\bullet(\rO, \partial)
+	\end{tikzcd}
+	\]
+	is the quasi-isomorphism of operads corresponding to the Koszul morphism
+	\(\bar{\kappa} \colon H_\bullet\big(\rO^{\ac}, d_1\big) \to H_\bullet\big(\rO,\partial\big)\).
+	Since these two filtrations are bounded below and exhaustive, their convergence shows that the morphism \(g_\kappa\) is a quasi-isomorphism by \cite[Theorem~5.2.12]{WeibelBook}.
+
+	\medskip
+
+	This Koszul type resolution
+	\[
+	\begin{tikzcd}
+		\rO_\infty = \Omega \rO^{\ac}
+		=
+		\Big(
+		\mathcal{T}\big(s^{-1}\overline{\mathcal{C}}\big(sE_\bullet, s^2 qR_\bullet\big)\big), d_1 + d_\psi + d_2
+		\Big)
+		\arrow[r, ->>, "\sim"]  & \rO
+	\end{tikzcd}
+	\]
+	is quasi-free on a space of generators non-negatively graded by the syzygy degree, so it is cofibrant.
+\end{proof*}

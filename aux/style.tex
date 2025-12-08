@@ -1,0 +1,92 @@
+% bibliography
+\usepackage[
+	backend=biber,
+	style=numeric-comp,   % compress [11--19]
+	sorting=none,         % bibliography order = input order (or bbl order)
+	sortcites=true,       % sort numbers inside \cite{...} so compression works
+	backref=true,
+	url=false,
+	doi=false,
+	isbn=false,
+	eprint=false]{biblatex}
+
+\renewbibmacro{in:}{} % don't display "in:" before the journal name
+\AtEveryBibitem{\clearfield{pages}} % don't show page numbers
+
+\DeclareFieldFormat{title}{\myhref{\mkbibemph{#1}}}
+\DeclareFieldFormat[book,article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{\myhref{#1\isdot}}
+
+\newcommand{\doiorurl}{%
+	\iffieldundef{doi}
+	{%
+		\iffieldundef{url}
+		{%
+			\iffieldundef{eprint}
+			{}% nothing available
+			{https://arxiv.org/abs/\strfield{eprint}}%
+		}
+		{\strfield{url}}%
+	}
+	{https://doi.org/\strfield{doi}}%
+}
+
+\newcommand{\myhref}[1]{%
+	\ifboolexpr{%
+		test {\ifhyperref}
+		and
+		not test {\iftoggle{bbx:eprint}}
+		and
+		not test {\iftoggle{bbx:url}}
+	}
+	{\href{\doiorurl}{#1}}
+	{#1}%
+}
+
+% references
+\usepackage[
+	bookmarks=true,
+	linktocpage=true,
+	bookmarksnumbered=true,
+	breaklinks=true,
+	pdfstartview=FitH,
+	hyperfigures=false,
+	plainpages=false,
+	naturalnames=true,
+	colorlinks=true,
+	pagebackref=false,
+	pdfpagelabels]{hyperref}
+
+\hypersetup{
+	colorlinks,
+	citecolor=NavyBlue,
+	filecolor=NavyBlue,
+	linkcolor=NavyBlue,
+	urlcolor=NavyBlue
+}
+
+\usepackage[capitalize, noabbrev]{cleveref}
+\crefname{subsection}{\S\!\!}{subsections}
+
+% layout
+\addtolength{\textwidth}{0in}
+\addtolength{\textheight}{0in}
+\calclayout
+
+% update to MSC2020
+\makeatletter
+\@namedef{subjclassname@2020}{%
+	\textup{2020} Mathematics Subject Classification}
+\makeatother
+
+% table of contents
+\let\oldtocsection=\tocsection
+\let\oldtocsubsection=\tocsubsection
+
+\renewcommand{\tocsection}[2]{\hspace{0em}\vspace{0.1em}\rule{0pt}{14pt}\oldtocsection{#1}{#2}\bf}
+\renewcommand{\tocsubsection}[2]{\hspace{2em}\oldtocsubsection{#1}{#2}}
+
+\newcommand{\changelocaltocdepth}[1]{%
+	\addtocontents{toc}{\protect\setcounter{tocdepth}{#1}}%
+	\setcounter{tocdepth}{#1}%
+}
+%\setcounter{tocdepth}{2}

@@ -1,0 +1,184 @@
+% !TEX root = ../ck2.tex
+
+\subsection{Tensor products and operadic diagonals}\label{ss:hopf}
+
+The universal framework for discussing tensor products of algebras over an operad is the \defn{Hadamard product} of operads.
+Given two symmetric operads \(\rO_1\) and \(\rO_2\), their \defn{Hadamard product} is the symmetric sequence
+\[
+\rO_1 \,\ot_H\, \rO_2
+\qquad\text{with components}\qquad
+(\rO_1 \ot_H \rO_2)(n) \coloneqq \rO_1(n)\otimes \rO_2(n),
+\]
+equipped with the operad structure inherited aritywise from \(\rO_1\) and \(\rO_2\).
+
+An \defn{operadic diagonal} on an operad \(\rO\) is a morphism of operads
+\[
+\Delta \colon \rO \longrightarrow \rO \ot_H \rO.
+\]
+Such a morphism encodes, in a universal way, the data needed to equip the tensor product of two \(\rO\)-algebras with a new \(\rO\)-algebra structure:
+given \(\rO\)-algebras \(A\) and \(B\), the composite
+\[
+\rO \xrightarrow{\;\Delta\;} \rO \ot_H \rO
+\longrightarrow \End_A \ot_H \End_B
+\cong \End_{A \otimes B}
+\]
+determines an \(\rO\)-algebra structure on \(A \otimes B\).
+
+\medskip
+
+The operad \(\Com\) carries the operadic diagonal determined by
+\[
+\Delta(\m) = \m \ot \m,
+\]
+which gives the usual tensor product of commutative algebras.
+Similarly, the operad \(\BV\) admits an operadic diagonal determined by
+\[
+\Delta(\m) = \m \ot \m,
+\qquad
+\Delta(\triangle) = \triangle \ot \id + \id \ot \triangle,
+\]
+and the operad \(\cBV\) carries the operadic diagonal determined by
+\[
+\Delta(\m) = \m \ot \m,
+\qquad
+\Delta(\triangle) = \triangle \ot \id + \id \ot \, \triangle,
+\qquad
+\Delta(\square) = \square \ot \id + \id \ot \, \square.
+\]
+
+\begin{proposition}\label{prop:Hopf-lifting}
+	Let \(\rO\) be an operad with an operadic diagonal \(\Delta\).
+	Let \(\rO_\infty \twoheadrightarrow \rO\) be any cofibrant resolution.
+	There exists an operadic diagonal \(\Delta_\infty\) on \(\rO_\infty\), unique up to homotopy, fitting in the diagram
+		\[
+	\begin{tikzcd}[column sep=large, row sep=large]
+		\rO_\infty \arrow[r, "\Delta_\infty", dashed] \arrow[d, ->>, "\sim"] &
+		\rO_\infty \ot_H \rO_\infty \arrow[d, ->>, "\sim"] \\
+		\rO \arrow[r, "\Delta"] &
+		\rO \ot_H \rO .
+	\end{tikzcd}
+	\]
+\end{proposition}
+
+\begin{proof}
+	This is a standard lifting argument that uses that the Hadamard product of acyclic fibrations is an acyclic fibration.
+%	Consider the commutative square
+%	\[
+%	\begin{tikzcd}[column sep=large, row sep=large]
+%		\rO_\infty \arrow[r] \arrow[d, ->>, "\sim"] &
+%		\rO_\infty \ot_H \rO_\infty \arrow[d, ->>, "\sim"] \\
+%		\rO \arrow[r, "\Delta"] &
+%		\rO \ot_H \rO ,
+%	\end{tikzcd}
+%	\]
+%	where the lower horizontal map is the given Hopf structure on \(\rO\) and the upper horizontal map is the composite
+%	\(\rO_\infty \to \rO \xrightarrow{\;\Delta\;} \rO \ot_H \rO \to \rO_\infty \ot_H \rO_\infty\).
+%	Since \(\rO_\infty\) is cofibrant, the left vertical arrow is a cofibration, and by \cref{t:main} the right vertical arrow is an acyclic fibration.
+%	The lifting property in the model category of operads therefore yields a map
+%	\[
+%	\Delta_\infty \colon \rO_\infty \longrightarrow \rO_\infty \ot_H \rO_\infty
+%	\]
+%	making the square commute.
+%	Any two such lifts are homotopic because the acyclic fibration on the right has contractible fibers.
+\end{proof}
+
+Since \(\cBV\) admits an operadic diagonal, its cofibrant resolution \(\cBV_\infty = \Omega \cBV^\ac\) inherits one as well, unique up to homotopy, by \cref{prop:Hopf-lifting}.
+Consequently, the tensor product of two \(\cBV_\infty\)-algebras carries a natural \(\cBV_\infty\)-algebra structure.
+While this establishes the existence of such a structure, it does not provide an explicit formula for the operadic diagonal on \(\cBV_\infty\).
+Since tensor products of \(\cBV_\infty\)-algebras are expected to play a central role in double copy constructions, we plan to develop explicit formulas for a chosen lift in future work.
+
+We note that the same lifting argument applies to both \(\rC_\infty\)- and \(\BV_\infty\)-algebras, endowing them with tensor product structures.
+However, explicit formulas for the operadic diagonals remain unknown in both cases.
+As explained in \cite{medina2023dennis}, such formulas for \(\Com_\infty\) would resolve a question posed by D. Sullivan in \cite[p.231]{lawrence2014interval}.
+
+%Since \(\cBV\) has an operadic diagonal, its cofibrant resolution \(\cBV_\infty = \Omega \cBV^\ac\) inherits, up to homotopy, one as well.
+%Consequently, the tensor product of two \(\cBV_\infty\)-algebras carries a \(\cBV_\infty\)-algebra structure.
+%This statement provides only the existence of an operadic diagonal, not an explicit formula for it.
+%Because such tensor products are expected to play a central role in the double copy constructions, explicit formulas for a chosen lift of the Hopf structure will be developed in future work.
+%We remark that, although by the same argument both \(\rC_\infty\)- and \(\BV_\infty\)-algebras admit a natural tensor product, no explicit formula is known for either.
+%As explained in \cite{medina2023dennis}, explicit formluas for an operadic diagonal of \(\Com_\infty\) would answer a question of D. Sullivan \cite[p.231]{lawrence2014interval}.
+
+%\begin{proposition}\label{t:hopf}
+%
+%\end{proposition}
+%
+%\begin{proof*}
+%	A direct verification shows that these formulas respect all defining relations of \(\cBV\) and are compatible with its differential, hence define a morphism of operads.
+%\end{proof*}
+
+%
+%\subsection{Hopf structure}\label{ss:hopf}
+%
+%The operad \(\Com\) is equipped with a \textit{Hopf structure}
+%\[
+%\Delta \colon \Com \to \Com \ot_H \Com
+%\]
+%defined by \(\Delta(\m) \defeq \m \ot \m\).
+%This endows the tensor product of two \(\Com\)-algebras with a canonical \(\Com\)-algebra structure.
+%
+%\noindent ---
+%
+%The tensor product of two \(\BV\)-algebras admits a natural \(\BV\)-algebra structure, it is determined by the Hopf structure
+%\[
+%\Delta \colon \BV \to \BV \ot_H \BV
+%\]
+%defined by \(\Delta(\m) \defeq \m \ot \m\) and \(\Delta(\triangle) \defeq \triangle \ot \id + \id \ot \triangle\).
+%
+%\noindent ---
+%
+%The tensor product of two \(\cBV\)-algebras admits a natural \(\cBV\)-algebra structure.
+%This is a consequence of the following.
+%
+%\begin{proposition}\label{t:hopf}
+%	The operad \(\cBV\) is equipped with a Hopf structure
+%	\[
+%	\Delta \colon \cBV \to \cBV \ot_H \cBV
+%	\]
+%	defined by
+%	\[
+%	\Delta(\m) \defeq \m \ot \m,\qquad
+%	\Delta(\triangle) \defeq \triangle \ot \id + \id \ot \, \triangle,\qquad
+%	\Delta(\square) \defeq \square \ot \id + \id \ot \,\square.
+%	\]
+%\end{proposition}
+%
+%\begin{proof*}
+%	It is straightforward to check that this assignment sends the relations of the operad \(\cBV\) to \(0\) and that it is compatible with the differential.
+%\end{proof*}
+%
+%\noindent ---
+%
+%
+%The product of two \(\cBV_\infty\)-algebras is itself a \(\cBV_\infty\)-algebra, a fact ensured by the following non-constructive existence result.
+%
+%\begin{proposition}
+%	The operad \(\cBV_\infty\) is equipped with a unique up to homotopy {Hopf structure}
+%	\[
+%	\Delta_\infty \colon \cBV_\infty \to \cBV_\infty \ot_H \cBV_\infty
+%	\]
+%	extending the one of the operad \(\cBV\), i.e.\ such that the following diagram is commutative:
+%	\[
+%	\begin{tikzcd}
+%		\cBV_\infty \arrow[r, "\Delta_\infty"] \arrow[d, ->>, "\sim"] &
+%		\cBV_\infty \ot_H  \cBV_\infty \arrow[d, ->>, "\sim"]  \\
+%		\cBV \arrow[r, "\Delta"] & \cBV \ot_H  \cBV.
+%	\end{tikzcd}
+%	\]
+%\end{proposition}
+%
+%\begin{proof*}
+%	The proof is classical: it amounts to considering the lifting property of the following commutative diagram
+%	\[
+%	\begin{tikzcd}[column sep=large, row sep=large]
+%		\mathrm{I} \arrow[d, >->]  \arrow[rr] & & \cBV_\infty \ot_H  \cBV_\infty \arrow[d, ->>, "\sim"] \\
+%		\cBV_\infty \arrow[urr, dashed, "\exists \Delta_\infty"] \arrow[r, ->>, "\sim"] & \cBV \arrow[r, "\Delta"] & \cBV \ot_H  \cBV
+%	\end{tikzcd}
+%	\]
+%	in the model category of operads.
+%	The left-most downward arrow is a cofibration (\(\cBV\) is cofibrant) and the right-most downward arrow is
+%	an acyclic fibration (tensor product of acyclic fibrations) by \cref{t:main}.
+%	Therefore there exists a lifting map \(\Delta_\infty\), which is unique up to homotopy.
+%\end{proof*}
+%
+%Such a Hopf operad structure on the operad \(\cBV\) endows \(\cBV_\infty\)-algebras with a universal formula for their tensor product.
+%Since this result is expected to play a key role in the double copy construction of gauge theories, explicit formulas will be the subject of a future study.

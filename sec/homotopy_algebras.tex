@@ -1,0 +1,348 @@
+% !TEX root = ../ck2.tex
+
+\subsection{Homotopy algebras}\label{ss:homotopy_algebras}
+
+We verify that algebras over the operad \(\cBV_{\!\infty}\) are precisely \(\cBV_{\!\infty}\)-algebras as defined in \cref{ss:generating_maps} and compare them to the \(\BV^\square_\infty\)-algebras introduced by M. Reiterer \cite{Reiterer2020HomotopyBVYMCK}.
+
+\medskip
+
+The main technical tool we will use is the following.
+
+\begin{lemma}[{\cite[Proposition~10.1.1]{LodayVallette12}}]\label{lem:TwCAlg}
+	Let \(\rC\) be a conilpotent cooperad and let \(\Omega\rC \twoheadrightarrow \rO\) be a Koszul replacement.
+	An \(\Omega\rC\)-algebra structure \(\Omega\rC \to \End_A\) on a chain complex \(A\) is equivalent to a twisting morphism \(\rC \to \End_A\).
+\end{lemma}
+
+\subsubsection{\(\rC_\infty\)-algebras}
+
+Let us start with the case of \(\rC_\infty\)-algebras to fix the general method.
+
+\begin{proposition}
+	Algebras over the Koszul replacement \(\Com_\infty \defeq \Omega \Com^{\ac}\) are precisely the \(\rC_\infty\)-algebras defined in \cref{ss:generating_maps}.
+\end{proposition}
+
+\begin{proof}
+	By \cref{lem:TwCAlg}, consider a twisting morphism \(\alpha \colon \Com^{\ac} \to \End_A\), that is, a degree \(-1\) map with \(\alpha(\id)=0\) satisfying the Maurer--Cartan equation
+	\begin{equation}\label{EQ:MCCOM}
+		\partial_A \alpha + \alpha \star \alpha = 0,
+	\end{equation}
+	where \(\partial_A\) denotes the differential of \(\End_A\).
+	As recalled in \cref{ex:Comac}, the Koszul dual cooperad \(\Com^\ac \cong \Lie^c_1\) is the cooperad of shifted Lie coalgebras.
+	The relationship with the Koszul dual cooperad of associative algebras \(\Ass^\ac \cong \Ass^c_1\) is given by Ree's theorem \cite[Theorem~1.3.6]{LodayVallette12}: the kernel of the canonical morphism of cooperads \(\Ass^c_1 \to \Lie^c_1\) is spanned by the sums of shuffles.\anibal{This only explains the symmetries, where are the maps \(m_k\)?}
+\end{proof}
+
+\subsubsection{\(\BV_{\!\infty}\)-algebras}\label{ss:BVinfty}
+
+The case of \(\BV_\infty\)-algebras is more involved due to the higher complexity of the Koszul dual cooperad \(\BV^\ac\), but it is mandatory on the way to \(\cBV_\infty\)-algebras.
+
+\begin{theorem}[{\cite[Theorem~20]{GCTV12}}]\label{thm:BVinfty}
+	Algebras over the cofibrant operad \(\BV_\infty \defeq \Omega\BV^{\ac}\) are precisely the \(\BV_\infty\)-algebras defined in \cref{ss:generating_maps}.
+\end{theorem}
+
+%\begin{theorem}[{\cite[Theorem~20]{GCTV12}}]\label{thm:BVinfty}
+%	A \(\BV_{\!\infty}\)-algebra is a chain complex \((A,d)\) equipped with a collection of maps
+%	\begin{align*}
+%		&m_{p_1,\dots,p_k}^t \colon
+%		A^{\otimes p_1}\otimes\dots\otimes A^{\otimes p_k}
+%		\longrightarrow A,
+%		\qquad t\geqslant  0,\ k\geqslant  1,\ \text{and}\ p_1,\ldots,p_k\geqslant  1,
+%	\end{align*}
+%	of degrees
+%	\[
+%	\big| m_{p_1,\dots,p_k}^t \big| = p_1+\cdots+p_k+k+2t-3,
+%	\]
+%	satisfying the block and shuffle symmetries of \cref{ss:generating_maps}, with \(m_1^0=d\).
+%	Under the notations and signs of \cref{ss:obstruction_maps}, they obey the following relations:
+%	\begin{align*}\tag{\(\mathsf{R}^t_{p_1,\dots,p_k}\)}\label{}
+%		&\sum_{\substack{
+%				0\leqslant s \leqslant t
+%				\\[0.5mm]
+%				I\sqcup J=\{1,\dots,k\}
+%				\\[0.5mm]
+%				I=\{i_1, \ldots, i_a\}\neq\emptyset \\[0.5mm]
+%				J=\{j_1, \ldots, j_b\}
+%		}}
+%		\sum_{
+%			\substack{
+%				q_1,\dots,{q}_a\geqslant  1 \\[0.5mm]
+%				(q_1, \ldots, q_a)\leqslant
+%				(p_1, \ldots, p_{i_a})
+%		}}
+%		\pm
+%		\,m^{s}_{r,p_{j_1},\dots,p_{j_b}}
+%		\left(
+%		m^{t-s}_{\frac{p_1, \ldots, p_{i_a}}{q_1, \ldots, q_a}}
+%		(w_{i_1} \otimes \dots \otimes w_{i_a})\otimes w_{j_1} \otimes \dots \otimes w_{j_b}
+%		\right)\\
+%		&\quad
+%		-\sum_{i=1}^k
+%		\sum_{1\leqslant j\leqslant p_i-1}\pm
+%		\,m^{t-1}_{p_1,\dots, j,p_i-j,\dots,p_k}
+%		\left(w_1\otimes\dots\otimes w_i^{(1)}\otimes w_i^{(2)}
+%		\otimes\dots\otimes w_k\right)=0,
+%	\end{align*}
+%	where the second term is present only for \(t+k\geqslant  2\).
+%\end{theorem}
+
+\begin{proof}
+	By \cref{thm:FormcBVac}, the underlying graded \(\Sy\)-modules of the Koszul dual cooperad is given by
+	\[
+	\BV^{\ac} \cong \mathrm{D}^{\ac} \circ \Gerst^{\ac} \cong T^c(\delta) \circ \Lie_1^{\ac} \circ \Com^{\ac},
+	\]\anibal{I replaced \(q\BV\) by \(\BV\), that is who the theorem I added (\cref{thm:FormcBVac}) states it} \anibal{Maybe it is better to state this isomorphism in that same theorem.}
+	where \(\mathrm{D}\defeq T(\triangle)/\big(\triangle^2\big)\) is the algebra of dual numbers, \(\Gerst\) is the operad of Gerstenhaber algebras, \(\Lie_1\) is the operad of shifted Lie algebras, and \(\mathrm{D}^{\ac}\cong T^c(\delta)\cong \KK[\delta]\) is the cofree conilpotent coalgebra on a degree \(2\) generator \(\delta\).
+	Therefore, the image of any twisting morphism \(\alpha \in \mathrm{Tw}\big(\BV^\ac, \mathrm{End}_A\big)\) is a collection of maps \(\{m_{p_1,\dots,p_k}^t\}\) having the degrees and symmetries described in the statement.
+
+	\medskip\noindent Regarding their relations, recall that\anibal{Recall from where?}
+	\[
+	\Lie_1^{\ac}(n)\cong \rS^c\Com_{-1}^*(n)\cong s^{2n-2} \KK_n
+	\qquad \text{and} \qquad
+	\Com^{\ac}(n)\cong \rS^c\Lie^*(n)\cong s^{n-1}\mathrm{sign}_{n} \otimes \Lie^*(n),
+	\]
+	where \(\KK_n\) stands for the trivial representation of \(\Sy_n\) and \(\mathrm{sign}_n\) stands for the signature representation of \(\Sy_n\).
+	Therefore the unique coderivation \(d_\varphi\) of the cooperad \(\q\BV^{\ac}\) which extends the map \(\varphi\) is explicitly given by
+	\[
+	d_\varphi\big(\delta^d\otimes L_1 \odot \cdots \odot L_k\big) =
+	\sum_{i=1}^k (-1)^{|L_1|+\cdots+|L_{i-1}|}\,  \delta^{d-1}
+	\otimes L_1\odot \cdots\odot L_i'\odot L_i''\odot \cdots
+	\odot L_k,
+	\]
+	where \(\odot\) stands for the graded symmetric tensor product and where \(L_i' \odot L_i''\) is Sweedler-type notation for the image of \(L_i\) under the binary part
+	\[
+	\rS^c\Lie^* \to \rS^c\Lie^*(2)\otimes_{\Sy_2} \big(\rS^c\Lie^* \otimes \rS^c\Lie^*\big)
+	\]
+	of the decomposition map of the cooperad \(\rS^c\Lie^*\).
+	The image of \(d_\varphi\) is equal to \(0\) when \(d=0\) or on elements \(L_i \in \rS^c \Lie^c(1)=\id\KK\).
+
+	\medskip
+
+	Now it is straightforward to check that the Maurer--Cartan equation satisfied by a twisting morphism \(\alpha \in \mathrm{Tw}\big(\BV^\ac, \mathrm{End}_A\big)\) coincides with the defining relations once evaluated on basis elements of \(\q\BV^\ac\).
+\end{proof}
+
+\subsubsection{\(\cBV_{\!\infty}\)-algebras}
+
+%We can now justify conceptually the simple definition of a \(\cBV_{\!\infty}\)-algebra given at the beginning of this work.
+
+%\begin{theorem}\label{thm:MaincBVinfty}
+%	An algebra over the operad \(\cBV_{\!\infty}\) is a \(\cBV_\infty\)-algebra as defined in \cref{def:cBV-algebra}.
+%	More precisely, an algebra over the operad \(\cBV_{\!\infty}\) is a chain complex \((A,d)\) equipped with two collections of maps
+%	\begin{align*}
+%		&m_{p_1,\dots,p_k}^t \colon
+%		A^{\otimes p_1}\otimes\dots\otimes A^{\otimes p_k}
+%		\longrightarrow A,
+%		\qquad t\geqslant  0,\ k\geqslant  1,\ \text{and}\ p_1,\ldots,p_k\geqslant  1,\\
+%		&n_{p_1,\dots,p_k}^t \colon
+%		A^{\otimes p_1}\otimes\dots\otimes A^{\otimes p_k}
+%		\longrightarrow A,
+%		\qquad
+%		t\geqslant  0,\ k\geqslant  1,\ p_1,\ldots,p_k\geqslant  1,\ \text{and}\ t+k\geqslant  2,
+%	\end{align*}
+%	of respective degrees
+%	\[
+%	\big| m_{p_1,\dots,p_k}^t \big| = p_1+\cdots+p_k+k+2t-3
+%	\qquad \text{and} \qquad
+%	\big| n_{p_1,\dots,p_k}^t \big| = p_1+\cdots+p_k+k+2t-4,
+%	\]
+%	satisfying the block and shuffle symmetries of \cref{ss:generating_maps}, with \(m_1^0=d\).
+%	Under the notations and signs of \cref{ss:obstruction_maps}, these generating and obstruction maps obey the following two types of relations \Bruno{type it like in Section 2 with \(\mathcal{P}\). I do not have your final version, can you do it? Thank you.}
+%	\begin{align*}\tag{\(\mathsf{M}^t_{p_1,\dots,p_k}\)}\label{REL:McBVinfty}
+%		&\sum_{
+%			0\leqslant s \leqslant t}
+%		\sum_{\substack{
+%				I\sqcup J=\{1,\dots,k\}
+%				\\[0.5mm]
+%				I=\{i_1, \ldots, i_a\}\neq\emptyset \\[0.5mm]
+%				J=\{j_1, \ldots, j_b\}
+%		}}
+%		\sum_{
+%			\substack{
+%				q_1,\dots,{q}_a\geqslant  1 \\[0.5mm]
+%				(q_1, \ldots, q_a)\leqslant
+%				(p_1, \ldots, p_{i_a})
+%		}}
+%		\pm
+%		\,m^{s}_{r,p_{j_1},\dots,p_{j_b}}
+%		\left(
+%		m^{t-s}_{\frac{p_1, \ldots, p_{i_a}}{q_1, \ldots, q_a}}
+%		(w_{i_1} \otimes \dots \otimes w_{i_a})\otimes w_{j_1} \otimes \dots \otimes w_{j_b}
+%		\right)\\
+%		&\quad
+%		-\sum_{i=1}^k
+%		\sum_{1\leqslant j\leqslant p_i-1}\pm
+%		\,m^{t-1}_{p_1,\dots, j,p_i-j,\dots,p_k}
+%		\left(w_1\otimes\dots\otimes w_i^{(1)}\otimes w_i^{(2)}\otimes\dots\otimes w_k\right)\\
+%		&\quad
+%		= n^t_{p_1, \ldots, p_k}(w_1\otimes \cdots \otimes w_k),
+%	\end{align*}
+%	where the second term is present only for \(t+k\geqslant  2\),
+%	and
+%	\begin{align*}\tag{\(\mathsf{N}^t_{p_1,\dots,p_k}\)}\label{REL:NcBVinfty}
+%		&\sum_{\substack{
+%				0\leqslant s \leqslant t
+%				\\[0.5mm]
+%				I\sqcup J=\{1,\dots,k\}
+%				\\[0.5mm]
+%				I=\{i_1, \ldots, i_a\}\neq \emptyset \\[0.5mm]
+%				J=\{j_1, \ldots, j_b\}
+%		}}
+%		\sum_{
+%			\substack{
+%				q_1,\dots,{q}_a\geqslant  1 \\[0.5mm]
+%				(q_1, \ldots, q_a)\leqslant
+%				(p_1, \ldots, p_{i_a})
+%		}}
+%		\pm
+%		\,m^{s}_{r,p_{j_1},\dots,p_{j_b}}
+%		\left(
+%		n^{t-s}_{\frac{p_1, \ldots, p_{i_a}}{q_1, \ldots, q_a}}
+%		(w_{i_1} \otimes \dots \otimes w_{i_a})\otimes w_{j_1} \otimes \dots \otimes w_{j_b}
+%		\right)\\
+%		&\quad
+%		-\sum_{\substack{
+%				0\leqslant s \leqslant t
+%				\\[0.5mm]
+%				I\sqcup J=\{1,\dots,k\}
+%				\\[0.5mm]
+%				I=\{i_1, \ldots, i_a\}\neq \emptyset \\[0.5mm]
+%				J=\{j_1, \ldots, j_b\}
+%		}}
+%		\sum_{
+%			\substack{
+%				q_1,\dots,{q}_a\geqslant  1 \\[0.5mm]
+%				(q_1, \ldots, q_a)\leqslant
+%				(p_1, \ldots, p_{i_a})
+%		}}
+%		\pm
+%		\,n^{s}_{r,p_{j_1},\dots,p_{j_b}}
+%		\left(
+%		m^{t-s}_{\frac{p_1, \ldots, p_{i_a}}{q_1, \ldots, q_a}}
+%		(w_{i_1} \otimes \dots \otimes w_{i_a})\otimes w_{j_1} \otimes \dots \otimes w_{j_b}
+%		\right)\\
+%		&\quad
+%		+\sum_{i=1}^k
+%		\sum_{1\leqslant j\leqslant p_i-1}\pm
+%		\,n^{t-1}_{p_1,\dots, j,p_i-j,\dots,p_k}
+%		\left(w_1\otimes\dots\otimes w_i^{(1)}\otimes w_i^{(2)}\otimes\dots\otimes w_k\right)
+%		= 0,
+%	\end{align*}
+%	for \(t+k\geqslant  2\), where the sign of the second sum is equal to the sign of the first sum of \eqref{REL:McBVinfty}, where the sign of the first sum is the same but with the extra term
+%	\[
+%	(-1)^{p_{j_1}+\cdots+p_{j_b}+r-1},
+%	\]
+%	and where the sign of the third sum is equal to the sign of the second sum of \eqref{REL:McBVinfty}.
+%	The relations \eqref{REL:McBVinfty} prescribe the values of the obstruction maps \(\{n_{p_1,\dots,p_k}^t\}\) from the data of the generating maps \(\{m_{p_1,\dots,p_k}^t\}\), and they induce the relations \eqref{REL:NcBVinfty}.
+%\end{theorem}
+
+\begin{theorem}\label{thm:cBVinfty}
+	Algebras over the cofibrant operad \(\cBV_\infty \defeq \Omega\BV^{\ac}\) are precisely the \(\cBV_\infty\)-algebras defined in~\cref{ss:generating_maps}.
+\end{theorem}
+
+\begin{proof}
+	Let us start with \(\alpha \colon \cBV^\ac \to \mathrm{End}_A\) satisfying the Maurer--Cartan equation
+	\begin{equation}\label{eq:TwAlpha}
+		\partial_A \alpha + \alpha (d_1+d_\psi) + \alpha \star \alpha = 0.
+	\end{equation}
+	\cref{thm:FormcBVac} shows that, as \(\Sy\)-modules,\anibal{I added the \(\Sy\)-module note since that is what the theorem seems to state, but below there seems to be a cooperad identification too.}
+%	 the Koszul dual cooperad \(\cBV^\ac\) satisfies the following decomposition:
+	\[
+	\begin{tikzcd}[column sep=-2.5pt]
+		\cBV^\ac & \cong & \Com^\ac & \oplus &
+		\rM^*
+		\arrow[rr, bend left=45, "\quad d_1 = s^{-1}", out=80, in=100, distance=1.1em]
+		\arrow[loop below, in=240, out=300, distance=2.3em, "d_\varphi"]  &
+		\oplus & s^{-1}\rM^* \arrow[loop below, in=245, out=295, distance=2em, "-d_\varphi"]
+	\end{tikzcd}
+	\]
+	where the dg sub-cooperad \(\big(\Com^\ac  \oplus \rM^*, d_\varphi\big)\) is isomorphic to the cooperad \(\BV^\ac\).
+	Therefore its image under the twisting morphism \(\alpha\) produces operations \(\{m_{p_1,\dots,p_k}^t\}\) for \(t \geqslant  0\), \(k \geqslant  1\), and \(p_1,\ldots,p_k \geqslant  1\), having the same degrees and symmetries as the ones of \(\BV_\infty\)-algebras described above in \cref{thm:BVinfty}.
+	The image of the last summand \(s^{-1}\rM^*\cong  \q \BV^\ac/\Com^\ac\) under the twisting morphism \(\alpha\) produces operations \(\{n_{p_1,\dots,p_k}^t\}\) for \(t\geqslant  0\), \(k\geqslant  1\), and \(p_1,\ldots,p_k\geqslant  1\), with \(t+k\geqslant  2\), satisfying the same symmetries as the operations \(\{m_{p_1,\dots,p_k}^t\}\) but having degree \(-1\).
+
+	\medskip
+
+	The restriction of \eqref{eq:TwAlpha} to the summand \(\Com^\ac\) is simply \(\partial_A \alpha + \alpha \star \alpha = 0\), which is the Maurer--Cartan equation \eqref{EQ:MCCOM} satisfied by the operations \(\{m^0_{p}\}_{p\geqslant  1}\), which therefore form a \(\rC_\infty\)-algebra.
+	The evaluation of \eqref{eq:TwAlpha} on any element \(\mu^t_{p_1, \ldots, p_k}\in \rM^*\), simply denoted by \(\mu\), is equal to
+	\[
+	\partial_A \alpha(\mu) + \alpha (d_1+d_\psi)(\mu) + (\alpha \star \alpha)(\mu) = 0,
+	\]
+	which is equivalent to
+	\[
+	\alpha \big(s^{-1}\mu\big)=- \partial_A \alpha(\mu) - \alpha d_\varphi(\mu) - (\alpha \star \alpha)(\mu).
+	\]
+	The right-hand side of this equation is the Maurer--Cartan equation defining the relations satisfied by the operations \(\{m_{p_1,\dots,p_k}^t\}\) of a \(\BV_\infty\)-algebra.
+	Since the left-hand side is equal to the obstruction map \(n_{p_1,\dots,p_k}^t\),
+%	, this equation gives the first type of relations \eqref{REL:McBVinfty} of a \(\cBV_\infty\)-algebra.
+	it completely prescribes the value of each obstruction map \(n_{p_1,\dots,p_k}^t\) in terms of the generating maps \(\{m_{p_1,\dots,p_k}^t\}\).
+
+	\medskip\anibal{I think the proof is completed here. The rest of it is proving something we no longer claim. If that ommited claim is worth including, I would support a second statement afterwards.}
+
+	It remains to prove that the obstruction maps \(n_{p_1,\dots,p_k}^t = \alpha \big(s^{-1}\mu^t_{p_1,\ldots, p_k}\big)\) automatically satisfy the evaluation of \eqref{eq:TwAlpha} on \(s^{-1}\rM^*\), which coincides with the second type of relations.
+	The image under \(\partial_A\) of \eqref{eq:TwAlpha} evaluated on any \(\mu\in \rM^*\) gives
+	\[
+	\partial_A \alpha (d_1+d_\psi)(\mu) + \partial_A(\alpha \star \alpha)(\mu)=
+	\partial_A \alpha (d_1+d_\psi)(\mu) + \big((\partial_A\alpha) \star \alpha\big)(\mu)
+	-\big(\alpha \star (\partial_A\alpha)\big)(\mu)=0,
+	\]
+	since \(\partial_A\) is a derivation of the operad \(\mathrm{End}_A\).
+	Since both sides of the product \(\star\) apply to strictly lower weight elements of \(\Com^\ac  \oplus \rM^*\), we can apply \eqref{eq:TwAlpha} to them and obtain
+	\begin{multline*}
+		\partial_A \alpha (d_1+d_\psi)(\mu) -
+		\big((\alpha\star\alpha) \star \alpha\big)(\mu)
+		-\big((\alpha(d_1+d_\psi) \star \alpha\big)(\mu)
+		- \big(\alpha\star (\alpha\star\alpha)\big)(\mu)\\
+		- \big(\alpha\star(\alpha(d_1+d_\psi)\big)(\mu)=
+		0.
+	\end{multline*}
+	The pre-Lie relation implies that the degree \(-1\) element \(\alpha\) satisfies \((\alpha\star\alpha) \star \alpha=\alpha\star (\alpha\star\alpha)\).
+	Since \(d_1+d_\psi\) is a coderivation of the cooperad \(\cBV^\ac\), we get
+	\begin{multline*}
+		\partial_A \alpha d_1(\mu) +
+		\partial_A \alpha d_\psi(\mu)
+		+\big(\alpha\star\alpha\big)(d_1+d_\psi)(\mu)=
+		\partial_A \alpha \big(s^{-1}\mu\big) +
+		\big(\alpha \star \alpha\big)\big(s^{-1}\mu\big)\\
+		+
+		\big(\partial_A \alpha + \alpha \star\alpha\big)\big(d_\psi(\mu)\big)=
+		0.
+	\end{multline*}
+	Since \(d_\psi\) lowers the weight by one on elements of \(\rM^*\), we can use \eqref{eq:TwAlpha} evaluated on \(d_\psi(\mu)\) to finally get
+	\begin{align*}
+		\big(\partial_A \alpha  +
+		\alpha \star \alpha\big)\big(s^{-1}\mu\big)-
+		\alpha(d_1+d_\psi)d_\psi(\mu)
+		&=
+		\big(\partial_A \alpha  +
+		\alpha \star \alpha\big)\big(s^{-1}\mu\big)+
+		\alpha (d_1+d_\psi)d_1(\mu)\\
+		&=
+		\big(\partial_A \alpha  +  \alpha (d_1+d_\psi)+
+		\alpha \star \alpha\big)\big(s^{-1}\mu\big)\\
+		&=
+		\partial_A \big(\alpha\big(s^{-1}\mu\big)\big)
+		-  \alpha \big(s^{-1} d_\varphi (\mu)\big)\\
+		&\quad
+		+\big(\alpha \star (\alpha \circ s^{-1})\big)(\mu)
+		-\big((\alpha \circ s^{-1}) \star \alpha\big)(\mu)
+		= 0,
+	\end{align*}
+	which is precisely relation \eqref{REL:NcBVinfty}.
+\end{proof}
+
+\subsubsection{\(\BV^\Box_{\!\infty}\)-algebras}\label{ss:reiterer}
+
+The notion of \(\cBV_\infty\)-algebra introduced in this paper is close to the notion of \(\BV^\Box_\infty\)-algebra introduced by M. Reiterer in \cite{Reiterer2020HomotopyBVYMCK}.
+His definition can be unravelled to provide a collection of operations \(\{m^t_{p_1,\ldots, p_k}\}\) with the same degrees and symmetries as ours and, when they are unobstructed, they also give rise to \(\BV_\infty\)-algebra structures.
+
+In a \(\BV^\Box_\infty\)-algebra, there is a linear operator of degree \(0\) given by the action of a certain element of a Hopf algebra; such an operator can be encoded by the general operator \(n^1_1\) in a \(\cBV_\infty\)-algebra.
+The relations satisfied by a \(\BV^\Box_\infty\)-algebra are obtained by starting from the relations of a \(\BV_\infty\)-algebra and by adding an extra term, which is equal to \(0\) when \(k=1\), except for \(t=1\) and \(p_1=1\), where it is precisely the aforementioned operator.
+Such obstructions are encoded in the present operations \(\{n^t_{p_1, \ldots, p_k}\}\), but in the case of \(\BV^\Box_\infty\)-algebras these obstructions admit a formula involving only the operator \(n^1_1\) and the operations \(m^t_{p_1, \ldots, p_k}\).
+Thus the notion of a \(\BV^\Box_\infty\)-algebra is more restrictive than the present notion of a \(\cBV_\infty\)-algebra.
+
+\medskip
+
+The discrepancy between these two notions comes from the different approaches which lead to them.
+M. Reiterer starts with an equivalent definition of \(\BV_\infty\)-algebras in terms of a series of (co)derivations on the (co)free Gerstenhaber algebra satisfying some equation \anibal{I would add a citation to the paper where he took that from}, and then modifies this equation “by hand” in order to add obstructions with a prescribed form.
+One limitation of this approach is that it produces the above-mentioned constraints, including the fact that there are no obstructions for \(t\geqslant  0\), \(p\geqslant  0\), except in the sole case \(t=p=1\).
+The equivalent definition of a \(\cBV_\infty\)-algebra in terms of a square-zero coderivation of the cofree \(\cBV^{\ac}\)-coalgebra is more subtle and cannot be obtained so easily from the similar definition of a \(\BV_\infty\)-algebra; see \cref{Def:BarConstr} and \cref{prop:FormBar}.
+
+\medskip
+
+Even if the notion of \(\BV^\Box_\infty\)-algebras could be encoded by an operad, we do not expect this operad to be a cofibrant replacement of the operad \(\cBV\), so \(\BV^\Box_\infty\)-algebras seem not to be a model for homotopy \(\cBV\)-algebrasdg as we understand them.

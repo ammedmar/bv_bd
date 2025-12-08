@@ -1,0 +1,159 @@
+\subsection{Exact and coexact \(\BV\)-structures}\label{ss:exact}
+
+This subsection is not part of the logical dependency structure of the paper and can be safely skipped on a first reading.
+Its purpose is to explain our choice of terminology by comparing the operad \(\cBV\) to the operad \(\eBV\) controlling \textit{exact} BV-algebras.
+
+\subsubsection{Exact \(\BV\)-algebras and Poisson manifolds}
+
+Recall that in a (dg) \(\BV\)-algebra \((A, d, \cdot, \triangle)\), the operators \(d\) and \(\triangle\) commute; that is, \([d, \triangle] = 0\).
+This means that \(\triangle\) is \emph{closed} in \(\End(A)\).
+The operator \(\triangle\) is said to be \emph{exact} if there exists a linear map \(\nabla \colon A \to A\) such that \(\triangle = [d, \nabla]\).
+As usual, exactness implies closedness.
+Therefore, the following notion, due to Guan--Muro \cite[Definition~4.5]{GuanMuro23} and of relevance to Poisson geometry, provides a refinement of the concept of \(\BV\)-algebra.
+
+\begin{definition}
+	An \defn{exact \(\BV\)-algebra} is a tuple \((A, d, \cdot, \nabla)\), where \((A, d, \cdot)\) is a dg commutative algebra and \(\nabla \colon A \to A\) is a linear map of degree \(-2\) and order at most \(2\), satisfying
+	\begin{equation}\label{Eq:Nabla}
+		[\nabla,[\nabla,d]] = 0.
+	\end{equation}
+\end{definition}
+
+The following proposition, proven straighforwardly using Cartan calculus, shows that Poisson manifolds canonically define exact \(\BV\)-algebras.
+
+\begin{proposition}[{\cite[Section~3]{Koszul85}}]\label{prop:eBVPoisson}
+	Let \(M\) be a manifold with a section \(\pi \in \Gamma(\Lambda^2 TM)\) such that \([\pi, \pi] = 0\).
+	Then the de Rham complex \(\Omega^{\bullet}(M)\) admits an exact \(\BV\)-algebra structure
+	\[
+	\big(\Omega^{\bullet}(M), d_{dR}, \wedge, \iota_\pi\big),
+	\]
+	where \(\iota_\pi\) denotes contraction with \(\pi\).
+\end{proposition}
+
+\medskip\noindent
+Exact \(\BV\)-algebras are algebras over the (dg) operad
+\[
+\eBV \defeq \dfrac{\BV \vee \mathcal{T}(\nabla)}
+{\big([\triangle, \nabla], \
+	\nabla \ \text{second-order}\big)},
+\]
+whose differential is determined by
+\begin{equation}\label{eq:exactness}
+	\dif \, \nabla \defeq \triangle.
+\end{equation}
+In contrast to \(\BV\)-algebras, the operator \(\triangle\) is always \(0\) in the homology of \(\eBV\)-algebras.
+As we will see next, this is also the case in the homology of \(\cBV\)-algebras that are not \(\BV\)-algebras, not because \(\triangle\) is exact, but because it is not closed.
+
+\subsubsection{Coexact \(\BV\)-algebras and pseudo-Riemannian manifolds}
+
+Recall that the operad \(\cBV\) is given by
+\[
+\dfrac{\BV \vee \mathcal{T}(\square)}
+{\big([\triangle, \square], \ \square \ \text{second-order}\big)},
+\]
+with differential determined by
+\[
+\dif \, \triangle = \square.
+\]
+Here the generator \(\triangle\) is \emph{coexact}, explicitly \(\dif^*(\square) = \triangle\), where \(\dif^*\) is the adjoint of \(\dif\) with respect to the canonical inner product.\footnote{
+	Explicitly, this inner product is defined by the canonical basis of \(\cBV(1)\), which in degree \(\bars{\triangle}\) is \(\set{\mathrm u_{m} =\triangle \circ \square^{\circ m} \mid m \geqslant 0}\).
+	We can verify the claim \(\dif^*(\square) = \triangle\) by writing \(\dif^*(\square) = \sum_{m} \alpha_{m} \cdot \mathrm u_{m}\) with \(\alpha_{m} = \angles{\mathrm u_{m}, \dif^*(\square)} = \angles{\dif(\mathrm u_{m}), \square} = \angles{\square^{\circ m+1}, \square}\), and concluding that
+	\[
+	\alpha_{m} =
+	\begin{cases}
+		1 & m = 0,\\
+		0 & \text{otherwise}.
+	\end{cases}
+	\]}
+This motivates the terminology \defn{coexact \(\BV\)-algebras} and the notation \(\cBV\) for the operad controlling them.
+We remind the reader that \(\BV\)-algebras are precisely coexact dg \(\BV\)-algebras where the operator corresponding to \(\square\), the obstruction \(n\), vanishes.
+
+We have the following analogue of \cref{prop:eBVPoisson} stating that pseudo-Riemannian manifolds canonically define coexact \(\BV\)-algebras.
+
+\begin{proposition}\label{prop:deRhamCoexact}
+	Let \(M\) be a manifold equipped with a nowhere-degenerate section \(g \in \Gamma(S^2 T^*M)\).
+	Then the de Rham complex \(\Omega^{\bullet}(M)\) admits a canonical coexact \(\BV\)-algebra structure
+	\[
+	\big(\Omega^{\bullet}(M), d_{dR}, \wedge, d^\star\big),
+	\]
+	where \(d^\star\) is the Hodge codifferential.
+\end{proposition}
+
+The parallel, or duality, observed here between Poisson and pseudo-Riemannian manifolds is best understood in the language of supergeometry, although we do not develop this perspective further.
+
+\subsubsection{Relationship between \(\BV\)-type operads}
+
+We conclude this subsection making explicit the relationship between the operads we have discussed so far.
+
+\begin{theorem}\label{thm:Homology}
+	The canonical maps induced by the identification of generators define the commutative diagram
+	\[
+	\begin{tikzcd}[row sep=small]
+		\cBV \arrow[r, two heads] \arrow[rr, bend left=35, "\sim"] &
+		\BV \arrow[r, hook] &
+		\eBV \\
+		& \Com \arrow[ul, hook', "\sim"', bend left] \arrow[ur, hook, "\sim", bend right] &
+	\end{tikzcd}
+	\]
+	where \(\hookrightarrow\) denotes an injection, \(\twoheadrightarrow\) a surjection, and \(\xrightarrow{\sim}\) a quasi-isomorphism.
+\end{theorem}
+
+\begin{proof}
+	The inclusion \(\Com \hookrightarrow \eBV\) is a quasi-isomorphism by \cite[Theorem~1.3]{GuanMuro23}.
+	To analyze \(\Com \hookrightarrow \cBV\) we adapt the method of \cite[Section~2]{DrummondColeVallette13}, and we note that this argument also yields an alternative proof of the acyclicity of \(\Com \hookrightarrow \eBV\).
+
+	The operad \(\cBV\) carries a weight grading defined by declaring that the total number of occurrences of \(\triangle\) and \(\square\) is the weight.
+	Both the relations and the differential are homogeneous for this grading.
+	Let \(\cBV^{[k]}\) denote the weight-\(k\) summand.
+	Then \(\cBV^{[0]} \cong \Com\).
+
+	Consider the assignment
+	\[
+	\cdot \mapsto 0,
+	\qquad
+	\triangle \mapsto 0,
+	\qquad
+	\square \mapsto \triangle.
+	\]
+	This is a morphism of quadratic data and therefore extends uniquely to a derivation \(h \colon \cBV \to \cBV\) preserving the weight.
+	Define a degree \(1\) morphism of \(\Sy\)-modules \(H \colon \cBV \to \cBV\) by
+	\[
+	H \mid_{\cBV^{[0]}} \coloneq 0,
+	\qquad
+	H \mid_{\cBV^{[k]}} \coloneq \frac{1}{k} \, h \mid_{\cBV^{[k]}}
+	\quad (k \ge 1).
+	\]
+
+	Let
+	\[
+	\begin{tikzcd}[column sep=small]
+		i \colon \Com \arrow[r, hook] & \cBV
+	\end{tikzcd}
+	\qquad\text{and}\qquad
+	\begin{tikzcd}[column sep=small]
+		p \colon \cBV \arrow[r, two heads] & \Com
+	\end{tikzcd}
+	\]
+	denote the canonical inclusion and projection.
+	Then \((i,p,H)\) is a deformation retract in the category of dg \(\Sy\)-modules, namely
+	\[
+	H \dif + \dif H
+	=
+	\id_{\cBV} - i p.
+	\]
+
+	The operator \(H \dif + \dif H\) is determined by its effect on generators:
+	\[
+	\cdot \mapsto 0,
+	\qquad
+	\triangle \mapsto \triangle,
+	\qquad
+	\square \mapsto \square.
+	\]
+	Thus \(i\) is a quasi-isomorphism.
+	Finally, the 2-out-of-3 property of weak equivalences concludes the proof.
+\end{proof}
+
+\begin{remark}
+	\cref{thm:Homology} shows that, for a pseudo-Riemannian manifold, the coexact BV-algebra structure on differential forms yields no homotopical invariants on de~Rham cohomology beyond the Massey products induced by the wedge product.
+	The corresponding statement for the exact BV-algebra structure in the Poisson case was made in \cite{GuanMuro23}.
+\end{remark}

@@ -1,0 +1,253 @@
+% !TEX root = ../ck2.tex
+
+\subsection{Application to \(\cBV\)}\label{ss:cbv}
+
+\subsubsection{Quadratic-linear conditions for \(\cBV\)}\label{subsubsec:QLcBV}
+
+\begin{lemma}\label{lemme:qlsforcBV}
+	The inhomogeneous quadratic presentation \((E_\bullet, R_\bullet)\) of the operad \(\cBV\) satisfies the quadratic-linear conditions.
+\end{lemma}
+
+\begin{proof*}
+	Condition \((ql_1)\) is trivially satisfied.
+	In order to establish Condition \((ql_2)\), we have to compute
+	\[
+	\{R_\bullet \circ_{(1)} E_\bullet + E_\bullet \circ_{(1)} R_\bullet\} \cap \cT(E_\bullet)^{(2)};
+	\]
+	the only way to possibly get non-trivial elements is to consider either the inhomogeneous quadratic relations \textsc{bracket} \(\triangle\) or the \textsc{bracket} \(\square\) in \(R_\bullet\) composed above or below with the generators \(\m\), \(\b\), \(\triangle\), \(\c\), or \(\square\) in \(E_\bullet\).
+	This gives the following 8 possibilities that are all straightforward to check: in the table below the \emph{inhomogeneous relation} is composed with a \emph{generator} to produce a \emph{combination} which either produces \emph{no relation}, is equal to a \emph{homogeneous relation}, or is a \emph{direct consequence} of a homogeneous relation.
+	\begin{center}
+		\renewcommand{\arraystretch}{1.15}
+		\begin{tabular}{c l l l l }
+			\hline
+			& Inhomogeneous Relation & Generator & Combination & Homogeneous Relation \\
+			\hline
+			1 & \textsc{bracket \(\triangle\)} & \(\m\) & \begin{minipage}[t]{3.1cm} \(\b \circ_1 \m + \m \circ_1 \b=\) \\
+				\(\big(\b \circ_1 \m + \m \circ_1 \b\big)^{(123)}\) \end{minipage} & Consequence of \textsc{leibniz \(\triangle\)} \\
+			2 & \textsc{bracket \(\triangle\)} & \(\b\) & \textsc{jacobi \(\triangle\)} & \textsc{jacobi \(\triangle\)} \\
+			3 & \textsc{bracket \(\triangle\)} & \(\triangle\) & \textsc{derivation} & \textsc{derivation} \\
+			4 & \textsc{bracket \(\square\)} & \(\m\) & \begin{minipage}[t]{3.1cm} \(\c \circ_1 \m + \m \circ_1 \c=\) \\
+				\(\big(\c \circ_1 \m + \m \circ_1 \c\big)^{(123)}\) \end{minipage} & Consequence of \textsc{leibniz \(\square\)} \\
+			5 & \textsc{bracket \(\triangle\)} and \textsc{bracket \(\square\)} & \(\c\) and \(\b\) & \textsc{compatibility 2} & \textsc{compatibility 2} \\
+			6 & \textsc{bracket \(\triangle\)} and \textsc{bracket \(\square\)} & \(\square\) and \(\triangle\) & \textsc{compatibility 3} & \textsc{compatibility 3} \\
+			7 & \textsc{bracket \(\square\)} & \(\c\) & No relation & No relation \\
+			8 & \textsc{bracket \(\square\)} & \(\square\) & No relation & No relation \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Let us make explicit two types of computations to show how it works.
+	In the first case of the above list, one comes up with the following six elements of \(\cT(E_\bullet)\):
+	\begin{align*}
+		\Theta(a,b,c) &\defeq \LBM{a}{b}{c}-\DLMM{a}{b}{c}+\LMDM{a}{b}{c}+\LMMBBB{a}{b}{c}~,\\
+		\Xi(a,b,c) &\defeq \LMB{a}{b}{c}-\LMDM{a}{b}{c}+\LMMB{a}{b}{c}+\LMMBB{a}{b}{c}~,
+	\end{align*}
+	where \((a,b,c)\) is either equal to \((1,2,3)\), \((2,3,1)\), or \((3,1,2)\).
+	The only cubical trees (i.e.\ with three vertices) on the right-hand sides which appear in a composite of a homogeneous quadratic relation (associativity here) in \(R_\bullet\) with a generator (\(\triangle\) here) in \(E_\bullet\) are the ones where the operator \(\triangle\) sits at the top or at the bottom of the composite of two products \(\m\).
+	So, up to the associativity relation composed with one \(\triangle\), the only way to get ony quadratic terms from a linear combination of the aforementioned six terms is
+	\begin{align*}
+		\Theta(1,2,3)+\Xi(1,2,3)-\Theta(2,3,1)+\Xi(2,3,1)
+		&=
+		\LBM{1}{2}{3}+\LMB{1}{2}{3}-\LBM{2}{3}{1}-\LMB{2}{3}{1},
+	\end{align*}
+	and the similar elements obtained by cyclic permutations.
+	This homogeneous quadratic relation is equal to the difference of the Leibniz \(\triangle\) relation with inputs \((1,2,3)\) and the Leibniz \(\triangle\) relation with inputs \((2,3,1)\), so it is not new.
+
+	In the last case of the above list, one comes up with the following three elements of \(\cT(E_\bullet)\):
+	\begin{align*}
+		&\CBoxL{1}{2}-\BoxMBoxL{1}{2}+\MBoxBoxL{1}{2}+\MBoxBox{1}{2}~,\\
+		&\CBoxR{1}{2}-\BoxMBoxR{1}{2}+\MBoxBox{1}{2}+\MBoxBoxR{1}{2}~,\\
+		&\BoxC{1}{2}-\BoxBoxM{1}{2}+\BoxMBoxL{1}{2}+\BoxMBoxR{1}{2}~.
+	\end{align*}
+	None of the cubical trees on the right-hand sides appear in any composite of a homogeneous quadratic relation in \(R_\bullet\) with a generator in \(E_\bullet\).
+	Then, the presence of the three different cubical trees with two adjacent generators \(\square\) prevents us from producing a non-trivial homogeneous quadratic relation from a linear combination of these above three terms.
+\end{proof*}
+
+\subsubsection{The cooperad \(\cBV^{\ac}\)}
+
+In order to develop an effective theory of \(\cBV_\infty\)-algebras, we will make explicit the cooperad
+\[
+\cBV^{\ac} \defeq \big(\q\cBV^{\ac}, d_1 + d_{\psi}\big)
+= \big(\cC(sE_\bullet, s^2 \q R_\bullet), d_1 + d_{\psi}\big).
+\]
+To do so we start with an explicit description of the operad \(\cBV^! \).
+%\[
+%\cBV^! \defeq \mathrm{S} \otimes_H \big(\cBV^{\ac}\big)^*.
+%\]
+
+\begin{lemma}\label{prop:cBV!}
+	The operad \(\cBV^!\) admits the following presentation, where the symmetric action on all generators is trivial:
+
+	\medskip\noindent \(\diamond\) The generating \(\Sy\)-module is given by
+	\[
+	\Big(\KK\set{\m'} \oplus \KK\set{\c'} \oplus \KK\set{\triangle'} \oplus \KK\set{\b'} \oplus \KK\set{\square'}\ ,\ (d_1)^* + (d_\psi)^*\Big),
+	\]
+	where
+	\[
+	\m' \defeq \Mprime,\quad
+	\b' \defeq \Bprime,\quad
+	\triangle' \defeq \Dprime,\quad
+	\c' \defeq \Cprime,\quad
+	\square' \defeq \BOXprime,
+	\]
+	with
+	\[
+	|\m'| = |\c'| = 0, \quad
+	|\b'| = |\square'| = -1, \quad
+	|\triangle'| = -2.
+	\]
+	The differential \((d_1)^*\) is the unique derivation extending the assignment
+	\[
+	\Mprime \mapsto 0,\quad
+	\Cprime \mapsto -\Bprime \mapsto 0,\quad
+	\BOXprime \mapsto -\Dprime \mapsto 0,
+	\]
+	and the differential \((d_\psi)^*\) is the unique derivation extending the assignment
+	\[
+	\Bprime \mapsto -\DMprime{1}{2},\quad
+	\Cprime \mapsto -\BoxMprime{1}{2}.
+	\]
+
+	\medskip\noindent \(\diamond\) The \(\Sy\)-module of relations is spanned by the following 11 relators:
+
+	\begin{tabular}{ll}
+		\textnormal{\textsc{jacobi:}}
+		\(\LLprime{1}{2}{3}+\LLprime{2}{3}{1}+\LLprime{3}{1}{2}\) &
+		\textnormal{\textsc{associativity:}}
+		\(\BBBprime{1}{2}{3}-\BBRprime{1}{2}{3}\) \\[4pt]
+
+		\textnormal{\textsc{leibniz \(\m'\text{--}\b'\):}}
+		\(\LMBprime{1}{2}{3}-\LBMprime{1}{3}{2}-\LBMprime{2}{3}{1}\) & \\[4pt]
+
+		\textnormal{\textsc{commutativity \(\m'\text{--}\triangle'\):}}
+		\(\DMprime{1}{2}-\MDLprime{1}{2}\) &
+		\textnormal{\textsc{commutativity \(\b'\text{--}\triangle'\):}}
+		\(\DBprime{1}{2}-\BDLprime{1}{2}\) \\[4pt]
+
+		\textnormal{\textsc{nilpotency:}}
+		\(\BoxBoxprime,\ \BoxCprime{1}{2},\ \CBoxLprime{1}{2},\ \LCCprime{1}{2}{3}\) &
+		\textnormal{\textsc{commutativity \(\triangle'\text{--}\square'\):}}
+		\(\DBoxprime - \BoxDprime\) \\[4pt]
+
+		\textnormal{\textsc{leibniz \(\m'\text{--}\square'\):}}
+		\(\LMBoxprime{1}{2}{3}+\LBoxMprime{1}{3}{2}+\LBoxMprime{2}{3}{1}\) &
+		\textnormal{\textsc{commutativity \(\m'\text{--}\square'\):}}
+		\(\BoxMprime{1}{2}+\MBoxLprime{1}{2}\)
+	\end{tabular}
+
+	\noindent
+	\begin{tabular}{l}
+		\textnormal{\textsc{commutativity \(\b'\text{--}\c'\):}}
+		\(\CBprime{1}{2}{3}-\CBprime{2}{3}{1},\
+		\BCprime{1}{2}{3}-\BCprime{2}{3}{1},\
+		\CBprime{1}{2}{3}-\BCprime{1}{2}{3}\) \\[4pt]
+
+		\textnormal{\textsc{compatibility \(\b'\square' \text{--} \c'\triangle'\):}}
+		\(\BoxBprime{1}{2}-\DCprime{1}{2},\
+		\DCprime{1}{2}+\CDLprime{1}{2},\
+		\BoxBprime{1}{2}+\BBoxLprime{1}{2}\)~.
+	\end{tabular}
+\end{lemma}
+
+\begin{proof*}
+	This proof is similar and extends the one of the \(\BV\) case given in \cref{prop:DualBValg}: we apply \cite[Proposition~7.2.1]{LodayVallette12} to get the following presentation
+	\[
+	\big(\q\cBV^{\ac}\big)^* \cong \mathcal{P}\big(s^{-1}(E_\bullet)^*, s^{-2}(\q R_\bullet)^{\perp}\big).
+	\]
+	Here the notation with a prime stands for the desuspension of the linear dual: \(\m' \defeq s^{-1}\m^*\), for instance.
+	The rest is a straightforward computation of the orthogonal space of quadratic relations.
+	The dual differentials are direct consequences of the definitions of the coderivations on the Koszul dual cooperad; the minus sign comes from the Koszul convention \(\big(s^{\otimes 2}\big)^* = -s^* \otimes s^*\).
+\end{proof*}
+
+\begin{lemma}
+	MISSING LEMMA\anibal{missing lemma about the decomposition of BV as an S-module (I think)}
+\end{lemma}
+
+\begin{theorem}\label{thm:FormcBVac}
+	The cooperads \(\BV^\ac\) and \(\cBV^\ac\) admit the following decompositions as cooperads:
+	\[
+	\begin{tikzcd}[column sep=-2.5pt]
+		\BV^\ac & \cong & \Com^\ac & \oplus &
+		\rM^*
+		\arrow[loop below, in=240, out=300, distance=2.3em, "d_\varphi"]
+	\end{tikzcd}
+	\quad\text{and}\quad
+	\begin{tikzcd}[column sep=-2.5pt]
+		\cBV^\ac & \cong & \Com^\ac & \oplus &
+		\rM^*
+		\arrow[rr, bend left=45, "\quad d_1 = s^{-1}", out=80, in=100, distance=1.1em]
+		\arrow[loop below, in=240, out=300, distance=2.3em, "d_\varphi"]  &
+		\oplus & s^{-1}\rM^* \arrow[loop below, in=245, out=295, distance=2em, "-d_\varphi"]
+	\end{tikzcd}
+	\]
+	where
+	\begin{itemize}[label=\(\diamond\),  leftmargin=*]
+		\item \(\Com^\ac\) is the sub-cooperad spanned by the cogenerator \(s\m\).
+		\item \(\rM^*\) is the coideal of \(\BV^\ac\) spanned by the cogenerators \(s\b\) and \(s\triangle\).
+		\item \(s^{-1}\rM^*\) is the coideal of \(\cBV^\ac\) spanned by the cogenerators \(s\c\) and \(s\square\).
+	\end{itemize}
+\end{theorem}
+
+\begin{proof*}
+	Recall that the quadratic analogue \(\q\BV\) of the operad \(\BV\) is given by a distributive law, see \cite[Section~1.2]{GCTV12}.
+	This implies that the underlying graded \(\Sy\)-modules of the Koszul dual cooperad \(\q\BV^{\ac}\) is given by
+	\[
+	\q\BV^{\ac} \cong \mathrm{D}^{\ac} \circ \Lie_1^{\ac} \circ \Com^{\ac},
+	\]
+	where \(\mathrm{D} \defeq T(\triangle)/\big(\triangle^2\big)\) is the algebra of dual numbers and \(\Lie_1\) is the operad of shifted Lie algebras with bracket of degree \(1\).
+	So the linear dual operad \(\big(\q\BV^{\ac}\big)^*\) splits as
+	\[
+	\big(\q\BV^{\ac}\big)^* \cong \mathrm{S}\Lie \oplus \rM,
+	\]
+	where \(\mathrm{S}\Lie\) is the sub-operad spanned by the generator \(\m'\) and where \(\rM\) is the \(\mathrm{S}\Lie\)-bimodule given by the ideal of \(\big(\q\BV^{\ac}\big)^*\) spanned by the two generators \(\b'\) and \(\triangle'\).
+
+	\medskip
+
+	The presentation of the operad \(\big(\q\cBV^{\ac}\big)^*\) given in the above \cref{prop:cBV!} shows that the pair of nilpotent generators \(\c'\) and \(\square'\) behave in the same way as the pair of generators \(\b'\) and \(\triangle'\) up to suspension.
+	This implies the following isomorphism of operads
+	\[
+	\big(\q\cBV^{\ac}\big)^* \cong \mathrm{S}\Lie \oplus \rM \oplus s\rM,
+	\]
+	where \(s\rM\) is isomorphic to the ideal of \(\big(\q\cBV^{\ac}\big)^*\) spanned by
+	the two generators \(\c'\) and \(\square'\).
+	Dually, we get the isomorphism of cooperads
+	\[
+	\q\cBV^{\ac} \cong \Com^\ac \oplus \rM^* \oplus s^{-1}\rM^*.
+	\]
+	Under this isomorphism, the codifferential \(d_1\) is equal to the desuspension isomorphism \(s^{-1} \colon \rM^* \to s^{-1}\rM^*\).
+	Since the total number of cogenerators \(s\c\) and \(s\square\) is preserved under the codifferential \(d_\psi\), both coideals \(\rM^*\) cogenerated by \(s\b\) and \(s\triangle\) and \(s^{-1}\rM^*\) cogenerated by \(s\c\) and \(s\square\) are stable under \(d_\psi\), where they are respectively equal to \(d_\varphi\) and \(-d_\varphi\).
+\end{proof*}
+
+\subsubsection{Koszul property}
+
+\begin{theorem}\label{prop:cBVKoszul}
+	The operad \(\cBV\) is Koszul.
+\end{theorem}
+
+\begin{proof*}
+	We have already seen in \cref{lemme:qlsforcBV} that the dg inhomogeneous quadratic data \(\big(E_\bullet, R_\bullet\big)\)
+	introduced in \cref{lemma:presentationcBV} for the operad \(\cBV\) satisfies the quadratic conditions.
+	It remains to study its homology twisting morphism \(\bar{\kappa}\).
+	By \cref{thm:FormcBVac}, the homology of the Koszul dual cooperad \(\cBV^\ac\) with respect to the internal codifferential
+	\(d_1\) is isomorphic to the Koszul dual cooperad \(\Com^\ac\):
+	\[
+	H_\bullet\big(\cBV^{\ac}, d_1\big) \cong \Com^\ac.
+	\]
+	\cref{thm:FormcBVac} also shows that the induced codifferential \(\bar{d}_\psi = 0\) is trivial in the case of the operad \(\cBV\).
+	\cref{thm:Homology} computes the homology operad of \(\cBV\):
+	\[
+	H_\bullet\big(\cBV, \partial\big) \cong \Com.
+	\]
+	In the end, the homology twisting morphism \(\bar{\kappa}\) is equal to the canonical twisting morphism
+	\(\Com^\ac \to \Com\) of the operad \(\Com\), which is known to be Koszul, see \cite[Proposition~13.1.2]{LodayVallette12}.
+\end{proof*}
+
+\begin{remark}
+	In the present case of the operad \(\cBV\), an even stronger phenomenon appears, which does not hold in full generality: the homology of the operad \(\cBV\) and the homology of the Koszul dual cooperad \(\cBV^\ac\) are given by the homology of their presentations
+	\begin{align*}
+		&H_\bullet\big(\cBV, \partial\big) \cong
+		\mathcal{P}\big(H_\bullet(E_\bullet, \partial), H_\bullet(R_\bullet, \partial)\big) \cong \Com
+		\quad \text{and} \quad \\
+		&H_\bullet\big(\cBV^\ac, d_1\big) \cong
+		\mathcal{C}\big(sH_\bullet(E_\bullet, \partial), s^2 H_\bullet(qR_\bullet, \partial)\big) \cong \Com^\ac~.
+	\end{align*}
+\end{remark}

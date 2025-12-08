@@ -1,0 +1,298 @@
+% !TEX root = ../ck2.tex
+
+\subsection{Homotopical properties}\label{ss:tools}
+
+The cofibrant replacement \(\cBV_\infty \defeq \Omega \cBV^{\ac}\) of the operad \(\cBV\) has the crucial feature of being the cobar construction of a cooperad, namely the Koszul dual \(\cBV^{\ac}\).
+This places \(\cBV_\infty\)-algebras into a rich homotopical framework providing them with \emph{\(\infty\)-morphisms}, \emph{homotopy transfer}, \emph{rectification}, and an \emph{obstruction theory}.
+We only sketch these properties here and refer to \cite[Chapters~10--12]{LodayVallette12} for proofs.
+
+%The Rosetta stone \cite[Theorem~10.1.3]{LodayVallette12} provides several equivalent descriptions of a \(\cBV_\infty\)-algebra, including one in terms of Maurer--Cartan elements in a dg pre-Lie algebra, which controls their deformation theory, and one in terms of square-zero coderivations, which describes their homotopy properties.
+
+\subsubsection{Deformation theory}
+
+\begin{definition}[{\cite[Section~10.1]{LodayVallette12}}]
+	For any chain complex \(A\), the \defn{deformation dg pre-Lie algebra} of \(\cBV_\infty\)-algebra structures on \(A\) is
+	\[
+	\g_{\cBV, A} \defeq
+	\left(
+	\Hom_{\Sy} \left({\cBV}^{\ac}, \End_A \right), \partial, \star
+	\right).
+	\]
+%	where
+%	\[
+%	\partial(f) \defeq \partial_{\End_A} f - (-1)^{|f|} f (d_1 + d_\psi),
+%	\]
+%	with \(\partial_A\) the differential on \(\End_A\) induced by \(d\), and where \(\star\) is the convolution product induced by the infinitesimal coproduct of the cooperad \(\cBV^{\ac}\) and the infinitesimal product of the operad \(\End_A\), see \cite[Section~10.1]{LodayVallette12}.
+\end{definition}
+
+\begin{proposition}\label{prop:DefpreLie}
+	The underlying module of the deformation dg pre-Lie algebra is isomorphic to
+	\[
+	\Hom_{\Sy}(\cBV^{\ac}, \End_A)
+	\cong
+	s^{2}\, \Hom\big(\mathrm{S}^c(s\mathrm{Lie}^c(sA))[\delta], A\big)
+	\oplus
+	s^{3}\, \Hom\big(\mathrm{S}^c(s\mathrm{Lie}^c(sA))[\delta]/s\mathrm{Lie}^c(sA), A\big),
+	\]
+	where \(\delta\) has degree \(2\), \(\mathrm{S}^c(-)\) is the conilpotent cofree cocommutative coalgebra, and \(\mathrm{Lie}^c(-)\) is the conilpotent cofree Lie coalgebra.
+\end{proposition}
+
+\begin{proof*}
+	This follows from the decomposition of the Koszul dual cooperad given in \cref{thm:FormcBVac}
+	\[
+	\cBV^{\ac}
+	\cong \underbrace{\Com^{\ac} \oplus \rM^*}_{\cong \BV^{\ac}} \oplus s^{-1}\rM^*
+	\cong \BV^{\ac} \oplus s^{-1}\BV^{\ac}/\Com^{\ac},
+	\]
+	which yields
+	\begin{align*}
+		\cBV^{\ac}(A) &\cong \BV^{\ac}(A) \oplus s^{-1}(\BV^{\ac}/\Com^{\ac})(A) \\
+		&\cong s^{-2}\,\mathrm{S}^c(s\mathrm{Lie}^c(sA))[\delta] \oplus
+		s^{-3}\,\mathrm{S}^c(s\mathrm{Lie}^c(sA))[\delta]/s^{-2}\mathrm{Lie}^c(sA),
+	\end{align*}
+	since \(\Com^{\ac}(A) \cong s^{-1}\mathrm{Lie}^c(sA)\).
+\end{proof*}
+
+Maurer--Cartan elements, i.e.\ degree \(-1\) elements \(\alpha\) satisfying
+\[
+\partial\alpha + \alpha \star \alpha
+= \partial_A \alpha + \alpha(d_1+d_\psi) + \alpha \star \alpha = 0,
+\]
+of the deformation dg pre-Lie algebra \(\g_{\cBV, A}\) are in one-to-one correspondence with \(\cBV_\infty\)-algebra structures on \(A\), see \cite[Proposition~10.1.1]{LodayVallette12}.
+One may start with a graded module \(A\) whose differential is encoded in the first component of \(\alpha\), or with a dg module \((A, d)\) and a Maurer--Cartan element having trivial component on \(A\).
+The pre-Lie product admits explicit integration formulas by \cite[Theorem~2]{DSV16}, yielding a complete topological group structure on the degree zero part: this is the \defn{gauge group of symmetries} \(\mathrm{G}\).
+Functoriality of the deformation pre-Lie algebra in the Koszul dual cooperad allows one to relate the deformation dg pre-Lie algebras of \(\cBV_\infty\)-algebras with those of \(\BV_\infty\)-algebras, \(\Gerst_\infty\)-algebras, and \(\Com_\infty\)-algebras.
+
+\begin{definition}
+	The \defn{cohomology groups} of a \(\cBV_\infty\)-algebra \(\alpha \in \mathrm{MC}(\g_{\cBV, A})\) are the groups defined by the chain complex
+	\[
+	\g_{\cBV, A}^\alpha \defeq
+	\big(\Hom_{\Sy}(\cBV^{\ac}, \End_A), \partial^\alpha \defeq \partial + [\alpha, -]\big),
+	\]
+	with differential twisted by \(\alpha\).
+\end{definition}
+
+Since twisting by a Maurer--Cartan element produces a dg Lie algebra, this chain complex carries a Lie bracket, sometimes called the \defn{intrinsic Lie bracket}, which detects the deformations of the \(\cBV_\infty\)-algebra structure, see \cite[Section~12.2]{LodayVallette12}.
+
+\begin{theorem}
+	The space \(Z_{-1}\big(\g_{\cBV, A}^\alpha\big)\) of degree \(-1\) cycles is isomorphic to the tangent space at \(\alpha\) of the algebraic variety
+	\(\mathrm{MC}\big(\g_{\cBV, A}\big)\) and the degree \(-1\) homology group
+	\(H_{-1}\big(\g_{\cBV, A}^\alpha\big)\) is isomorphic to the tangent space at \(\alpha\) of the algebraic stack
+	\(\mathcal{MC}\big(\g_{\cBV, A}\big)\defeq \mathrm{MC}\big(\g_{\cBV, A}\big)/\mathrm{G}\) defined as the moduli space of Maurer--Cartan elements up to gauge group action.
+\end{theorem}
+
+\begin{proof*}
+	This is a direct application of \cite[Theorem~12.2.14]{LodayVallette12}.
+\end{proof*}
+
+\subsubsection{Obstruction theory}
+
+The weight grading of the Koszul dual cooperad \(\cBV^{\ac}\) by its cogenerators \(s \m, s \b, s \triangle, s \c, s \square\) induces a weight grading on the deformation dg pre-Lie algebra
+\[
+\g_{\cBV, A} \cong \prod_{w \geqslant  0} \g_{\cBV, A}^{(w)}.
+\]
+Maurer--Cartan elements concentrated in weight one are in one-to-one correspondence with \(\cBV\)-algebra structures on \(A\).
+This decomposition yields an effective obstruction theory for \(\cBV_\infty\)-algebras, as shown for instance by the next theorem.
+
+\begin{theorem}
+	If
+	\[
+	H_{-2}\big(\g_{\cBV, A}^{(w)}, \partial_0\big) \cong 0,
+	\]
+	for all \(w \geqslant  2\), where
+	\[
+	\partial_0(f) \defeq \partial_A f - (-1)^{|f|} f d_1,
+	\]
+	then any dg commutative algebra \((A, d, \cdot)\) equipped with a degree \(+1\) linear operator \(\triangle\) and a degree \(+1\) symmetric binary operation \(b\) extends to a \(\cBV_\infty\)-algebra such that
+	\[
+	m^0_1 = d,
+	\qquad
+	m^0_2 = \cdot,
+	\qquad
+	m^1_1 = \triangle,
+	\qquad
+	m^0_{1,1} = b,
+	\qquad
+	n^1_1 = [d, \triangle],
+	\qquad
+	n^0_{1,1} = [d, b].
+	\]
+\end{theorem}
+
+\begin{proof*}
+	This is a direct application of \cite[Theorem~12.2.12]{LodayVallette12}.
+\end{proof*}
+
+In \cite[Theorem~28]{GCTV12}, this kind of obstruction theory was used to
+endow the BRST complex (off-shell) of a topological vertex operator algebra with an explicit \(\BV_\infty\)-algebra lifting the \(\BV\)-algebra on cohomology (on-shell), answering a conjecture of Lian--Zuckerman \cite{LianZuckerman93}.
+
+\begin{proposition}
+	For every \(w \geqslant  0\), the chain complex \(\big(\g_{\cBV, A}^{(w)}, \partial_0\big)\) is acyclic whenever \((\End_A, \partial_A)\) is acyclic, for example when \((A, d)\) is acyclic.
+\end{proposition}
+
+\begin{proof*}
+	For any \(w \geqslant  0\), the complex \(\big(\g_{\cBV, A}^{(w)}, \partial_0\big)\) has the following form:
+	\[
+	\begin{tikzcd}[column sep=tiny]
+		\Hom_{\Sy}(\Com^\ac(w+1), \End_A)
+		\arrow[loop below,distance=2em, "(\partial_A)_*"]
+		\!\!\!&\!\!\! \oplus \!\!\!&\!\!\!
+		\Hom_{\Sy}((\BV^{\ac}/\Com^{\ac})^{(w)}, \End_A)
+		\arrow[rr,bend left=45, "(d_1)^* = s", "\cong"']
+		\arrow[loop below,distance=2em, "(\partial_A)_*"]
+		\!\!\!&\!\!\! \oplus \!\!\!&\!\!\!
+		s\Hom_{\Sy}((\BV^{\ac}/\Com^{\ac})^{(w)}, \End_A)
+		\arrow[loop below,distance=2em, "(\partial_A)_*"].
+	\end{tikzcd}
+	\]
+	Filtering by the homological degree of \(\End_A\) yields a convergent spectral sequence whose first page has differential \((d_1)^*\), an isomorphism between the last two summands.
+	Thus the second page is
+	\[
+	(E^1, d^1) \cong \big(\Hom_{\Sy}(\Com^\ac(w+1), \End_A), (\partial_A)_*\big)
+	\cong \big((\Com^\ac(w+1))^* \otimes_{\Sy} \Hom(A^{\otimes w+1}, A), \id \otimes \partial_A\big),
+	\]
+	which is acyclic under the assumption.
+\end{proof*}
+
+Since the Koszul dual cooperad \(\cBV^{\ac}\) contains the Koszul dual cooperads \(\BV^{\ac}\), \(\Gerst^{\ac}\), and \(\Com^{\ac}\), one can set up \emph{relative} obstruction theories detecting when a \(\BV_\infty\)-algebra, a \(\Gerst_\infty\)-algebra, or a \(\Com_\infty\)-algebra can be lifted to a \(\cBV_\infty\)-algebra.
+This is obtained by adapting \cite[Section~3.4]{GCTV12}, where the relative weight grading is given by the number of cogenerators in \(s^{-1}\rM^*\), \(s\triangle\) and \(s^{-1}\rM^*\), or \(\rM^* \oplus s^{-1}\rM^*\), respectively.
+
+\subsubsection{Homotopy theory}
+
+The third equivalent definition of a \(\cBV_\infty\)-algebra identifies such a structure on \(A\) with a square-zero coderivation (a \emph{codifferential}) on the conilpotent cofree dg \(\cBV^{\ac}\)-coalgebra \(\cBV^{\ac}(A)\).
+Interpreted as an assignment, this leads to the following definition.
+
+\begin{definition}\label{Def:BarConstr}
+	The \defn{bar construction} of a \(\cBV_\infty\)-algebra \((A, \alpha)\) is the dg \(\cBV^{\ac}\)-coalgebra
+	\[
+	\mathrm{B}_\iota A \defeq (\cBV^{\ac}(A), d_1 + d_\psi + d_\alpha),
+	\]
+	where \(d_\alpha\) is the unique coderivation extending the map \(\cBV^{\ac}(A) \to A\) defined by \(\alpha\).
+\end{definition}
+
+\begin{proposition}\label{prop:FormBar}
+	The underlying module of the bar construction is isomorphic to
+	\[
+	\cBV^{\ac}(A) \cong
+	s^{-2}\, \mathrm{S}^c(s\mathrm{Lie}^c(sA))[\delta]
+	\oplus
+	s^{-3}\, \mathrm{S}^c(s\mathrm{Lie}^c(sA))[\delta]/s\mathrm{Lie}^c(sA).
+	\]
+\end{proposition}
+
+\begin{proof*}
+	This follows directly from the argument in \cref{prop:DefpreLie}.
+\end{proof*}
+
+\begin{definition}
+	An \defn{\(\infty\)-morphism} \(A \rightsquigarrow B\) of \(\cBV_\infty\)-algebras is a morphism of dg \(\cBV^{\ac}\)-coalgebras between the corresponding bar constructions \(\mathrm{B}_\iota A \to \mathrm{B}_\iota B\).
+\end{definition}
+
+The data of an \(\infty\)-morphism \((A, \alpha) \rightsquigarrow (B, \beta)\) is equivalent to a degree zero element \(f \in \Hom_{\Sy}\big(\cBV^{\ac}, \End^A_B\big)\) satisfying
+\[
+\partial f = f \star \alpha - \beta \circledcirc f,
+\]
+see \cite[Theorem~10.2.3]{LodayVallette12} and \cite[Section~5]{DSV16}.
+So an \(\infty\)-morphism consists of two families of maps
+\begin{align*}
+	f_{p_1,\dots,p_k}^t &\colon
+	A^{\otimes p_1}\otimes\dots\otimes A^{\otimes p_k} \longrightarrow A,
+	\qquad t \geqslant  0,\ k \geqslant  1,\ p_i \geqslant  1,\\
+	g_{p_1,\dots,p_k}^t &\colon
+	A^{\otimes p_1}\otimes\dots\otimes A^{\otimes p_k} \longrightarrow A,
+	\qquad t \geqslant  0,\ k \geqslant  1,\ p_i \geqslant  1,\ t+k \geqslant  2,
+\end{align*}
+of respective degrees
+\[
+\bigl|f_{p_1,\dots,p_k}^t\bigr| = p_1 + \dots + p_k + k + 2t - 2,
+\qquad
+\bigl|g_{p_1,\dots,p_k}^t\bigr| = p_1 + \dots + p_k + k + 2t - 3,
+\]
+satisfying the same symmetries as the generating and obstruction maps of a \(\cBV_\infty\)-algebra, see \cref{ss:generating_maps} and \cref{ss:obstruction_maps}.
+The \(\infty\)-morphisms of \(\cBV_\infty\)-algebras satisfy exactly the same pattern of relations as the structural maps described and proved in \cref{thm:MaincBVinfty}.
+The collection of maps \(\{f_{p}^0\}_{p \geqslant  1}\) forms an \(\infty\)-morphism of \(\rC_\infty\)-algebras.
+The maps \(g_{p_1,\dots,p_k}^t\) are precisely equal to the obstructions to the relations of the maps \(f_{p_1,\dots,p_k}^t\) defining an \(\infty\)-morphism of \(\BV_\infty\)-algebras.
+Then, altogether, the maps \(g_{p_1,\dots,p_k}^t\) and \(f_{p_1,\dots,p_k}^t\) satisfy relations which are automatic from this prescription.
+The proof is similar to that of \cref{thm:MaincBVinfty} and is left to the reader.
+
+\medskip
+
+The isomorphisms in the category of \(\cBV_\infty\)-algebras are the \defn{\(\infty\)-isomorphisms}, namely those \(\infty\)-morphisms whose first component \(f^0_1 \colon A \to B\) is a dg module isomorphism, see \cite[Theorem~10.4.1]{LodayVallette12}.
+The Deligne groupoid of the deformation dg pre-Lie algebra \(\g_{\cBV, A}\) has \(\cBV_\infty\)-algebra structures on \(A\) as objects and \(\infty\)-isotopies, i.e.\ \(\infty\)-isomorphisms with first component the identity, as morphisms, see \cite[Theorem~3]{DSV16}.
+
+\medskip
+
+There is a bar-cobar adjunction between dg \(\cBV\)-algebras and conilpotent dg \(\cBV^{\ac}\)-coalgebras
+\[
+\begin{tikzcd}
+	\Omega_\kappa \colon \text{conil.\ dg } \cBV^{\ac}\text{-coalgebras} \arrow[r, shift left=1.75, harpoon, "\perp"']
+	& \text{dg } \cBV\text{-algebras} \arrow[l, shift left=1.75, harpoon] \colon \mathrm{B}_\kappa,
+\end{tikzcd}
+\]
+where the underlying constructions are given respectively by the free algebra and the cofree coalgebra functors, see \cite[Section~11.2]{LodayVallette12}.
+
+\begin{theorem}[Rectification]
+	Any \(\cBV_\infty\)-algebra \(A\) is naturally \(\infty\)-quasi-isomorphic to the canonical dg \(\cBV\)-algebra
+	\[
+	A \stackrel{\sim}{\rightsquigarrow} \Omega_\kappa \mathrm{B}_\iota A.
+	\]
+\end{theorem}
+
+\begin{proof*}
+	This is a direct application of \cite[Theorem~11.4.4]{LodayVallette12} to the Koszul operad \(\cBV\).
+\end{proof*}
+
+This rectification extends to \(\infty\)-morphisms by \cite[Proposition~11.4.5]{LodayVallette12}.
+
+\medskip
+
+Recall that a \defn{contraction} of a chain complex \((A, d_A)\) onto another chain complex \((H, d_H)\) is a homotopy \(h\) of degree \(1\) together with chain maps \(i\) and \(p\) such that
+\[
+\begin{tikzcd}
+	(A, d_A) \arrow[r, shift left, "p"] \arrow[loop left, distance=1.5em, "h"]
+	& (H, d_H) \arrow[l, shift left, "i"]
+\end{tikzcd}
+\]
+and satisfying
+\[
+pi = \id_H,
+\qquad ip - \id_A = d_A h + h d_A,
+\qquad hi = 0,
+\qquad ph = 0,
+\qquad h^2 = 0.
+\]
+
+\begin{theorem}[Homotopy transfer theorem]
+	For any \(\cBV_\infty\)-algebra structure \(\alpha\) on \((A, d_A)\) and any contraction onto a chain complex \((H, d_H)\), there exists a \(\cBV_\infty\)-algebra structure on \(H\) defined by the composite
+	\[
+	\begin{tikzcd}[column sep=large]
+		\overline{\cBV}^{\ac} \arrow[r, "\Delta_{\cBV^{\ac}}"] & \mathcal{T}^c(\overline{\cBV}^{\ac})
+		\arrow[r, "\mathcal{T}^c(s\alpha)"] & \mathcal{T}^c(s\End_A)
+		\arrow[r, "\Psi"] & \End_H,
+	\end{tikzcd}
+	\]
+	where \(\Delta_{\cBV^{\ac}}\) is the comonadic decomposition map of the cooperad \(\cBV^{\ac}\) and \(\Psi \colon \End_A \rightsquigarrow \End_H\) is the Van der Laan \(\infty\)-morphism.
+	Both maps \(i\) and \(p\) extend to \(\infty\)-quasi-isomorphisms between \(\alpha\) and this transferred structure.
+\end{theorem}
+
+\begin{proof*}
+	This is a direct application of \cite[Theorem~10.3.1]{LodayVallette12}.
+	Explicit formulas for the extensions to \(\infty\)-quasi-isomorphisms are given in \cite[Theorem~10.3.6]{LodayVallette12} and \cite[Proposition~10.3.9]{LodayVallette12}.
+\end{proof*}
+
+The homotopy transfer theorem admits a conceptual interpretation via perturbation theory and the gauge group action, see \cite[Section~8]{DSV16}.
+It is functorial with respect to the Koszul dual cooperad by \cite[Proposition~3.18]{HLV21}.
+Applied to the homology \(H = H_\bullet(A)\) of a \(\cBV_\infty\)-algebra, it produces \defn{Massey products} for homotopy coexact Batalin--Vilkovisky algebras.
+A \(\cBV_\infty\)-algebra with trivial differential \(m^0_1 = 0\) is called \defn{minimal}.
+
+\begin{proposition}[Minimal model]
+	Every \(\cBV_\infty\)-algebra is \(\infty\)-isomorphic to the product of a minimal \(\cBV_\infty\)-algebra, given by the transferred structure on its homology, with an acyclic trivial \(\cBV_\infty\)-algebra.
+\end{proposition}
+
+\begin{proof*}
+	This is a direct application of \cite[Theorem~10.4.3]{LodayVallette12}.
+\end{proof*}
+
+This implies that any \(\infty\)-quasi-isomorphism of \(\cBV_\infty\)-algebras admits a homotopy inverse, see \cite[Theorem~10.4.4]{LodayVallette12}.
+The \defn{Kaledin--Emprin classes} introduced in \cite{Emprin24} provide faithful obstructions for the formality of \(\cBV_\infty\)-algebras.
+Finally, Theorem~0.25 of \cite{CPRN24} applied to the split morphism \(\Com_{(n)} \to \cBV_{(n)}\) shows that the formality of \(\cBV_\infty\)-algebras reduces to the formality of their underlying \(\Com_\infty\)-algebras.

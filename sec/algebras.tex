@@ -1,0 +1,694 @@
+% !TEX root = ../ck2.tex
+
+\section{A model for homotopy \(\cBV\)-algebras}\label{sec:algebras}
+
+In this section we introduce \(\cBV_{\!\infty}\)-algebras in concrete terms.
+We begin by recalling the conventions underlying our constructions and review \(\Com\)-algebras, \(\cBV\)-algebras, and \(\BV\)-algebras.
+We then introduce \(\cBV_{\!\infty}\)-algebras via generating maps, show how every \(\rC_\infty\)-algebra extends canonically to such a structure, and define obstruction maps measuring the failure of a \(\cBV_{\!\infty}\)-algebra to descend to \(\BV_{\!\infty}\)-algebra.
+A weight filtration is introduced to organize the hierarchy of homotopies present in \(\cBV_{\!\infty}\)-algebras and define \(\cBV_{\!(n)}\)-algebras for \(n \in \N\).
+Finally, we illustrate the utility of this framework with the kinematic algebra of Yang--Mills theory \cite{Bonezzi2023GaugeInvariantDoubleCopyQuartic, Bonezzi2024WeaklyConstrainedDoubleField}.
+
+\subsection{Conventions}
+
+\subsubsection{The underlying category}\label{ss:dgVec}
+
+We work throughout in the closed symmetric monoidal category of cochain complexes over a field \(\KK\) of characteristic \(0\).
+We spell this out for the convenience of the reader.
+
+\medskip\noindent
+A \textit{cochain complex} is a pair \((V, d)\) consisting of a graded vector space \(V = \bigoplus_{n \in \Z} V^n\) and a \textit{differential}, that is, a linear map \(d \colon V \to V\) such that \(d(V^n) \subseteq V^{n+1}\) for all \(n \in \Z\) and \(d \circ d = 0\).
+
+\medskip\noindent
+Saying that the category is \emph{monoidal} means that it is equipped with a product and a unit object satisfying the usual associativity and unitality constraints.
+In this case, we have the tensor product
+\[
+(V \otimes W)^n \;=\; \bigoplus_{p+q=n} V^p \otimes_\KK W^q,
+\]
+with differential
+\[
+d_{V \otimes W}(v \otimes w) \;\defeq\; d(v) \otimes w \;+\; (-1)^{|v|} v \otimes d_W(w),
+\]
+and the unit object being \(\KK\) concentrated in degree \(0\) with trivial differential.
+
+\medskip\noindent
+Saying that the category is \emph{closed} means that we have an \textit{internal Hom}: for any cochain complex \(V,W\), the collection of linear maps from \(V\) to \(W\) itself forms a cochain complex
+\[
+\Hom(V,W) \;=\; \bigoplus_{k \in \Z} \Hom^k(V,W),
+\]
+where \(\Hom^k(V,W)\) consists of all linear maps \(f \colon V \to W\) of \textit{degree \(k\)}, i.e.\ satisfying \(f(V^n) \subseteq W^{n+k}\) for all \(n\) in \(\Z\).
+The differential on \(\Hom(V,W)\) is given by
+\[
+d_{\Hom}(f) \;\defeq\; d_W \circ f \;-\; (-1)^{|f|} f \circ d .
+\]
+This internal Hom gives rise to a canonical \textit{dg adjunction}:
+\[
+\Hom(U \otimes V, W) \;\cong\; \Hom\big(U,\, \Hom(V,W)\big)
+\]
+for any \(U,V,W\).
+
+\medskip\noindent
+Saying that this category is \emph{symmetric} asserts the existence of the isomorphism
+\begin{equation}\label{eq:symmetry_isomorphism}
+	\begin{tikzcd}[row sep=0, column sep=small]
+		V \otimes W \arrow[r, "\tau_{V,W}", shift left=0.5ex] & W \otimes V \\
+		v \otimes w \arrow[mapsto, r] & (-1)^{|v||w|}\, w \otimes v,
+	\end{tikzcd}
+\end{equation}
+for all homogeneous elements \(v \in V\) and \(w \in W\).
+
+\subsubsection{Symmetric group action}
+
+The \textit{symmetry isomorphism} \eqref{eq:symmetry_isomorphism} defines a left action of the symmetric group \(\Sy_n\) on \(V^{\otimes n}\) by
+\[
+\sigma (v_1 \otimes \dotsb \otimes v_n)
+\defeq
+\pm\, v_{\sigma^{-1}(1)} \otimes \dotsb \otimes v_{\sigma^{-1}(n)},
+\]
+for all \(\sigma \in \Sy_n\) and homogeneous \(v_i \in V\),
+where the sign is determined by the \emph{Koszul convention}.
+%\footnote{Exchanging two homogeneous objects of odd degree introduces a minus sign, while all other transpositions leave the sign unchanged.}.
+
+This induces a natural right \(\Sy_n\)-action on \(\Hom(V^{\otimes n},V)\) given by precomposition.
+Explicitly, for \(f \in \Hom(V^{\otimes n},V)\) and \(\sigma \in \Sy_n\)
+\[
+(f \circ \sigma^{-1})(v_1 \otimes \dotsb \otimes v_n)
+\defeq
+\pm\, f \big(v_{\sigma(1)} \otimes \dotsb \otimes v_{\sigma(n)}\big).
+\]
+
+\subsubsection{Partial compositions and the insertion bracket}
+
+Given \(f \in \Hom(V^{\ot n}, V)\), \(g \in \Hom(V^{\ot m}, V)\), and \(1 \leqslant i \leqslant n\), the \defn{partial composition}
+\[
+f \circ_i g \;\in\; \Hom\!\big(V^{\ot (n+m-1)}, V\big)
+\]
+is defined on homogeneous inputs \(v_1 \ot\dotsb\ot v_{n+m-1}\) by
+\[
+\begin{split}
+	(-1)^{|g| \cdot (|v_1| + \dotsb + |v_{i-1}|)}
+	f\big(v_1 \ot\dotsb\ot v_{i-1} \ot g(v_i \ot\dotsb\ot v_{i+m-1})
+	\ot v_{i+m} \ot\dotsb\ot v_{n+m-1}\big).
+\end{split}
+\]
+
+\medskip\noindent
+From these partial compositions we define the \defn{pre-Lie product}
+\begin{equation}\label{eq:preLie_product}
+	f \star g \;\defeq\; \sum_{i=1}^{n} f \circ_i g ,
+\end{equation}
+and its antisymmetrization, the \defn{insertion bracket},
+\[
+[f,g] \;\defeq\; f \star g \;-\; (-1)^{|f||g|}\, g \star f.
+\]
+This bracket makes
+\[
+\End_V \;\defeq\; \prod_{n \geqslant 1} \Hom(V^{\ot n},V)
+\]
+into a \emph{dg Lie algebra} extending the (graded) commutator Lie algebra on \(\Hom(V,V)\).
+
+\subsection{Strict algebras}
+
+A differential graded commutative algebra, or more compactly a \defn{\(\Com\)-algebra}, is a tuple \((A,d,m)\), where \((A,d)\) is a cochain complex and \(m \colon A \ot A \to A\) is a (graded) symmetric bilinear map of degree \(0\), i.e. \(m \circ \big(\id - (12)\big) = 0\), such that:
+\[
+m \circ_1 m - m \circ_2 m = 0, \qquad
+[d, m] = 0.
+\]
+The first identity states the associativity of \(m\) and the second that \(d\) is a \textit{derivation} of \(m\).
+
+\begin{definition}\label{def:cbv_algebra}
+	A \defn{\(\cBV\)-algebra} (\emph{coexact Batalin--Vilkovisky algebra}) is a tuple \((A,d,m,\triangle)\), where \((A,d,m)\) is a \(\Com\)-algebra and \(\triangle \in \Hom(A, A)\) is a degree \(-1\) map satisfying \(\triangle \circ \triangle = 0\) and the \textit{second-order relation}:
+	\begin{equation}\label{eq:second-order}
+		\begin{split}
+			\triangle(abc)
+			&= \triangle(ab)c
+			+ (-1)^{|a|}a\,\triangle(bc)
+			+ (-1)^{(|a|+1)|b|}b\,\triangle(ac) \\[4pt]
+			&\quad
+			- \triangle(a)bc
+			- (-1)^{|a|}a\,\triangle(b)c
+			- (-1)^{|a|+|b|}ab\,\triangle(c),
+		\end{split}
+	\end{equation}
+	where \(m(a \otimes b)\) is denoted \(ab\).
+\end{definition}
+
+\medskip\noindent A (differential graded) \defn{\(\BV\)-algebra}, short for (dg) \textit{Batalin--Vilkovisky algebra}, is a \(\cBV\)-algebra  \((A, d, m, \triangle)\) where the \defn{obstruction}
+\[
+n \defeq [d, \triangle]
+\]
+is identically \(0\).
+
+\begin{remark}
+	Both \(\cBV\) and \(\BV\) algebras may also be defined in the absence of a differential, in which case the two notions coincide.
+	Throughout, we restrict attention to their differential graded versions.
+\end{remark}
+
+\begin{example}
+	For a smooth manifold \(M\), the \(\Com\)-algebra \((\Omega(M), d, \wedge)\) of differential forms extends to a \(\cBV\)-algebra once a non-degenerate metric is chosen, with the Hodge codifferential \(d^\star\) playing the role of \(\triangle\).
+	In the Lorentzian case, the obstruction \([d, d^\star]\) is the d’Alembertian, typically denoted \(\square\).
+	This is the origin of the alternative terminology \(\BV^\square\)-algebras for \(\cBV\)-algebras \cite{Reiterer2020HomotopyBVYMCK}.
+\end{example}
+
+In a \(\cBV\)-algebra, the failure of \(\triangle\) to be a derivation of the product \(\m\) defines a degree \(-1\) symmetric bracket \(b \defeq [\triangle,\m]\) satisfying the \defn{Jacobi relation}
+\[
+(b \,\circ_1 b) \circ \big(\id + (123) + (132)\big) = 0
+\]
+and the \defn{Leibniz relation}
+\[
+b \,\circ_1 m = m \,\circ_1 b + (m \,\circ_2 b) \circ (213).
+\]
+The latter is equivalent to the second-order relation~\eqref{eq:second-order}.
+Thus \((A,d,\m,b)\) is almost a \textit{Gerstenhaber algebra} except that \([d,b] = [d,[\triangle,\m]] = [[d,\triangle],\m] = [n,\m]\) need not vanish if the obstruction \(n \neq 0\).
+
+\subsection{\(\cBV_{\!\infty}\)-algebras}\label{ss:generating_maps}
+
+Recall that a \defn{\(\rC_\infty\)-algebra} is a graded vector space \(A\) together with maps
+\[
+m_n \colon A^{\ot n} \to A, \qquad n \geqslant  1,
+\]
+of degree \(2-n\) with the following symmetries holding for every \(j\):
+\[
+\sum_{\mathclap{\sigma \in \Sh(j,\, n - j)}} \ \sign(\sigma)\,
+m_n  \! \circ \sigma =  0.
+\]
+They satisfy the relation:
+\[
+\sum_{r+s+t = n} (-1)^{r + st}\, m_{r+1+t} \circ (\id^{\ot r} \ot \, m_s \ot \id^{\ot t}) = 0
+\]
+for any \(n \geqslant 1\).
+If \(m_k = 0\) for all \(k > n+1\) we say that this is a \defn{\(\rC_{(n)}\)-algebras}.
+
+\medskip
+
+Let us fix a graded vector space \(A\).
+A set of \defn{generating maps} on \(A\) consists of a collection of linear maps
+\begin{align*}
+	m_{p_1,\dots,p_k}^t &\colon
+	A^{\ot p_1} \ot\dotsb\ot A^{\ot p_k}
+	\longrightarrow A,
+\end{align*}
+for each \(	t \geqslant  0, \  k \geqslant  1, \  p_1, \dots, p_k \geqslant  1\)\,, of degree
+\[
+\bars{m_{p_1, \dots, p_k}^t}  =  3 - 2t - p_1 - \cdots - p_k - k,
+\]
+with the following \defn{block} and \defn{shuffle symmetries}:
+
+\medskip\noindent(1)
+For any permutation \(\sigma \in \sym_k\):
+\[
+m_{p_{\sigma^{-1}(1)},\dots,p_{\sigma^{-1}(k)}}^t \!= m_{p_1, \dots, p_k}^t \! \circ \overline\sigma,
+\]
+where \(\overline\sigma\) is the image of \(\sigma\) via the block inclusion \(\sym_k \to \sym_{p_1+\dots+p_k}\).
+
+\medskip\noindent(2)
+For any \(i \in \set{1,\dots,k}\) and \(j \in \set{1, \dots, p_i-1}\):
+\[
+\sum_{\mathclap{\ \sigma \in \Sh(j,\, p_i - j)}} \ \sign(\sigma) \;
+m_{p_1,\dots,p_k}^t  \! \circ \underline\sigma =  0,
+\]
+where \(\underline\sigma\) is the image of \(\sigma\) in via the inclusion \(\sym_{p_i} \to \sym_{p_1+\dots+p_k}\) induced by the \(i^\th\)-block.
+
+\medskip In \cref{label} we will prove that the following definition coincides with that of an algebra over a cofibrant resolution of the operad controlling \(\cBV\)-algebras.
+
+\begin{definition}\label{def:cBV-algebra}
+	A \defn{\(\cBV_{\!\infty}\)-algebra} is a graded vector space \(A\) together with a set of generating maps \(\set{m_{p_1, \dots, p_k}^t}\) such that \((A, m^0_1, m^0_2, m^0_3, \dots )\) is a \(\rC_\infty\)-algebra.
+\end{definition}
+
+\noindent A straightforward consequence of this characterization is the following.
+
+\begin{theorem}\label{t:extension from C_infty}
+	Any \(\rC_\infty\)-algebra \(\big(A, m_1, m_2, m_3, \dots\big)\) can be extended to a \(\cBV_{\!\infty}\)-algebra by completing \(\set{m^0_i \defeq m_n}_{n \geqslant 1}\) to a set of generating maps.
+\end{theorem}
+
+\noindent A canonical, although not very interesting choice, is to set all the additional maps to \(0\).
+
+\subsection{Obstruction maps and \(\BV_\infty\)-algebras}\label{ss:obstruction_maps}
+
+\subsubsection{Straight shuffles}
+
+To understand explicitly the relationship between \(\cBV_{\!\infty}\)-algebras and \(\BV_{\!\infty}\)-algebras, we will need the combinatorial notion of \textit{straight shuffle}, which we illustrate with the following example:
+\begin{equation}\label{ex:straight_shuffle}
+	1\;\underline{2}\;3\;4\;|\;\underline{5\;6}\;7\;8\;|\;9\;\underline{10\;11}\;|\;\underline{12\;13}
+	\ \longrightarrow\
+	9\;1\;\;\underline{2\;5\;6\;10\;11\;12\;13}\;\;7\;3\;8\;4.
+\end{equation}
+
+\medskip\noindent Forgetting all decoration in \eqref{ex:straight_shuffle}, we have the permutation
+\[
+\sigma =
+\left[
+\begin{array}{ccccccccccccc}
+	1&2&3&4&5&6&7&8&9&10&11&12&13\\
+	2&3&11&13&4&5&10&12&1&6&7&8&9
+\end{array}
+\right]
+\in \sym_{13}.
+\]
+The segmentation induced by the vertical bars in \eqref{ex:straight_shuffle} is encoded in the \(k\)-tuple
+\[
+\bar p \defeq (4,4,3,2)
+\]
+with \(k = 4\).
+The subdivision of each segment of \eqref{ex:straight_shuffle} induced by the underline is encoded in the three \(k\)-tuples
+\[
+\bar l = (1,0,1,0), \quad
+\bar q = (1,2,2,2), \quad
+\bar r = (2,2,0,0).
+\]
+By definition, the permutation \(\sigma\) is a \defn{ \((\bar l, \bar q, \bar r, \bar p)\)-shuffle} if for all \(1 \leqslant i \leqslant k\),
+\[
+(p_1+\dots+p_{i-1} + l_i) + [1, q_i ] \xmapsto{\sigma}
+(l_1 + \dotsb + l_k) + (q_1 + \dotsb + q_{i-1}) + [1, q_i].
+\]
+Explicitly,
+\[
+2 \xmapsto{\sigma} 3, \quad
+[5, 6] \xmapsto{\sigma} [4, 5], \quad
+[10, 11] \xmapsto{\sigma} [6, 7], \quad
+[12, 13] \xmapsto{\sigma} [8, 9].
+\]
+%Notice that \(\bar p = \bar l + \bar q + \bar r\) and that any other \((\bar l, \bar q, \bar r, \bar p)\)-shuffle is of the form \(\underline\pi \circ \sigma\), where
+%\[
+%\begin{tikzcd}[row sep=0,column sep=small]
+%	\sym_2 \times \sym_4 \rar & \sym_{2+7+4} \\
+%	\pi \arrow[r, maps to] & \underline{\pi}.
+%\end{tikzcd}
+%\]
+
+\medskip
+
+We will be interested in the set  \(\mathrm{StSh}(\bar q, \bar p)\) of all straight shuffles for a fixed pair
+\[
+\bar q = (q_1, \dots, q_k) \leqslant (p_1, \dots, p_k) = \bar p.
+\]
+
+\subsubsection{Straight shuffle extensions}
+
+Let us now introduce some notation for the action of straight shuffles on tensor product elements of a graded vector space.
+Using the straight shuffle \(\sigma\) from example \eqref{ex:straight_shuffle}, we have that if \(x = x_1 \ot\dotsb\ot x_{13}\) then
+\[
+\sigma x =
+\pm\, \underbrace{x_9 \ot x_1}_{\sigma x^{(1)}} \ot
+\underbrace{x_2 \ot x_5 \ot x_6 \ot x_{10} \ot x_{11} \ot x_{12} \ot x_{13}}_{\sigma x^{(2)}} \ot
+\underbrace{x_7 \ot x_3 \ot x_8 \ot x_4}_{\sigma x^{(3)}},
+\]
+where the sign is given by the permutation of elements under the Koszul sign rule.
+
+\medskip
+
+The \defn{straight shuffle extension} of a map
+\[
+m_{q_1, \dots, q_k} \colon A^{\ot q_1} \ot\dotsb\ot A^{\ot q_k} \to A
+\]
+to a map
+\[
+m_{\frac{p_1,\dots,p_k}{q_1,\dots,q_k}} \colon {A^{\ot p_1}} \ot\dotsb\ot {A^{\ot p_k}} \to A,
+\]
+where \((q_1, \dots, q_k) \leqslant (p_1, \dots, p_k)\), is defined by
+\[
+m_{\frac{p_1,\dots,p_k}{q_1,\dots,q_k}}(x)
+=
+\sum_{\quad \mathclap{\sigma \in \mathrm{StSh}(\bar q, \bar p)}}
+%(-1)^{\varepsilon+\varepsilon'+\varepsilon''} \mathrm{sgn}(\sigma)\,
+\, \pm \,
+\sigma x^{(1)} \ot
+m_{q_1,\dots,q_k}\big( \sigma x^{(2)} \big) \ot \sigma x^{(3)}.
+\]
+The sign is given by the product of the following four contributions:
+the sign of \(\sigma\),
+the Koszul sign given by permutation of the elements, as referenced above,
+the Koszul sign arising from the permutation of \(\sigma x^{(1)}\) and \(m_{q_1,\dots,q_k}\),
+and the explicit factor:
+\[
+(-1)^{(q_1+\cdots+q_r+1)(r_1+\cdots+r_k) + (l_2+r_2) + 2(l_3+r_3) + \dotsb + (k-1)(l_k+r_k)}
+\]
+expressed under the assumption that \(\sigma\) is a \((\bar l, \bar q, \bar r, \bar p)\)-shuffle.
+
+%Notice that the Koszul sign associated to the action of \(\sigma\) on \(x\) is already incorporated in the notation \(\sigma x^{(1)} \ot \sigma x^{(2)} \ot \sigma x^{(3)}\).\Bruno{This is no obvious from the definition of $\sigma x$ given above (the sign is outside the braces).}
+
+\subsubsection{Obstruction maps}
+
+For each \(t \geqslant  0, \  k \geqslant  1, \  p_1, \dots, p_k \geqslant  1\) with \(t + k \geqslant  2\), the \defn{obstruction map} \(n^t_{p_1, \dots, p_k}\) is defined on a basis element
+\[
+\underbrace{(x_1 \ot\dotsb\ot x_{p_1})}_{w_1}
+\ot \underbrace{(x_{P_1 + 1} \ot\dotsb\ot x_{P_1 + p_2})}_{w_2}
+\ot\dotsb\ot
+\underbrace{(x_{P_{k-1} + 1} \ot\dotsb\ot x_{P_k})}_{w_k},
+\]
+where \(P_i = p_1 + \dots + p_{i-1}\), as
+\begin{equation}\label{eq:relation_maps_1}
+	\sum_{\mathclap{\begin{array}{c}
+			\scriptstyle 0 \leqslant s \leqslant t
+	\end{array}}}
+	\hspace{25pt}
+	\sum_{\hspace*{10pt}\mathclap{\begin{array}{l}
+				\scriptstyle I \,\sqcup J = \{1, \dots, k\} \\[-2pt]
+				\scriptstyle I = \{i_1, \dots, i_a\} \neq \emptyset \\[-2pt]
+				\scriptstyle J = \{j_1, \dots, j_b\}
+	\end{array}}}
+	\hspace*{35pt}  % space
+	\sum_{\hspace*{0pt}\mathclap{\begin{array}{c}
+				\scriptstyle 1 \leqslant q_1 \leqslant p_1 \\[-2pt]
+				\scalebox{0.5}{\(\vdots\)} \\[-2pt]
+				\scriptstyle 1 \leqslant q_a \leqslant p_a
+	\end{array}}}
+	\hspace*{3pt}	% space
+	\pm \ m^{s}_{r,\,  p_{j_1}, \dots, p_{j_b}}
+	\Big(m^{t-s}_{\frac{p_1, \dots, p_{i_a}}{q_1, \dots, q_a}}
+	(w_{i_1} \!\ot\dotsb\ot w_{i_a}) \ot w_{j_1} \!\ot\dotsb\ot w_{j_b}\Big),
+\end{equation}
+where \(r = 1 + p_{i_1} + \dots + p_{i_a} - q_1 - \dots - q_a\)\,; minus the sum
+\begin{equation}\label{eq:relation_maps_2}
+	\sum_{1 \leqslant i \leqslant k}
+	\hspace*{15pt}
+	\sum_{\mathclap{1 \leqslant j \leqslant p_i-1}}
+	\ (-1)^{p_1+\cdots+p_{i-1}+j-i} \ m^{t-1}_{p_1, \dots, j, p_i-j, \dots, p_k}
+	\Big(w_1 \ot\dotsb\ot w_i^{(1)} \ot w_i^{(2)} \ot\dotsb\ot w_k\Big),
+\end{equation}
+where \(w_i^{(1)} = x_{P_i+1} \ot\dotsb\ot x_{P_i+j}\) and \(w_i^{(2)} = x_{P_i+j+1} \ot\dotsb\ot x_{P_{i+1}}\).
+
+\medskip
+
+The sign in \eqref{eq:relation_maps_1} is given by the product of the following three contributions:
+the Koszul sign arising from the permutation of the elements,
+the sign of the \((a,b)\)-shuffle corresponding to the partition \(I \sqcup J = \{1,\dots,k\}\)---computed by considering the blocks of sizes \(p_1-1,\dots,p_k-1\) and shuffling them according to the permutation determined by this partition (so, in particular, if all \(p_i=1\), there is no sign)---and the explicit factor
+\[
+(-1)^{(q_1+\dotsb+q_a - a + 1)\,(p_{j_1}+\cdots+p_{j_b} - b) + r - 1}.
+\]
+%The sign in \eqref{eq:relation_maps_2} is
+%\[
+%(-1)^{p_1+\cdots+p_{i-1}+j-i}.
+%\]
+
+\subsubsection{\(\BV_{\!\infty}\)-algebras}
+
+For more details on the notions of \(\BV_{\!\infty}\)-algebra, \(\Gerst_\infty\)-algebra, and shifted \(\rL_\infty\)-algebra we refer to \cite{GCTV12}.
+
+\begin{theorem}[{\cite{GCTV12}}]\label{t:obstruction vanishing}
+	Let \(\big(A, \set{m_{p_1, \dots, p_k}^t}\big)\) be a \(\cBV_{\!\infty}\)-algebra.
+	Then:
+	\begin{enumerate}
+		\item \(\big(A, \set{m_{p_1, \dots, p_k}^t}\big)\) is a \(\BV_{\!\infty}\)-algebra if and only if all \(n^t_{p_1, \dots, p_k}\) vanish.
+		\item \(\big(A, \set{m^0_{p_1, \dots, p_k}}\big)\) is a \(\Gerst_\infty\)-algebra if and only if every \(n^0_{p_1, \dots, p_k}\) vanishes.
+		\item \(\big(A, m^0_1, m^0_{1,1}, m^0_{1,1,1}, \dots\big)\) is a shifted \(\rL_\infty\)-algebra if and only if every \(n^0_{1, \dots, 1}\) vanishes.
+	\end{enumerate}
+\end{theorem}
+
+\subsection{Weight filtration}
+
+\subsubsection{\(\cBV_{\!(n)}\)-algebras}
+
+We assign to each \(m^t_{p_1, \dots, p_k}\) in a set of generating maps the following \defn{weight}:
+\[
+\mathrm{weight}(m^t_{p_1, \dots, p_k}) \defeq t + p_1 + \dots + p_k - 1.
+\]
+
+\begin{definition}
+	A \defn{\(\cBV_{\!(n)}\)-algebra} is a \(\cBV_{\!\infty}\)-algebra in which all generating maps of weight greater than \(n\) vanish.
+\end{definition}
+
+%\Bruno{we could say that this convention is coherent with the (correct) convention for $C_{(n)}$-algebras: ``The generating operations $\{m^0_p\}_{p\leqslant n-1}$ of a \(\cBV_{\!(n)}\)-algebra form a $C_{(n)}$-algebra. Anibal: I think that is implicit in the next sentence.}
+
+\noindent As in \cref{t:extension from C_infty}, every \(\rC_{(n)}\)-algebra extends to a \(\cBV_{\!(n)}\)-algebra, and, similarly to \cref{t:obstruction vanishing}, a \(\cBV_{\!(n)}\)-algebra descends to a \(\BV_{(n)}\)-algebra, a \(\Gerst_{(n)}\)-algebra, or a shifted \(\rL_{(n)}\)-algebra if and only if the same sets of obstruction maps vanish.
+Among these obstructions, only finitely many can be non-zero, namely those whose weight
+\[
+\mathrm{weight}(n^t_{p_1, \dots, p_k}) \defeq t + p_1 + \dots + p_k - 1
+\]
+is at most \(n\).
+
+\subsubsection{Initial stages}\label{ss:explicit_descriptions}
+
+We provide an explicit description of the generating and obstruction maps in the initial stages of the weight filtration.
+
+\smallskip\noindent\textsc{Generators}\nopagebreak
+
+\smallskip\noindent\textit{Weight 0}.
+The only generating map of weight \(0\) is \(m^0_1\) of degree \(\bars{m^0_1} = 1\).
+
+\smallskip\noindent\textit{Weight 1}.
+The set of generating maps of weight \(1\) is:
+\[
+m^1_1 \colon A \to A, \qquad
+m^0_2 \colon A^{\ot 2} \to A, \qquad
+m^0_{1,1} \colon A \ot A \to A,
+\]
+of degrees
+\[
+\bars{m^1_1} = -1, \quad
+\bars{m^0_2} = 0, \quad
+\bars{m^0_{1,1}} = -1.
+\]
+They are required to have the following symmetric properties:
+\[
+m^0_{2} = m^0_{2} \circ (12), \qquad
+m^0_{1,1} = m^0_{1,1} \circ (12),
+\]
+or, equivalently, for homogeneous elements \(a,b \in A\),
+\[
+m^0_{2}(a,b) = (-1)^{|a||b|} m^0_{2}(b,a), \qquad
+m^0_{1,1}(a,b) = (-1)^{|a||b|} m^0_{1,1}(b,a).
+\]
+
+\smallskip\noindent\textit{Weight 2}.
+The subset of independent generating maps of weight \(2\) is:
+\begin{align*}
+	&m^0_{3}      \colon A^{\ot 3} \to A,
+	&& m^0_{1,2}    \colon A \ot A^{\ot 2} \to A,
+	&& m^0_{1,1,1}  \colon A \ot A \ot A \to A, \\
+	&m^1_{1,1}    \colon A \ot A \to A,
+	&& m^1_{2}      \colon A^{\ot 2} \to A,
+	&& m^2_{1}      \colon A \to A,
+\end{align*}
+whose degrees are:
+\begin{align*}
+	&\bars{m^0_{3}} = -1,   && \bars{m^0_{1,2}} = -2,   && \bars{m^0_{1,1,1}} = -3, \\
+	&\bars{m^1_{1,1}} = -3, && \bars{m^1_{2}}   = -2,   && \bars{m^2_{1}}     = -3.
+\end{align*}
+They are required to have the following symmetry properties:
+\begin{equation*}\label{eq:symmetry_weight2}
+	\begin{split}
+		m^0_3 \circ \big(\id - (12) + (132)\big) &= 0, \qquad \Big(m^0_3 \circ \big(\id - (23) + (123)\big) = 0,\Big) \\
+		m^0_{1,2} \circ \big(\id - (23)\big) &= 0, \qquad \Big(m^0_{2,1} - m^0_{1,2} \circ (123) = 0,\Big) \\
+		m^0_{1,1,1} \circ \big(\id - (12)\big) &= 0, \qquad m^0_{1,1,1} \circ \big(\id - (23)\big) = 0, \\
+		m^1_{1,1} \circ \big(\id - (12)\big) &= 0, \qquad m^1_{2} \circ \big(\id - (12)\big) = 0.
+	\end{split}
+\end{equation*}
+
+\smallskip\noindent\textit{Weight 3}.
+There are 11 independent generators of weight 3:
+\begin{align*}
+	&m^0_{4}
+	&& m^0_{1,3}
+	&& m^0_{2,2}
+	&& m^0_{1,1,2}
+	&& m^0_{1,1,1,1}
+	\\
+	&m^1_{3}
+	&& m^1_{1,2}
+	&& m^1_{1,1,1}
+	\\
+	&m^2_{2}
+	&& m^2_{1,1}
+	\\
+	&m^3_{1}
+\end{align*}
+
+\Bruno{Bottom Page 9: more terms can be simply written as brackets like \([m^1_1, m^0_{1,1}]\) in \(n^1_{1,1}\) or \([m^1_1, m^0_2]\) in \(n^1_2\). \\ Anibal: I think that would be good, but I do not have the confidence to make the changes.}
+
+\medskip\noindent\textsc{Obstructions}\nopagebreak
+
+\medskip\noindent\textit{Weight 1}.\par\nopagebreak
+\medskip\noindent\input{sec/obstructions_weight1}
+
+\medskip\noindent\textit{Weight 2}.\par\nopagebreak
+\medskip\noindent\input{sec/obstructions_weight2}
+
+\medskip\noindent\textit{Weight 3}.\par\nopagebreak
+\medskip\noindent\input{sec/obstructions_weight3}
+
+\medskip\noindent We describe explicitly the properties obstructed by the terms of weight at most 2:
+%\medskip\noindent\textit{Obstructs}\par\nopagebreak
+
+\medskip\noindent
+\begin{tabular}{l l}
+	\(n^1_1\) & \(m^0_1\) commuting with the operator \(m^1_1\). \\[2pt]
+	\(n^0_{1,1}\) & \(m^0_1\) acting as a derivation of the shifted bracket \(m^0_{1,1}\). \\[2pt]
+	\(n^0_{1,2}\) & \(m^0_2\) and \(m^0_{1,1}\) satisfying the Leibniz relation up to the homotopy \(m^0_{1,2}\). \\[2pt]
+	\(n^0_{1,1,1}\) & \(m^0_{1,1,1}\) serving as a homotopy for the (shifted) Jacobi relation of \(m^0_{1,1}\). \\[2pt]
+	\(n^1_{1,1}\) & \(m^1_{1,1}\) serving as a homotopy for the commutation relation between \(m^1_1\) and \(m^0_{1,1}\). \\[2pt]
+	\(n^1_2\) & \(m^1_2\) serving as a homotopy for the relation expressing \(m^0_{1,1}\) as the commutator of \(m^1_1\) with \(m^0_2\). \\[2pt]
+	\(n^2_1\) & \(m^2_1\) serving as a homotopy for the square-zero relation of \(m^1_1\). \\
+\end{tabular}
+
+%\begin{itemize}[leftmargin=18pt, label*=\(\diamond\)]
+%	\item \(n^1_1\): \(m^0_1\) commuting with the operator \(m^1_1\).
+%	\item \(n^0_{1,1}\): \(m^0_1\) acting as a derivation of the shifted bracket \(m^0_{1,1}\).
+%	\item \(n^0_{1,2}\): \(m^0_2\) and \(m^0_{1,1}\) satisfying the Leibniz relation up to the homotopy \(m^0_{1,2}\).
+%	\item \(n^0_{1,1,1}\): \(m^0_{1,1,1}\) serving as a homotopy for the (shifted) Jacobi relation of \(m^0_{1,1}\).
+%	\item \(n^1_{1,1}\): \(m^1_{1,1}\) serving as a homotopy for the commutation relation between \(m^1_1\) and \(m^0_{1,1}\).
+%	\item \(n^1_2\): \(m^1_2\) serving as a homotopy for the relation expressing \(m^0_{1,1}\) as the commutator of \(m^1_1\) with \(m^0_2\).
+%	\item \(n^2_1\): \(m^2_1\) serving as a homotopy for the square-zero relation of \(m^1_1\).
+%\end{itemize}\anibal{Convert to table. maybe obtruction | to}
+
+\subsection{Yang--Mills kinematic algebra}
+
+We now review an example of a \(\cBV_{\!(2)}\)-algebra arising as the kinematic algebra of Yang--Mills theory.
+It was constructed and developed in \cite{Bonezzi2022GaugeStructureDoubleField, Bonezzi2023GaugeInvariantDoubleCopyQuartic, Bonezzi2024WeaklyConstrainedDoubleField}.
+
+\medskip\noindent
+Let \(\cO\) denote the vector space of smooth real-valued function on \(\R^d\) with the Minkowski metric \(\eta  =  \operatorname{diag}(+,-,\dots,-)\).
+We use the following short hand notation throughout:
+\[
+\partial_\mu \lambda = \frac{\partial \lambda}{\partial t} + \sum_{i = 1}^{d-1} \frac{\partial \lambda}{\partial x^i} \,,
+\qquad
+\partial^\mu \lambda = \eta^{\mu \nu} \partial_\nu \lambda = \frac{\partial \lambda}{\partial t} - \sum_{i = 1}^{d-1} \frac{\partial \lambda}{\partial x^i} \,.
+\]
+Let \(\cK  =  \cZ \ot \cO\) where \(\cZ\) be the following graded vector space with a given basis:
+\[
+\begin{tikzcd}[row sep = 0]
+	\cZ_0 & \cZ_1 & \cZ_2 & \cZ_3 \\
+	\R\set{\theta_+} & \R\set{\theta_0, \dots, \theta_{d-1}} & \R\set{\theta_-} \\
+	& \oplus & \oplus & \\
+	& \R\set{s\theta_+} & \R\set{s\theta_0, \dots, s\theta_{d-1}} & \R\set{s\theta_-}. \\
+\end{tikzcd}
+\]
+We will define multilinear maps on \(\cK\) using this basis, specifically, assigning to each basis element of \(\cZ^{\ot r}\) a sum of differential operator \(\cO^{\ot r} \to \cO\) parameterized by \(\cZ\).
+More precisely, we will use the natural inclusion
+\[
+\Hom(\cZ^{\ot r}, \cZ \ot \Hom(\cO^{\ot r}, \cO)) \to \Hom(\cK^{\ot r}, \cK).
+\]
+Additionally, we will omit operators that are identically \(0\) and leave implicit the operator \(\id \ot\dotsb\ot \id\), which agrees with the product of functions.
+
+\medskip\noindent The map \(m_1\) is defined by:
+\begin{align*}
+	&\theta_+ \mapsto \theta_\mu \partial^\mu + s\theta_+ \partial^\mu \partial_\mu,
+	&&s\theta_+ \mapsto - s\theta_\mu \partial^\mu - \theta_-, \\
+	&\theta_\mu \mapsto s\theta_\mu \partial^\mu \partial_\mu + \theta_- \partial_\mu,
+	&&s\theta_\mu \mapsto - s\theta_- \partial_\mu, \\
+	&\theta_- \mapsto s\theta_- \partial^\mu \partial_\mu,
+	&&s\theta_- \mapsto 0.
+\end{align*}
+The map \(m_2\), which is assumed to satisfy \(m_2 \circ (12) = m_2\), is defined by:
+
+\noindent\hspace*{5pt}
+\begin{minipage}{0.2\textwidth}
+	\begin{align*}
+		&\theta_+ \ot \theta_+
+		\mapsto \theta_+ , \\
+		%%%
+		&\theta_+ \ot \theta_\mu
+		\mapsto \theta_\mu + s\theta_+( \partial_\mu \ot \id + \id \ot \partial_\mu), \\
+		%%%
+		&\theta_+ \ot \theta_-
+		\mapsto -s\theta_\mu (\id \ot \partial^\mu), \\
+		%%%
+		&\theta_+ \ot s\theta_\mu
+		\mapsto s\theta_\mu , \\
+		%%%
+		&\theta_+ \ot s\theta_-
+		\mapsto s\theta_- ,
+	\end{align*}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+	\begin{align*}
+		&\theta_\mu \ot \theta_\nu
+		\mapsto
+		s\theta_\nu ( \partial_\mu \ot \id + 2\, \id \ot \partial_\mu ) \\
+		&\phantom{(\theta_\mu, \theta_\nu) \mapsto}
+		- s\theta_\mu ( \id \ot \partial_\nu + 2\, \partial_\nu \ot \id ) \\
+		&\phantom{(\theta_\mu, \theta_\nu) \mapsto}
+		+ s\theta_\rho \eta_{\mu\nu} ( \partial^\rho \ot \id - \id \ot \partial^\rho ), \\
+		%%%
+		&\theta_\mu \ot \theta_-
+		\mapsto s\theta_- (\id \ot \partial_\mu), \\
+		%%%
+		&\theta_\mu \ot s\theta_\nu
+		\mapsto -s\theta_- \eta_{\mu \nu}.
+	\end{align*}
+\end{minipage}
+
+\medskip\noindent
+The map \(m_3\) is defined by
+\[
+\theta_\mu \ot \theta_\nu \ot \theta_\rho
+\mapsto
+s\theta_\mu \eta_{\nu\rho} - 2s\theta_\nu \eta_{\mu\rho} + s\theta_\rho \eta_{\nu\nu}.
+\]
+
+In \cite{Bonezzi2022GaugeStructureDoubleField}, the authors verify that this maps define a \(\rC_{(2)}\)-algebra structure on \(\cK\).
+By \cref{t:extension from C_infty}, this structure can be extended to a \(\cBV_\infty\)-algebra structure by choosing, for each \(	t \geqslant  0, \  k \geqslant  1, \  p_1, \dots, p_k \geqslant  1\) with \(t+k \geqslant 2\), a generating maps \(m^t_{p_1,\dots,p_k}\).
+We now review the choices made by the authors in \cite{Bonezzi2023GaugeInvariantDoubleCopyQuartic, Bonezzi2024WeaklyConstrainedDoubleField}.
+
+\medskip\noindent\textsc{Generators}\nopagebreak
+
+\medskip\noindent\textit{Weight 0}.
+We set \(m^0_1 \defeq m_1\).
+
+\medskip\noindent\textit{Weight 1}.
+We set \(m^0_2 \defeq m_2\).
+The generating map \(m^1_1\) is defined by
+\begin{align*}
+	s\theta_+ \mapsto \theta_+, \quad
+	s\theta_\mu \mapsto \theta_\mu, \quad
+	s\theta_- \mapsto \theta_-.
+\end{align*}
+The final generating map of weight \(1\) is \(m^0_{1,1} \defeq [m^1_1, m^0_2]\).
+
+\medskip\noindent\textit{Weight 2}.
+We set \(m^0_3 \defeq m_3\).
+The following generating maps are chosen to be \(0\):
+\begin{align*}
+	m^1_2 &= 0,	& m^2_1 &= 0,	& m^1_{1,1} &= 0.
+\end{align*}
+The authors explicitly define a map \(\theta_3 \colon \cK^{\ot 3} \to \cK\), found in \cite[Appendix~A]{Bonezzi2024WeaklyConstrainedDoubleField}, which we use to define \(m^0_{1,2} \defeq \theta_3 \circ (13)\).
+The final generating map of weight 2 is \(m^0_{1,1,1} \defeq -[m^1_1, m^0_{1,2}]\).
+
+\medskip\noindent\textit{Weight \(\geqslant\)\,3}. All other generating maps are chosen to be identically 0.
+Therefore, the resulting structure on \(\cK\) is that of a \(\cBV_{\!(2)}\)-algebra.
+
+\medskip\noindent\textsc{Obstructions}\nopagebreak
+
+\medskip\noindent
+We use the general list in \cref{ss:explicit_descriptions} to make explicit some of the obstruction maps arising from the above choices of generating maps.
+
+\medskip\noindent\textit{Weight 1}.
+The obstruction map \(n^1_1 = [m^0_1, m^1_1]\) is the d'Alambertian operator \(\square\) and \(n^0_{1,1} = [\square, m^0_{1,1}]\).
+
+\medskip\noindent\textit{Weight 2}.
+Three obstruction maps are identically 0:
+\begin{align*}
+	n^1_2 &= 0,	& n^2_1 &= 0,	& n^1_{1,1} &= 0.
+\end{align*}
+The other two, \(n^0_{1,2}\) and \(n^0_{1,1,1}\), are obstructions to the homotopy Leibniz and Jacobi relations respectively.
+They are left uncomputed.
+
+\medskip\noindent\textit{Weight 3}.
+There are four obstruction maps that are identically 0:
+\[
+n^1_{1,2} = 0, \qquad n^2_{1,1} = 0, \qquad n^2_2 = 0, \qquad n^3_1 = 0.
+\]
+Two others are simplified compared to their general definition:
+\[
+n^1_3 = - [m^1_1, m^0_3] + m^0_{1,2} + m^0_{2,1}
+\quad\text{and}\quad
+n^1_{1,1,1} = [m^1_1, m^0_{1,1,1}].
+\]
+The remaining four obstruction maps are left uncomputed.
+
+\Bruno{I am completely confused by the notation with the index \(/\mu\). For mathematicians, \(\partial_i=\frac{\partial}{\partial x_i}\), but still. I understand \(\partial_\mu\) and \(\partial^\mu\) as symbols denoting sums of partial derivatives, ok. But then, what does the assignment \(\theta_\mu \mapsto s\theta_\mu\, \partial^\mu \partial_\mu + \theta_-\,\partial_\mu\) mean? I would understand something like \(\theta_i \mapsto s\theta_i\, \partial^\mu \partial_\mu + \theta_-\,\partial_\mu\). \\
+Anibal: That is what they mean, except that it would be  \(\theta_i \mapsto s\theta_i\, \partial^\mu \partial_\mu + \theta_-\,\partial_i\) }
+
+\Bruno{The arrow could represent the inclusion: \(\hookrightarrow\).\\
+Anibal: What arrow?}
+
+\Bruno{Top of page 11: what we are considering is not the tensor product \(\partial_\mu \otimes \id\) but the product after the tensor product. \\
+Anibal: I made a comment that the tensor product of realvalued functions is their product.}
+
+\Bruno{I do not know what the operators \(\eta^{\mu\nu}\) and \(\eta_{\mu\nu}\) are.\\
+The metric. these are its entries: mu = nu implies eta = 1 or -1 depending on if mu > 1 or not.}
+
+\Bruno{Do you wish to recall the definition of the map \(\theta_3\) from \([{\rm BCDJH}24]\)? \\
+Anibal: Super long, but I included a reference.}
+
+\Bruno{There is a minus sign missing in the definition of \(n^1_{1,1,1}\). \\
+Anibal: I do not know exactly where, sorry.}
