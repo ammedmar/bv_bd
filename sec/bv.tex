@@ -1,0 +1,29 @@
+% !TEX root = ../bv_bd.tex
+
+\section{Batalin--Vilkovisky Algebras}
+
+For the first time, we make fully explicit the notion of a dg \(\BV^!\)-algebra.
+
+\begin{proposition}\label{prop:DualBValg}
+	The desuspension of a differential graded \(\BV^!\)-algebra structure on \(sA\) is a Gerstenhaber \(\KK[\hbar]\)-algebra \((A, m ,\{\, , \,\})\) on a chain \(\KK[\hbar]\)-complex \((A,d)\), with \(|\hbar|=-2\), such that the differential \(d\) is a derivation with respect to \(\{\, , \,\}\) and such that
+	\[
+	d(m(a,b)) = m\bigl(d(a),b\bigr) + (-1)^{|a|} m\bigl(a,d(b)\bigr) + \hbar\,\{a,b\}.
+	\]
+\end{proposition}
+
+\begin{proof}
+	By \cite[Proposition~7.2.1]{LodayVallette12}, the dg operad Koszul dual to the Batalin--Vilkovisky operad admits the presentation
+	\[
+	\BV^! \cong \bigl(\mathcal{P}(s^{-1}\mathrm{S}\otimes_H E^*,\, s^{-2}\mathrm{S}\otimes_H(\q R)^{\perp}),\, (d_\varphi)^*\bigr).
+	\]
+	On the desuspension \(A\) of \(sA\), the linear duals \(\b^*\) and \(\m^*\) induce symmetric binary operations \(m\) and \(\{\, , \,\}\) of respective degrees \(0\) and \(1\), and the linear dual \(\triangle^*\) induces a degree \(-2\) linear operator \(\tau\).
+	The relations orthogonal to the quadratic analogues of the relations \(R\) assert that \((A, m, \{\, , \,\})\) is a Gerstenhaber algebra with which \(\tau\) commutes, that is, a Gerstenhaber \(\KK[\hbar]\)-algebra with \(|\hbar|=-2\).
+	The induced differential \((d_\varphi)^*\) on the linear dual operad \(\bigl(\q\BV^{\ac}\bigr)^*\) is the unique derivation sending \(s^{-1}\b^*\) to \(-s^{-1}\triangle^* \circ s^{-1}\m^*\) and the other generators to \(0\).
+	This produces Relation~\eqref{eq:dKoszuldual} and the fact that the differential \(d\) commutes with the action of \(\hbar\) and with the commutative product.
+	The sign in Relation~\eqref{eq:dKoszuldual} comes from the fact that the differential on \(A\) is the opposite of the differential on \(sA\).
+\end{proof}
+
+In short plain words, the desuspension of a \(\KK\)-algebra over the operad \(\BV^!\) is a differential graded Gerstenhaber \(\KK[\hbar]\)-algebra \((A, d, m, \{\, , \,\})\), with \(|\hbar|=-2\), except that the derivation relation with respect to the commutative product \(m\) is replaced by
+\[
+[d, m] = \hbar\,\{\, , \,\}.
+\]

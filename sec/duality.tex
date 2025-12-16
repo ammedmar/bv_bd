@@ -1,0 +1,22 @@
+% !TEX root = ../bv_bd.tex
+
+\section{Duality}
+
+To be self-coherent, we use the homological degree convention in this definition, contrary to the abovementioned references where the Lie bracket has cohomological degree \(+1\).
+Let \(\BV_{-1}\) denote the operad encoding Batalin--Vilkovisky algebras where the operator \(\Delta\) and the Lie bracket are placed in homological degree \(-1\).
+
+\begin{theorem}
+	BD-algebras are suspensions of \(\BV_{-1}^!\)-algebras, and complete BD-algebras are absolute \(\BV_{-1}^{\ac}\)-algebras.
+\end{theorem}
+
+\begin{proof}
+	The first point follows directly from \cref{prop:DualBValg} with homological degrees modified accordingly.
+	For the notion of absolute algebras over a cooperad, see \cite[Section~3]{rocailucio2025absolute}.
+	The Koszul dual of the degree \(-1\) operator \(\Delta\) is a generating element of degree \(0\) and arity \(1\) in the Koszul dual cooperad \(\BV_{-1}^{\ac}\).
+	The arguments of Example~4.6 of \emph{loc.\ cit.} show that its action on an absolute \(\BV_{-1}^{\ac}\)-algebra is equivalent to an action of the ring \(\KK[\![\hbar]\!]\).
+	One concludes with the same arguments as in Section~4.2 of \emph{loc.\ cit.}.
+\end{proof}
+
+Thus BV-algebras are Koszul dual to BD-algebras, up to a mild change of degree convention.
+Therefore, the operadic calculus \cite[Chapter~11]{LodayVallette12} and \cite{rocailucio2025absolute} provides bar–cobar adjunctions between categories of BV-(co)algebras and BD-(co)algebras, conilpotent or complete, which yield Quillen equivalences \cite{Vallette14}.
+This offers a concrete way to relate these two algebraic structures and potentially explains duality phenomena in Quantum Field Theories.

@@ -1,0 +1,77 @@
+% !TEX root = ../bv_bd.tex
+
+\section{Beilinson--Drinfeld Algebras}
+
+%Let \((E, Q)\) be a cochain complex equipped with a nondegenerate symplectic pairing
+%\[
+%\omega \colon E \otimes E \to k[-1].
+%\]
+%It induces an identification
+%\[
+%E \xrightarrow{\;\sim\;} E^\vee[1].
+%\]
+%The inverse of this identification determines a symmetric tensor
+%\[
+%\Pi \in \Sym^2 E[1].
+%\]
+%If \(\{x_i\}\) are linear coordinates on \(E\) with dual coordinates \(\{x^i\}\) then
+%\[
+%\omega = \omega_{ij} \, dx^i \wedge dx^j[-1]
+%\qquad\text{and}\qquad
+%\Pi = \Pi^{ij} \, \frac{\partial}{\partial x^i} \otimes \frac{\partial}{\partial x^j}[1],
+%\]
+%with \((\Pi^{ij})\) the inverse matrix to \((\omega_{ij})\) up to the required degree shift.
+%
+%The \defn{algebra of formal functions} on \(E\) is the completed symmetric algebra
+%\[
+%\mathcal{O}(E) = \widehat{\Sym} E^\vee.
+%\]
+%For \(f \in \mathcal{O}(E)\) we write \(df \in E^\vee \otimes \mathcal{O}(E)\) for its differential.
+%
+%\paragraph{(4) The Poisson bracket of degree \(1\).}
+%The Poisson bracket on \(\mathcal{O}(E)\) is defined by
+%\[
+%\{f,g\} = \langle \Pi , df \otimes dg \rangle,
+%\qquad
+%f,g \in \mathcal{O}(E),
+%\]
+%and it satisfies
+%\[
+%\deg\{f,g\} = \deg f + \deg g + 1.
+%\]
+
+In \cite[\S2.8]{costello2011renormalization}, K. Costello provides a precise statement relating solutions to the Quantum master equation (QMC)
+
+\begin{definition}[\cite{costello2011renormalization}]\label{def:BD-algebra}
+	A \defn{\(\BD\)-algebra} is a flat \(\R[[\hbar]]\)-module \(A\), equipped with a commutative product, a Poisson bracket \(\{-,-\}\) of degree \(1\), and a differential \(d\), all of which are \(\R[[\hbar]]\)-linear, such that
+	\[
+	d(a \cdot b) = (da) \cdot b + (-1)^{|a|} a \cdot db + \hbar\{a, b\}
+	\]
+	for all homogeneous \(a, b \in A\).
+\end{definition}
+
+\begin{definition}
+	Let \(A\) be a \(\Pois_0\)-algebra.
+	A \defn{quantization} of \(A\) is a  \(\BD\)-algebra \(\widehat{A}\), flat over \(\R[[\hbar]]\), together with an isomorphism of \(\Pois_0\)-algebras
+	\[
+	\widehat{A} \otimes_{\R[[\hbar]]} \R \cong A,
+	\]
+	where \(\R\) is viewed as an \(\R[[\hbar]]\)-algebra via \(\hbar \mapsto 0\).
+\end{definition}
+
+The operad \(\BD\) in the category of cochain complexes over \(\KK[[\hbar]]\) is given, as a graded operad, by
+\[
+\BD \defeq \Pois_0 \otimes_\KK \KK[[\hbar]]
+\]
+with differential determined by
+\[
+d(- * -) = \hbar\{-,-\}
+\]
+
+\begin{definition}[Bruno's]\label{def:BDalg}
+	A \defn{\(\BD\)-algebra} is a Gerstenhaber \(\KK[\hbar]\)-algebra \((A, m ,\{\, , \,\})\) on a chain \(\KK[\hbar]\)-complex \((A,d)\), with \(|\hbar|=0\), such that the differential \(d\) is a derivation with respect to \(\{\, , \,\}\) and satisfies
+	\[
+	d\bigl(m(a,b)\bigr) = m\bigl(d(a),b\bigr) + (-1)^{|a|} m\bigl(a,d(b)\bigr) + \hbar\,\{a,b\}.
+	\]
+	A \defn{complete \(\BD\)-algebra} is defined similarly but over the ring of power series \(\KK[\![\hbar]\!]\).
+\end{definition}

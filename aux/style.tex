@@ -1,14 +1,16 @@
 % bibliography
 \usepackage[
-	backend=biber,
-	style=numeric-comp,   % compress [11--19]
-	sorting=none,         % bibliography order = input order (or bbl order)
-	sortcites=true,       % sort numbers inside \cite{...} so compression works
-	backref=true,
-	url=false,
-	doi=false,
-	isbn=false,
-	eprint=false]{biblatex}
+backend=biber,
+style=alphabetic, % numeric-compcompress [11--19]
+sorting=none,   % bibliography order = input order (or bbl order)
+sortcites=true,  % sort numbers inside \cite{...} so compression works
+backref=true,
+url=false,
+doi=false,
+isbn=false,
+eprint=false,
+maxnames=99,
+minnames=99]{biblatex}
 
 \renewbibmacro{in:}{} % don't display "in:" before the journal name
 \AtEveryBibitem{\clearfield{pages}} % don't show page numbers
@@ -43,25 +45,25 @@
 }
 
 % references
-\usepackage[
+\usepackage[dvipsnames]{xcolor} % Named colors (e.g., NaviBlue, ForestGreen)
+\definecolor{colorlinks}{rgb}{0.36, 0.2, 0.09}
+
+\usepackage{hyperref}
+
+\hypersetup{
 	bookmarks=true,
 	linktocpage=true,
-	bookmarksnumbered=true,
 	breaklinks=true,
 	pdfstartview=FitH,
-	hyperfigures=false,
 	plainpages=false,
 	naturalnames=true,
 	colorlinks=true,
-	pagebackref=false,
-	pdfpagelabels]{hyperref}
-
-\hypersetup{
-	colorlinks,
-	citecolor=NavyBlue,
-	filecolor=NavyBlue,
-	linkcolor=NavyBlue,
-	urlcolor=NavyBlue
+	%	pagebackref=false,
+	%	pdfpagelabels,
+	citecolor=colorlinks,
+	filecolor=colorlinks,
+	linkcolor=colorlinks,
+	urlcolor=colorlinks
 }
 
 \usepackage[capitalize, noabbrev]{cleveref}
@@ -89,4 +91,3 @@
 	\addtocontents{toc}{\protect\setcounter{tocdepth}{#1}}%
 	\setcounter{tocdepth}{#1}%
 }
-%\setcounter{tocdepth}{2}

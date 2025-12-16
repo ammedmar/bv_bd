@@ -1,134 +1,16 @@
-% !TEX root = ../ck2.tex
+% !TEX root = ../bv_bd.tex
 
-\newpage
 \section{Introduction}
 
-This work is motivated by gauge field theory, particularly by \textit{colour--kinematics duality} and the \textit{double copy construction}.
-From the algebro-homotopical perspective on perturbative field theory, surveyed for example in \cite{Hohm2017LInfinityAlgebrasGauge, Jurco2020PerturbativeQFTandHomotopyAlgebras, Jurco2019LInfinityBVReview}, a classical field theory is encoded as a cyclic \(\rL_\infty\)-algebra \(\big(\cL, \set{\ell_n}, \langle\cdot, \cdot \rangle \big)\)---a model for homotopy Lie algebras with a compatible non-degenerate inner product---whose Maurer--Cartan functional
-\[
-S(a) \defeq \sum_{n \geqslant 1} \frac{1}{(n+1)!}\,\big\langle a, \ell_n(a^{\otimes n})\big\rangle
-\]
-defines the action.
-For many gauge theories of interest, including Chern--Simons and Yang--Mills, their \(\rL_\infty\)-algebra splits as a tensor product
-\[
-\cL \cong \cK \ot \g,
-\]
-where \(\g\) is a Lie algebra, the \textit{colour Lie algebra}, and \(\cK\) is a homotopy commutative algebra, the \textit{kinematic algebra}.
-This \emph{colour-splitting} provides the algebraic framework to understand the duality between colour and kinematics, a phenomenon first observed by Bern--Carrasco--Johansson while studying amplitudes in Yang--Mills theory \cite{Bern2008NewRelationsGaugeTheory}.
-There it was found that kinematic numerators obey the same antisymmetry and Jacobi relations as the colour factors, suggesting that the kinematic algebra \(\cK\) carries a Lie-type structure \cite{Monteiro2011KinematicAlgebraSelfDual}.
+...
 
-For instance, in Chern--Simons theory one has \(\cK = (\Omega(M), d, \wedge)\), the algebra of differential forms on an oriented 3-manifold.
-Equipping \(M\) with a metric introduces the Hodge codifferential \(d^\star\), and the commutator \([d^\star, \wedge]\) endows \(\cK\) with a shifted Lie bracket giving rise to the kinematic Lie algebra of Chern--Simons theory \cite{BenShahar2022OffShellCKDualityCS}.
+%The first case is classical: \(\Com^!\)-algebras are Lie algebras, see \cite[Section~13.1.5]{LodayVallette12}.
 
-In this example, \(\cL\) is a dg Lie algebra, i.e., an \(\rL_\infty\)-algebra in which all operations beyond arity 2 vanish, reflecting the fact that Chern--Simons theory involves only cubic interactions.
-The algebraic structure on the kinematic algebra \((\cK, d, \wedge, d^\star)\) is itself strict and motivates the notion of \emph{\(\cBV\)-algebra}, a weaker version of dg Batanin--Vilkovisky algebra \cite{Lian1993NewPerspectivesBRST, Getzler1994BVAlgebrasTQFT}, or \(\BV\)-algebra for short.
-More precisely, a \(\cBV\)-algebra is a tuple \((A, d_A, m, \triangle)\) where \((A, d_A, m)\) is a dg commutative algebra and \(\triangle\) is a nilpotent operator of degree \(|\triangle| = -|d_A|\) and order at most 2.
+...
 
-\(\BV\)-algebras are special cases of \(\cBV\)-algebras, realized precisely when the \emph{obstruction} \([d_A, \triangle]\) vanishes.
-In this case, the shifted Lie bracket \(\b = [\triangle, \m]\) makes \((A, d_A, \m, \b)\) into a dg Gerstenhaber algebra.
-For differential forms, the obstruction \([d, d^\star]\) is precisely the failure of the de Rham differential and the Hodge codifferential to commute, yielding the Laplacian in Riemannian signature and the d’Alembertian in Lorentzian.
-
-The concept of \(\cBV\)-algebra, or \textit{coexact \(\BV\)-algebra}, is dual---in a sense explained in \cref{ss:exact}---to the notion of \textit{exact \(\BV\)-algebra} arising in Poisson geometry \cite{DotsenkoShadrinVallette15, GuanMuro23}.
-In the physics literature, \(\cBV\)-algebras are referred to as \(\BV^\Box\)-algebras, a term coined by M.~Reiterer in his influential preprint \cite{Reiterer2020HomotopyBVYMCK}.
-These algebras have been employed to define colour--kinematics duality for theories with at most cubic interactions and to construct double copies of these \cite{Borsten2021DoubleCopyHomotopyAlgebras, Borsten2023KinematicLieAlgebrasTwistor, Borsten2023DoubleCopySDYM, Borsten2023TreeLevelCKPureSpinor, Bonezzi2024DoubleCopy3DCSKodairaSpencer, Borsten2025DoubleCopyFromTensorBV, BenShahar2025OffShellDoubleCopyBV}.
-To move beyond the cubic case and incorporate higher-order interactions, as for instance up to quartic order in \cite{Bonezzi2022GaugeStructureDoubleField, Bonezzi2023GaugeInvariantDoubleCopyQuartic, Bonezzi2024WeaklyConstrainedDoubleField, Bonezzi2023GaugeIndependentKinematicSDYM}, M.~Reiterer also pioneered the use of a homotopy version of \(\BV^\Box\)-algebras, which he introduced through an ingenious albeit ad hoc definition.
-The goal of the present paper is to provide a conceptual definition of homotopy \(\cBV\)-algebras and a concrete model for them, which we ground in the operadic calculus of \cite{LodayVallette12}.
-As reviewed in \cref{ss:tools}, this enables the systematic application of key homotopical techniques to the resulting \(\cBV_{\!\infty}\)-algebras, including their homotopy transfer, rectification, \(\infty\)-morphisms, and deformation theory.
-
-To facilitate the use of \(\cBV_{\!\infty}\)-algebras and the above techniques in physics, we give explicit descriptions of the generating operations and relations defining  \(\cBV_{\!\infty}\)-algebras, relate them to \(\rC_\infty\)- and \(\BV_\infty\)-algebras, and show explicitly how the quartic-level structure constructed in \cite{Bonezzi2023GaugeInvariantDoubleCopyQuartic, Bonezzi2024WeaklyConstrainedDoubleField} on the kinematic algebra of Yang--Mills theory fits naturally into our framework.
-%In fact, as explained below, any extension of a kinematic algebra from a homotopy commutative algebra to a homotopy \cBV-algebra does as well.
-
-\medskip
-
-Conceptually, it is useful to situate \(\cBV_{\!\infty}\)-algebras in a more abstract context.
-Within the relevant model category \cite{Hinich97}, the operad \(\cBV_{\!\infty}\) cofibrantly resolves the operad \(\cBV\), with this resolution fitting in the following commutative diagram, where the horizontal compositions are the canonical inclusions:
-\begin{equation}\label{eq:diagram_main}
-	\begin{tikzcd}[row sep=large, column sep=large]
-		\Com_\infty \dar[->>, "\sim"] \arrow[r, >->, "\sim"] &
-		\cBV_\infty \dar[->>, "\sim"] \arrow[r,->>] &
-		\BV_{\!\infty} \dar[->>, "\sim"] \\
-		\Com \arrow[r, "\sim"] &
-		\cBV \arrow[r,->>] &
-		\BV
-	\end{tikzcd}
-\end{equation}
-Here \(\rightarrowtail\) denotes a cofibration, \(\twoheadrightarrow\) a fibration, and \(\xra{\sim}\) a weak equivalence.
-The operads
-\begin{equation*}\label{eq:cofibrant_operads_intro}
-	\Com_\infty \defeq \Cobar\Com^\ac,
-	\qquad
-	\BV_{\!\infty} \defeq \Cobar\BV^\ac,
-	\qquad
-	\cBV_{\!\infty} \defeq \Cobar\cBV^\ac,
-\end{equation*}
-arise from applying the cobar construction to the Koszul dual cooperad of the operad governing the corresponding strict algebras.
-
-\medskip\noindent
-Two model-independent consequences of Diagram \eqref{eq:diagram_main} are:
-\begin{enumerate}
-	\item Any homotopy commutative algebra extends, up to homotopy, to a homotopy \(\cBV\)-algebra.
-	\item A homotopy \(\cBV\)-algebra descends, up to homotopy, to a homotopy \(\BV\)-algebra if and only if its restriction to the homotopy fibre of the inclusion of \(\Com\) into \(\BV\) is nullhomotopic.
-\end{enumerate}
-In addition we have the following model-dependent algebraic counterparts:
-\begin{enumerate}
-	\item[(a1)] Any \(\rC_\infty\)-algebra defines a \(\cBV_{\!\infty}\)-algebra after arbitrarily choosing certain \textit{extra generating maps} described in \cref{ss:generating_maps}.
-	\item[(a2)] A \(\cBV_{\!\infty}\)-algebra defines a \(\BV_{\!\infty}\)-algebra if and only if certain explicitly defined \textit{obstruction maps}, described in \cref{ss:obstruction_maps}, vanish.
-\end{enumerate}
-Moreover, the sets of extra generating maps and of obstruction maps are in a canonical bijection.
-
-The picture that emerges in practice is that of a controlled extension process.
-The kinematic data, presented as a \(\rC_\infty\)-algebra may always be promoted to a \(\cBV_{\!\infty}\)-algebra, but the promotion is not necessarily canonical: it depends on a choice of extra generating maps.
-Each such new operation gives rise to an obstruction map, all of which vanish precisely when the resulting structure is that of a \(\BV_{\!\infty}\)-algebra.
-In applications, the additional generating maps are tuned so as to control the obstructions in a physically meaningful way.
-
-\medskip
-
-An important use of the duality between colour and kinematics, which was pioneered in \cite{Bern2010PerturbativeQGDoubleCopy} at the scattering amplitude level, is the \textit{double copy construction}, in which the colour Lie algebra is formally replaced by the kinematic Lie algebra.
-At cubic order, this construction has been understood off-shell using the tensor product of \(\cBV\)-algebras \cite{Borsten2025DoubleCopyFromTensorBV}.
-For this tensor product to exist---like in the associative case and unlike the Lie case---it is necessary and sufficient that the operad  \(\cBV\) admits a \emph{diagonal}, a morphism of operads
-\[
-\Delta \colon \cBV \to \cBV \ot_H \cBV,
-\]
-where \(\ot_H\) denotes the Hadamard (or aritywise) tensor product of operads.
-We describe a canonical diagonal for \(\cBV\) in \cref{ss:hopf} recovering the tensor product defined in \cite{Borsten2025DoubleCopyFromTensorBV}.
-
-Since \(\cBV_{\!\infty}\) is a cofibrant resolution of \(\cBV\), the lifting property in the model category of operads ensures the existence of a diagonal for \(\cBV_{\!\infty}\):
-\[
-\begin{tikzcd}
-	&[-5pt] &[-10pt] \cBV_\infty \otimes_H \cBV_\infty \hspace*{3pt} \ar[d, ->> ,"\sim", shift right=5pt]\\
-	\cBV_\infty \ar[r, ->>, "\sim \ "] \arrow[urr, dashed, out=45, in=180] & \cBV \ar[r, "\Delta"] & \cBV \otimes_H \cBV.
-\end{tikzcd}
-\]
-Consequently, one obtains the existence of a tensor product for \(\cBV_{\!\infty}\)-algebras, which in principle allows for a formulation of the double copy extending beyond cubic interactions.
-The construction, however, depends on a specific choice of diagonal, a task that falls outside the scope of this work.
-
-\medskip
-
-Mathematically, the central technical contribution of this work is the extension of Koszul duality to quadratic-linear presentations with non-trivial differentials.
-This refinement allows the operad \(\cBV\) to be treated within the established framework of operadic calculus and, in particular, enables the explicit construction of its Koszul replacement.
-As explained in \cref{ss:reiterer}, the resulting notion of \(\cBV_{\!\infty}\)-algebras, a model of homotopy \(\cBV\)-algebras, is more general and better behaved than the \(\BV^\Box_\infty\)-algebras introduced in \cite{Reiterer2020HomotopyBVYMCK}, which we are unsure if defines a model for homotopy .
+In the context of chiral algebras, Beilinson--Drinfeld introduced in \cite{BeilinsonDrinfeld04} an algebraic structure closely related to Koszul dual Batalin--Vilkovisky algebras.
+It admits at least two versions: one with a formal parameter \(\hbar\), appropriate for perturbative Quantum Field Theories \cite{CG16, CG21}, and one with a polynomial parameter \(\hbar\), sufficient for nonperturbative free theories \cite{GH18}.
 
 \subsection*{Outline}
 
-In \cref{sec:algebras} we work at the level of algebras, avoiding the operadic constructions underlying our definitions.
-We describe \(\cBV_{\!\infty}\)-algebras in terms of generating maps and relations, and clarify their relationships with \(\rC_\infty\)- and \(\BV_{\!\infty}\)-algebras.
-We then introduce a weight filtration that organizes the hierarchy of homotopies and yields stricter forms of \(\cBV_{\!\infty}\)-algebras.
-Finally, we illustrate this algebraic structure using the kinematic algebra of Yang–Mills theory as developed in \cite{Bonezzi2023GaugeInvariantDoubleCopyQuartic,Bonezzi2024WeaklyConstrainedDoubleField}.
-
-\cref{sec:operads} constructs Diagram~\eqref{eq:diagram_main} and develops the homotopical theory of algebras over the operad \(\cBV_{\!\infty}\).
-We begin in \cref{ss:strict_operads} by reviewing the operads \(\Com\), \(\BV\), and \(\cBV\) governing the strict algebraic structures of interest.
-In \cref{ss:exact}, an independent subsection, we compare \(\cBV\) with the operad \(\eBV\) of exact \(\BV\)-algebras.
-Section~\cref{ss:koszul_duals} extends Koszul duality to differential graded inhomogeneous presentations, and \cref{ss:cbv} applies this framework to \(\cBV\) to obtain an explicit model for its Koszul replacement \(\cBV_\infty\).
-In \cref{ss:hopf} we show that tensor products of \(\cBV_{\!\infty}\)-algebras are well defined up to homotopy.
-Section~\cref{ss:homotopy_fibre} studies the model-categorical relationship between \(\Com_\infty\), \(\cBV_\infty\), and \(\BV_\infty\).
-In \cref{ss:homotopy_algebras} we prove that algebras over \(\cBV_{\!\infty}\) agree with the explicitly presented \(\cBV_{\!\infty}\)-algebras of \cref{sec:algebras}.
-Finally, \cref{ss:tools} describes the deformation, obstruction, and homotopy theories of \(\cBV_{\!\infty}\)-algebras from the operadic perspective.
-
-\nocite{Lada1993IntroSHLie, Costello2011RenormalizationEFT, CostelloGwilliam2021FactorizationAlgebrasQFTv2}
-
-\subsection*{Outlook}
-
-Our focus in this paper is on the non-cyclic aspects of homotopy \(\cBV\)-algebras.
-By contrast, the \(\rL_\infty\)-algebras arising in field theory typically carry a cyclic structure.
-Accordingly, in examples of colour-splitting the associated kinematic \(\rC_\infty\)-structures are also cyclic.
-Extending the present framework to cyclic \(\cBV_{\!\infty}\)-algebras, as well as to their quantum counterparts, constitutes an important direction for future research.
+...
