@@ -1,0 +1,162 @@
+% !TEX root = ../bv_bd.tex
+
+\section{BV Quantization}
+
+\subsection{Classical \(\BV\) complexes}
+
+A \defn{classical \(\BV\)-complex} is a cochain complex equipped with a \(\Pois_0\)-algebra structure, that is, a dg commutative and associative product  \(m \colon A \otimes A \to A\) and a dg Lie bracket \(b \colon A \otimes A \to A\) of degree \(1\) satisfying
+\[
+b(a, m(x,y)) = m(b(a,x), y) + (-1)^{(|a| + 1 - n)|x|} m(x, b(a,y))
+\]
+for all homogeneous \(a, x, y \in A\).
+
+%An \(n\)-Poisson algebra on chain complexes is the same data with the additional constraint that \(m\) and \(b\) are closed in \(\Hom_A\).
+
+\medskip\noindent \(\Pois_0\)-algebras are controlled by the operad \(\Pois_0\)--isomorphic to the cohomology of the little disk operad--which can be presented by the following \textit{quadratic data}:
+
+\medskip\noindent \(\diamond\) \(E_{\Pois_0} \defeq \KK\set{\m} \oplus \KK\set{\b}\) where
+\[
+\m \defeq \M, \quad |\m| = 0 \quad ; \quad \b \defeq \B, \quad |\b| = 1
+\]
+and trivial symmetric action.
+
+\medskip\noindent \(\diamond\) \(R_{\Pois_0}\) is spanned, as an \(\Sy\)-module, by the following 3 relations:
+
+\begin{tabular}{ll}
+	\textnormal{\textsc{associativity:}} & \(\LL{1}{2}{3} - \RR{1}{2}{3}\) \\
+	\textnormal{\textsc{jacobi:}} & \(\BBB{1}{2}{3}+ \hspace*{-5pt} \BBB{2}{3}{1}+ \hspace*{-5pt} \BBB{3}{1}{2}\) \\
+	\textnormal{\textsc{leibniz:}} & \(\LBM{1}{2}{3}- \hspace*{-5pt} \LMB{1}{3}{2}-\RMB{1}{2}{3}\)~.
+\end{tabular}
+
+%\medskip\noindent We remark that \(\Pois_0\) is isomorphic to the cohomology of the little disk operad.
+
+%\medskip Explicitly, an \defn{\(n\)-Poisson algebra} in \(\gVec\), i.e., an operad map \(\Pois_n \to \End_A\), is a triple \((A, m, b)\) where \(m \colon A \otimes A \to A\) is a graded commutative and associative product and \(b \colon A \otimes A \to A\) is a Lie bracket of degree \(1-n\) satisfying:
+%\[
+%b(a, m(x,y)) = m(b(a,x), y) + (-1)^{(|a| + 1 - n)|x|} m(x, b(a,y))
+%\]
+%for all homogeneous \(a, x, y \in A\).
+%
+%An \(n\)-Poisson algebra on chain complexes is the same data with the additional constraint that \(m\) and \(b\) are closed in \(\Hom_A\).
+%\medskip\noindent We will be mostly interested in the operads \(\Pois_0\).
+%Notice that \(\Pois_2 \cong \rT\Pois_0\) controlls so-called \defn{Gerstenhaber algebras}.
+
+%\begin{definition}
+%	A \defn{classical \(\BV\)-complex} is a cochain complex equipped with a \(\Pois_0\)-algebra structure.
+%\end{definition}
+
+\begin{example}
+	Let \(M\) be a finite-dimensional smooth manifold.
+	The graded vector space \(\PV^\bullet(M)\) of \defn{polyvector fields}, with vector fields in degree \(-1\),  carries a \(\Pois_0\)-algebra structure with the Schouten bracket, the extension of the Lie bracket of vector fields via the Leibniz relation.
+
+	We can think of \(\PV^\bullet(M)\) as the ring of functions on the shifted cotangent bundle \(\rT^*[-1] M\).
+	The \(\Pois_0\) structure on \(\rT^*[-1] M\) is a supersymetric generalization of the Poisson structure on the ring of functions on \(\rT^*M\).
+
+	Choosing a function \(S \colon M \to \R\) satisfying the \textit{classical master equation} \(\{S,S\} = 0\) we can promote this \(\Pois_0\)-algebra to \(\dgVec\) with differential \(d = \{S, -\}\).
+	Its underlying cochain complex is a model for the derived critical locus of \(S\) \cite[\S?]{CostelloGwilliam2021FactorizationAlgebrasQFTv2}.
+\end{example}
+
+\begin{example}
+	For a bounded cochain complex \((V, d_V)\) consider the \textit{functions on its shifted cotangent bundle}
+	\[
+	\cO(\rT^*[-1] V) \defeq \big(\Sym(V^\vee \ot V[1]), d\big).
+	\]
+	We can define a \(\Pois_0\) structure on this complex by extending the evaluation map using the Leibniz relation.
+\end{example}
+
+\subsection{BV-algebras}
+
+%a \(\Pois_0\)-algebra \((A, d, m, b)\) an element \(\Delta \colon A \to A\) is said to be a \defn{generator} for \(b\) if
+%\[
+%...
+%\]
+
+A \defn{Batalin--Vilkovisky algebra} or \defn{\(\BV\)-algebra} is a \(\Pois_0\)-algebra \((A, d, m, b)\) together with a linear map \(\Delta \colon A \to A\) of degree \(1\) such that
+\[
+[\Delta, \Delta] = 0, \quad
+[\Delta, d] = 0, \quad
+[\Delta, m] = b.
+\]
+Notice that \([\Delta, b] = 0\) follows.
+
+\(\BV\)-algebras are algebras over the operad \(\BV\) which we present using the following inhomogeneous quadratic data \((E_{\BV}, R_{\BV})\):
+
+....
+
+We remark that \(\BV\) is isomorphic to the cohomology of the little framed disks operad.
+
+\begin{example}
+	Let us continue with our running example of polyvector fields on a smooth manifold \(M\) discussed in \cref{ex:polyvectors}.
+	A choice of volume form \(\mu\) on \(M\) gives an isomorphism
+	\[
+	PV --> dR
+	\]
+	which we use to transfer the de Rham differential.
+	The resulting operator \(\Delta_\mu \defeq \iota^{-1}_\mu \circ d_{dR} \circ \iota_\mu\) makes this \(\Pois_0\)-algebra into a \(\BV\)-algebra.
+\end{example}
+
+\subsection{Quantum \(\BV\) complexes}
+
+A \defn{quantum \(\BV\) complex} is a flat graded \(\KK[[\hbar]]\)-module \(A^q\) with a \(\KK[[\hbar]]\)-linear differential \(d\), a graded commutative and associative product of degree \(0\), and degree \(1\) Lie bracket \(b\) satisfying the Leibniz rule and
+\[
+[d, m] = \hbar \cdot b
+%d(ab) = (da)b + (-1)^{|a|} a(db) + \hbar\{a,b\}.
+\]
+%for all homogeneous \(a, b\in A\)
+These are also referred to as \defn{Beilinson--Drinfeld algebras}.
+The main contribution of this note is to provide a new operadic description of these algebras.
+Specifically, in \cref{label} we show that these are cochain complexes of \(\KK\)-vector spaces with the structure of an (absolute) algebra over the Koszul dual cooperad of \(\BV\).
+
+%or \defn{\(\BD\)-algebra} \((A^q, d, m, b = \{-,-\})\) is a graded commutative algebra \((A^q, m)\), flat as a module over \(\KK[[\hbar]]\), equipped with a degree \(1\) Poisson bracket \(\{-,-\}\) and an \(\KK[[\hbar]]\)-linear differential \(d\), such that for all homogeneous \(a, b\in A\) one has
+%\[
+%d(ab) = (da)b + (-1)^{|a|} a(db) + \hbar\{a,b\}.
+%\]
+
+\medskip When working over the polynomial ring \(\KK[\hbar]\) instead of the ring of power series \(\KK[[\hbar]]\) we refer to the analogous structure as a \defn{polynomial \(\BD\)-algebras}.
+
+\begin{example}
+	Consider the \(\Pois_0\)-algebra on polyvector fields with the \(\BV\) operator \(\Delta_\mu\) defined by a volume form \(\mu\) as described in \cref{label}.
+	We now consider a \textit{classical action} \(S \colon M \to \KK\) as in \cref{label}.
+	We define a new volume form\anibal{volume form?}
+	\[
+	\mu_S \defeq e^{S/\hbar} \cdot \mu
+	\]
+	where \(\hbar\) is an unspecified finite value.
+	The transfer of the de Rham differential through the isomorphism defined by \(\mu_S\) satisfies:
+	\[
+	\hbar\Delta_{\mu_S} =
+	\set{S, -} + \hbar\Delta_\mu.
+	\]
+	Setting \(d \defeq \set{S, -} + \hbar\Delta_\mu\) we obtain a polynomial \(\BD\)-algebra on \(\PV^\bullet(M)\).
+
+
+	For any \(f \in C^\infty(M)\),
+	\[
+	[f]_{\Delta_{\mu_S}} = \angles{f}_{\mu_S} \cdot [1]_{\Delta_{\mu_S}}.
+	\]
+	where \([\,-\,]_{\Delta_{\mu_S}}\) denotes the class in \(\Delta_{\mu_S}\) homology and
+	\[
+	\angles{f}_{\mu_S} \defeq
+	\frac{\int f \cdot \mu_S}{\int \mu_S}.
+	\]
+	This last integral is interpreted as the \textit{expectation value} of the \textit{observable} \(f\).
+\end{example}
+
+Likewise, we can restrict to \(\hbar\neq 0\) by setting
+\[
+A_{\hbar\neq 0}\defeq A^q\otimes_{\KK[[\hbar]]}\KK((\hbar)).
+\]
+In this case we obtain only a cochain complex, and its cohomology need not inherit an algebra structure, unlike \(H^*(A_{\hbar=0})\).
+
+
+\noindent-------
+
+\medskip\noindent Given a BD-algebra \(A^q\), we can restrict to \(\hbar = 0\) by setting
+\[
+A^q_{\hbar=0} \defeq A \otimes_{\KK[[\hbar]]}\KK[[\hbar]]/(\hbar).
+\]
+The induced differential on \(A_{\hbar = 0}\) is a derivation, hence \(A^q_{\hbar = 0}\) is a \(\Pois_0\)-algebra.
+
+\medskip\noindent A \defn{\(\BV\)-quantisation} of a \(P_0\)-algebra \(A\) is a BD algebra \(A^q\) such that \(A^q_{\hbar=0} = A\).
+
+
+

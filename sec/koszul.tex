@@ -1,0 +1,68 @@
+% !TEX root = ../bv_bd.tex
+
+\section{Koszul duality}
+
+\begin{example}
+	As explained in \cite[\S13.3.16]{LodayVallette12}, we have
+	\[
+	\Pois_0^! \cong \Pois_0.
+	\]
+\end{example}
+
+\subsection{Algebras over cooperads}
+
+Review of \cite{rocailucio2025absolute}.
+
+\subsection{Extending scalars}
+
+We will be interested in algebras over the category of graded \(\KK[[h\hbar]]\)-modules.
+Given an operad \(\rO\) over \(\gVec\), an \(\rO{[\hbar]}\)-algebra is ...
+
+\subsection{Batalin--Vilkovisky Algebras}
+
+For the first time, we make fully explicit the notion of a dg \(\BV^!\)-algebra.
+
+\begin{proposition}\label{prop:DualBValg}
+	The desuspension of a differential graded \(\BV^!\)-algebra structure on \(sA\) is a Gerstenhaber \(\KK[\hbar]\)-algebra \((A, m ,\{\, , \,\})\) on a chain \(\KK[\hbar]\)-complex \((A,d)\), with \(|\hbar|=-2\), such that the differential \(d\) is a derivation with respect to \(\{\, , \,\}\) and such that
+	\[
+	d(m(a,b)) = m\bigl(d(a),b\bigr) + (-1)^{|a|} m\bigl(a,d(b)\bigr) + \hbar\,\{a,b\}.
+	\]
+\end{proposition}
+
+\begin{proof}
+	By \cite[Proposition~7.2.1]{LodayVallette12}, the dg operad Koszul dual to the Batalin--Vilkovisky operad admits the presentation
+	\[
+	\BV^! \cong \bigl(\mathcal{P}(s^{-1}\mathrm{S}\otimes_H E^*,\, s^{-2}\mathrm{S}\otimes_H(\q R)^{\perp}),\, (d_\varphi)^*\bigr).
+	\]
+	On the desuspension \(A\) of \(sA\), the linear duals \(\b^*\) and \(\m^*\) induce symmetric binary operations \(m\) and \(\{\, , \,\}\) of respective degrees \(0\) and \(1\), and the linear dual \(\Delta^*\) induces a degree \(-2\) linear operator \(\tau\).
+	The relations orthogonal to the quadratic analogues of the relations \(R\) assert that \((A, m, \{\, , \,\})\) is a Gerstenhaber algebra with which \(\tau\) commutes, that is, a Gerstenhaber \(\KK[\hbar]\)-algebra with \(|\hbar|=-2\).
+	The induced differential \((d_\varphi)^*\) on the linear dual operad \(\bigl(\q\BV^{\ac}\bigr)^*\) is the unique derivation sending \(s^{-1}\b^*\) to \(-s^{-1}\Delta^* \circ s^{-1}\m^*\) and the other generators to \(0\).
+	This produces Relation~\eqref{eq:dKoszuldual} and the fact that the differential \(d\) commutes with the action of \(\hbar\) and with the commutative product.
+	The sign in Relation~\eqref{eq:dKoszuldual} comes from the fact that the differential on \(A\) is the opposite of the differential on \(sA\).
+\end{proof}
+
+In short plain words, the desuspension of a \(\KK\)-algebra over the operad \(\BV^!\) is a differential graded Gerstenhaber \(\KK[\hbar]\)-algebra \((A, d, m, \{\, , \,\})\), with \(|\hbar|=-2\), except that the derivation relation with respect to the commutative product \(m\) is replaced by
+\[
+[d, m] = \hbar\,\{\, , \,\}.
+\]
+
+\subsection{Main theorem}
+
+To be self-coherent, we use the homological degree convention in this definition, contrary to the abovementioned references where the Lie bracket has cohomological degree \(+1\).
+Let \(\BV_{-1}\) denote the operad encoding Batalin--Vilkovisky algebras where the operator \(\Delta\) and the Lie bracket are placed in homological degree \(-1\).
+
+\begin{theorem}
+	BD-algebras are suspensions of \(\BV_{-1}^!\)-algebras, and complete BD-algebras are absolute \(\BV_{-1}^{\ac}\)-algebras.
+\end{theorem}
+
+\begin{proof}
+	The first point follows directly from \cref{prop:DualBValg} with homological degrees modified accordingly.
+	For the notion of absolute algebras over a cooperad, see \cite[Section~3]{rocailucio2025absolute}.
+	The Koszul dual of the degree \(-1\) operator \(\Delta\) is a generating element of degree \(0\) and arity \(1\) in the Koszul dual cooperad \(\BV_{-1}^{\ac}\).
+	The arguments of Example~4.6 of \emph{loc.\ cit.} show that its action on an absolute \(\BV_{-1}^{\ac}\)-algebra is equivalent to an action of the ring \(\KK[\![\hbar]\!]\).
+	One concludes with the same arguments as in Section~4.2 of \emph{loc.\ cit.}.
+\end{proof}
+
+Thus BV-algebras are Koszul dual to BD-algebras, up to a mild change of degree convention.
+Therefore, the operadic calculus \cite[Chapter~11]{LodayVallette12} and \cite{rocailucio2025absolute} provides bar–cobar adjunctions between categories of BV-(co)algebras and BD-(co)algebras, conilpotent or complete, which yield Quillen equivalences \cite{Vallette14}.
+This offers a concrete way to relate these two algebraic structures and potentially explains duality phenomena in Quantum Field Theories.

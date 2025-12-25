@@ -1,16 +1,16 @@
 % bibliography
 \usepackage[
-backend=biber,
-style=alphabetic, % numeric-compcompress [11--19]
-sorting=none,   % bibliography order = input order (or bbl order)
-sortcites=true,  % sort numbers inside \cite{...} so compression works
-backref=true,
-url=false,
-doi=false,
-isbn=false,
-eprint=false,
-maxnames=99,
-minnames=99]{biblatex}
+	backend=biber,
+	style=alphabetic, % numeric-comp compress [11--19]
+	sorting=none,   % bibliography order = input order (or bbl order)
+	sortcites=true,  % sort numbers inside \cite{...} so compression works
+	backref=true,
+	url=false,
+	doi=false,
+	isbn=false,
+	eprint=false,
+	maxnames=99,
+	minnames=99]{biblatex}
 
 \renewbibmacro{in:}{} % don't display "in:" before the journal name
 \AtEveryBibitem{\clearfield{pages}} % don't show page numbers

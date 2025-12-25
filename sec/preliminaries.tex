@@ -4,14 +4,12 @@
 
 \subsection{Conventions}
 
-We work over a field \(\KK\) of characteristic \(0\) and over the underlying category of differential graded modules.
-We use the homological degree convention, for which differentials have degree \(-1\) (so cohomology lies in degree \(-n\)).
-We denote the symmetric groups by \(\Sy_n\).
-We use the operadic conventions introduced in \cite{LodayVallette12}.
+We work over the symmetric monoidal category of cochain complexes of \(\KK\)-vector spaces with \(\KK\) a field of characteristic \(0\).
+We use the operadic conventions of \cite{LodayVallette12} with the understanding that those are written for chain complexes.
 
 \subsection{Degree involution}
 
-Let \(\rT\colon \gVec \to \gVec\) be the \defn{degree involution} given on objects by \((\rT V)_n \coloneqq V_{-n}\).
+Let \(\rT\colon \gVec \to \gVec\) be the \defn{degree involution} given on objects by \((\rT V)_n \defeq V_{-n}\).
 This functor is a symmetric monoidal autoequivalence, and therefore it acts on operads over \(\gVec\).
 For any operad \(\rO\) in ??, the degree involution functor induces a equivalence of categories
 \[
@@ -23,99 +21,3 @@ For any operad \(\rO\) in ??, the degree involution functor induces a equivalenc
 \]
 
 The degree involution functor is also an equivalence of categories between chain complexes and cochain complexes.
-
-
-\subsection{\(n\)-Poisson algebras}
-
-The homology of the little \(n\)-disk operad for \(n \geq 2\) is the operad \(\Pois_n\), which can be presented by \((E, R)\), where the symmetric action on all generators is trivial:\anibal{Is this action corect?}
-
-\medskip\noindent \(\diamond\) \(E \defeq \KK\set{\m} \oplus \KK\set{\b}\) where
-\[
-\m \defeq \M,\quad \b \defeq \B~,
-\]
-with \(|\m| = 0\) and \(|\b| = 1 - n\).
-
-\medskip\noindent \(\diamond\) \(R\) is spanned, as an \(\Sy\)-module, by the following 3 relations:
-
-%	\noindent
-\begin{tabular}{ll}
-	\textnormal{\textsc{associativity:}} & \(\LL{1}{2}{3} - \RR{1}{2}{3}\) \\
-	\textnormal{\textsc{jacobi:}} & \(\BBB{1}{2}{3}+ \hspace*{-5pt} \BBB{2}{3}{1}+ \hspace*{-5pt} \BBB{3}{1}{2}\) \\
-	\textnormal{\textsc{leibniz:}} & \(\LBM{1}{2}{3}- \hspace*{-5pt} \LMB{1}{3}{2}-\RMB{1}{2}{3}\)~.
-\end{tabular}
-
-\medskip Explicitly, an \defn{\(n\)-Poisson algebra} in \(\gVec\), i.e., an operad map \(\Pois_n \to \End_A\), is a triple \((A, m, b)\) where \(m \colon A \otimes A \to A\) is a graded commutative and associative product and \(b \colon A \otimes A \to A\) is a Lie bracket of degree \(1-n\) satisfying:
-\[
-b(a, m(x,y)) = m(b(a,x), y) + (-1)^{(|a| + 1 - n)|x|} m(x, b(a,y))
-\]
-for all homogeneous \(a, x, y \in A\).
-
-An \(n\)-Poisson algebra on chain complexes is the same data with the additional constraint that \(m\) and \(b\) are closed in \(\Hom_A\).
-
-\medskip\noindent We will be mostly interested in the operads \(\Pois_0\) and \(\Pois_2 \cong \rT\Pois_0\), controlling so-called \defn{Gerstenhaber algebras}.
-
-\begin{example}
-	Consider a finite-dimensional smooth manifold \(M\).
-	The graded vector space \(\Sym^\bullet \rT M\) of \defn{polyvector fields} carries a \(\Pois_0\)-algebra structure when graded non-positively.
-	The bracket \(\{-,-\}\) is given by the extension of the Lie bracket of vector fields.
-
-	We can think of this as the ring of functions on the shifted cotangent bundle \(\rT^*[-1] M\), in the supergeometric sense.
-	The \(\Pois_0\) structure on \(\rT^*[-1] M\) is a supersymetric generalization of the Poisson structure on the functions on the cotangent bundle of \(M\)
-
-	Choosing a function \(S \colon M \to \R\) satisfying the \textit{classical master equation} \(\{S,S\} = 0\) we can promote this \(\Pois_0\)-algebra to \(\dgVec\) with differential \(d = \{S, -\}\).
-	Its underlying cochain complex is a model for the derived critical locus of \(S\) \cite[\S?]{CostelloGwilliam2021FactorizationAlgebrasQFTv2}.
-\end{example}
-
-\begin{example}
-	For a bounded cochain complex \((V, d_V)\) consider the \textit{functions on its shifted cotangent bundle}
-	\[
-	\cO(\rT^*[-1] V) \defeq \big(\Sym(V^\vee \ot V[1]), d\big).
-	\]
-	We can define a \(\Pois_0\) structure on this complex by extending the evaluation map using the Leibniz relation.
-\end{example}
-
-\subsection{Quantisation of \(\Pois_0\)-algebras}
-
-A \defn{Beilinson--Drinfeld algebra} or \defn{\(\BD\)-algebra} \((A^q, d,\{-,-\})\) is a graded commutative algebra \(A^q\), flat as a module over \(\KK[[\hbar]]\), equipped with a degree \(1\) Poisson bracket \(\{-,-\}\) and an \(\KK[[\hbar]]\)-linear differential \(d\), such that for all homogeneous \(a,b\in A\) one has
-\[
-d(ab)=(da)b+(-1)^{\lvert a\rvert}a(db)+\hbar\{a,b\}.
-\]
-
-\medskip\noindent Given a BD-algebra \(A^q\), we can restrict to \(\hbar=0\) by setting
-\[
-A^q_{\hbar=0}\coloneqq A\otimes_{\KK[[\hbar]]}\KK[[\hbar]]/(\hbar).
-\]
-The induced differential on \(A_{\hbar=0}\) is a derivation, hence \(A^q_{\hbar=0}\) is a \(P_0\)-algebra.
-
-\medskip\noindent A \defn{\(\BV\)-quantisation} of a \(P_0\)-algebra \(A\) is a BD algebra \(A^q\) such that \(A^q_{\hbar=0} = A\).
-
-\begin{example}
-	\(\R^n\) ...
-\end{example}
-
-%Likewise, we can restrict to \(\hbar\neq 0\) by setting
-%\[
-%A_{\hbar\neq 0}\coloneqq A^q\otimes_{\KK[[\hbar]]}\KK((\hbar)).
-%\]
-%In this case we obtain only a cochain complex, and its cohomology need not inherit an algebra structure, unlike \(H^*(A_{\hbar=0})\).
-
-\subsection{Koszul duality}
-
-\begin{example}
-	As explained in \cite[\S13.3.16]{LodayVallette12}, we have
-	\[
-	\Pois_n^! \cong \mathrm s^n\Pois_n.
-	\]
-\end{example}
-
-\subsection{Algebras over cooperads}
-
-Review of \cite{rocailucio2025absolute}.
-
-\subsection{Extending scalars}
-
-We will be interested in algebras over the category of graded \(\KK[[h\hbar]]\)-modules.
-Given an operad \(\rO\) over \(\gVec\), an \(\rO{[\hbar]}\)-algebra is ...
-
-
-
