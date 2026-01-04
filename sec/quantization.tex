@@ -4,21 +4,20 @@
 
 \subsection{Classical \(\BV\) complexes}
 
-A \defn{classical \(\BV\)-complex} is a cochain complex equipped with a \(\Pois_0\)-algebra structure, that is, a dg commutative and associative product  \(m \colon A \otimes A \to A\) and a dg Lie bracket \(b \colon A \otimes A \to A\) of degree \(1\) satisfying
+A \defn{classical \(\BV\) complex} is a cochain complex equipped with a \(\Pois_0\)-algebra structure, that is, a dg commutative and associative product  \(m \colon A \otimes A \to A\) and a dg Lie bracket \(b \colon A \otimes A \to A\) of degree \(1\) satisfying the \textit{Leibniz relation}:
 \[
 b(a, m(x,y)) = m(b(a,x), y) + (-1)^{(|a| + 1 - n)|x|} m(x, b(a,y))
 \]
 for all homogeneous \(a, x, y \in A\).
 
-%An \(n\)-Poisson algebra on chain complexes is the same data with the additional constraint that \(m\) and \(b\) are closed in \(\Hom_A\).
-
-\medskip\noindent \(\Pois_0\)-algebras are controlled by the operad \(\Pois_0\)--isomorphic to the cohomology of the little disk operad--which can be presented by the following \textit{quadratic data}:
+\medskip\noindent The operad controlling these algebras is, after degree involution, the homology of the little disk operad.
+Explicitly, the operad \(\Pois_0\) is presented by the following \textit{quadratic data}:
 
 \medskip\noindent \(\diamond\) \(E_{\Pois_0} \defeq \KK\set{\m} \oplus \KK\set{\b}\) where
 \[
 \m \defeq \M, \quad |\m| = 0 \quad ; \quad \b \defeq \B, \quad |\b| = 1
 \]
-and trivial symmetric action.
+with a trivial symmetric action.
 
 \medskip\noindent \(\diamond\) \(R_{\Pois_0}\) is spanned, as an \(\Sy\)-module, by the following 3 relations:
 
@@ -27,22 +26,6 @@ and trivial symmetric action.
 	\textnormal{\textsc{jacobi:}} & \(\BBB{1}{2}{3}+ \hspace*{-5pt} \BBB{2}{3}{1}+ \hspace*{-5pt} \BBB{3}{1}{2}\) \\
 	\textnormal{\textsc{leibniz:}} & \(\LBM{1}{2}{3}- \hspace*{-5pt} \LMB{1}{3}{2}-\RMB{1}{2}{3}\)~.
 \end{tabular}
-
-%\medskip\noindent We remark that \(\Pois_0\) is isomorphic to the cohomology of the little disk operad.
-
-%\medskip Explicitly, an \defn{\(n\)-Poisson algebra} in \(\gVec\), i.e., an operad map \(\Pois_n \to \End_A\), is a triple \((A, m, b)\) where \(m \colon A \otimes A \to A\) is a graded commutative and associative product and \(b \colon A \otimes A \to A\) is a Lie bracket of degree \(1-n\) satisfying:
-%\[
-%b(a, m(x,y)) = m(b(a,x), y) + (-1)^{(|a| + 1 - n)|x|} m(x, b(a,y))
-%\]
-%for all homogeneous \(a, x, y \in A\).
-%
-%An \(n\)-Poisson algebra on chain complexes is the same data with the additional constraint that \(m\) and \(b\) are closed in \(\Hom_A\).
-%\medskip\noindent We will be mostly interested in the operads \(\Pois_0\).
-%Notice that \(\Pois_2 \cong \rT\Pois_0\) controlls so-called \defn{Gerstenhaber algebras}.
-
-%\begin{definition}
-%	A \defn{classical \(\BV\)-complex} is a cochain complex equipped with a \(\Pois_0\)-algebra structure.
-%\end{definition}
 
 \begin{example}
 	Let \(M\) be a finite-dimensional smooth manifold.
@@ -63,29 +46,26 @@ and trivial symmetric action.
 	We can define a \(\Pois_0\) structure on this complex by extending the evaluation map using the Leibniz relation.
 \end{example}
 
-\subsection{BV-algebras}
+We remark that the homology of the little disk operad, isomorphic to \(\rT\Pois_0\), controls so-called \textit{Gerstenhaber algebras}.
+Therefore, the category of classical \(\BV\) complexes is isomorphic to the category of chain complexes with a Gerstenhaber algebra structure.
 
-%a \(\Pois_0\)-algebra \((A, d, m, b)\) an element \(\Delta \colon A \to A\) is said to be a \defn{generator} for \(b\) if
-%\[
-%...
-%\]
+\subsection{BV algebras}
 
-A \defn{Batalin--Vilkovisky algebra} or \defn{\(\BV\)-algebra} is a \(\Pois_0\)-algebra \((A, d, m, b)\) together with a linear map \(\Delta \colon A \to A\) of degree \(1\) such that
+An algebra over the homology of the little framed disk operad is referred as a \defn{Batalin--Vilkovisky algebra} or \defn{\(\BV\) algebra}.
+Explicitly, this is a \(\rT\Pois_0\)-algebra \((A, d, m, b)\) together with a linear map \(\Delta \colon A \to A\) of degree \(1\) satisfying:
 \[
 [\Delta, \Delta] = 0, \quad
 [\Delta, d] = 0, \quad
-[\Delta, m] = b.
+[\Delta, m] = b, \quad
+[\Delta, b] = 0.\footnote{This last identity follows from the others.}
 \]
-Notice that \([\Delta, b] = 0\) follows.
 
-\(\BV\)-algebras are algebras over the operad \(\BV\) which we present using the following inhomogeneous quadratic data \((E_{\BV}, R_{\BV})\):
+These are algebras over the operad \(\BV\) which we present using the following inhomogeneous quadratic data
 
 ....
 
-We remark that \(\BV\) is isomorphic to the cohomology of the little framed disks operad.
-
 \begin{example}
-	Let us continue with our running example of polyvector fields on a smooth manifold \(M\) discussed in \cref{ex:polyvectors}.
+	Continuing with \cref{ex:polyvectors}.
 	A choice of volume form \(\mu\) on \(M\) gives an isomorphism
 	\[
 	PV --> dR
@@ -96,13 +76,14 @@ We remark that \(\BV\) is isomorphic to the cohomology of the little framed disk
 
 \subsection{Quantum \(\BV\) complexes}
 
-A \defn{quantum \(\BV\) complex} is a flat graded \(\KK[[\hbar]]\)-module \(A^q\) with a \(\KK[[\hbar]]\)-linear differential \(d\), a graded commutative and associative product of degree \(0\), and degree \(1\) Lie bracket \(b\) satisfying the Leibniz rule and
+A \defn{quantum \(\BV\) complex} is a flat graded \(\KK[[\hbar]]\)-module \(A^q\) with a \(\KK[[\hbar]]\)-linear differential \(d\), a graded commutative and associative product of degree \(0\), and degree \(1\) Lie bracket \(b\) satisfying both the Leibniz rule and
 \[
-[d, m] = \hbar \cdot b
+[d, m] = \hbar \cdot b.
 %d(ab) = (da)b + (-1)^{|a|} a(db) + \hbar\{a,b\}.
 \]
 %for all homogeneous \(a, b\in A\)
-These are also referred to as \defn{Beilinson--Drinfeld algebras}.
+These are also referred to as \defn{Beilinson--Drinfeld algebras} or \defn{\(\BD\) algebras} after \cite{bibid}.
+
 The main contribution of this note is to provide a new operadic description of these algebras.
 Specifically, in \cref{label} we show that these are cochain complexes of \(\KK\)-vector spaces with the structure of an (absolute) algebra over the Koszul dual cooperad of \(\BV\).
 
@@ -111,7 +92,7 @@ Specifically, in \cref{label} we show that these are cochain complexes of \(\KK\
 %d(ab) = (da)b + (-1)^{|a|} a(db) + \hbar\{a,b\}.
 %\]
 
-\medskip When working over the polynomial ring \(\KK[\hbar]\) instead of the ring of power series \(\KK[[\hbar]]\) we refer to the analogous structure as a \defn{polynomial \(\BD\)-algebras}.
+\medskip When working over the polynomial ring \(\KK[\hbar]\) instead of the ring of power series \(\KK[[\hbar]]\) we refer to the analogous structure as a \defn{polynomial \(\BD\)-algebra}.
 
 \begin{example}
 	Consider the \(\Pois_0\)-algebra on polyvector fields with the \(\BV\) operator \(\Delta_\mu\) defined by a volume form \(\mu\) as described in \cref{label}.
@@ -120,13 +101,13 @@ Specifically, in \cref{label} we show that these are cochain complexes of \(\KK\
 	\[
 	\mu_S \defeq e^{S/\hbar} \cdot \mu
 	\]
-	where \(\hbar\) is an unspecified finite value.
+	where \(\hbar\) is an unspecified parameter.
 	The transfer of the de Rham differential through the isomorphism defined by \(\mu_S\) satisfies:
 	\[
 	\hbar\Delta_{\mu_S} =
 	\set{S, -} + \hbar\Delta_\mu.
 	\]
-	Setting \(d \defeq \set{S, -} + \hbar\Delta_\mu\) we obtain a polynomial \(\BD\)-algebra on \(\PV^\bullet(M)\).
+	Setting \(d \defeq \set{S, -} + \hbar\Delta_\mu\) we obtain a polynomial \(\BD\)-algebra on \(\PV^\bullet(M) \ot \KK[\hbar]\).
 
 
 	For any \(f \in C^\infty(M)\),
