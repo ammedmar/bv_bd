@@ -4,13 +4,15 @@
 
 \subsection{Conventions}
 
-We work over the symmetric monoidal category of cochain complexes of \(\KK\)-vector spaces with \(\KK\) a field of characteristic \(0\).
-We use the operadic conventions of \cite{LodayVallette12} with the understanding that those are written for chain complexes.
+We work over the symmetric monoidal category $\gVec$\Bruno{I would prefer "dgVect" that I use in my other papers} of cochain complexes of \(\KK\)-vector spaces with \(\KK\) a field of characteristic \(0\).
+This means that we use the cohomological degree conventions with boundary maps of degree $+1$. 
+We follow the operadic conventions of \cite{LodayVallette12} with the understanding that those are written for chain complexes.
+\Bruno{Define the shift operation \(V[k]_n\defeq V_{n-k}?\). Also do we use this convention or \(sV\)?}
 
 \subsection{Degree involution}
 
 Let \(\rT\colon \gVec \to \gVec\) be the \defn{degree involution} given on objects by \((\rT V)_n \defeq V_{-n}\).
-This functor is a symmetric monoidal autoequivalence, and therefore it acts on operads over \(\gVec\).
+This functor is a symmetric monoidal autoequivalence\Bruno{this word/notion exists?}, and therefore it acts on operads over \(\gVec\).
 For any operad \(\rO\) in ??, the degree involution functor induces a equivalence of categories
 \[
 \begin{tikzcd}[column sep=small, row sep=-3pt]
@@ -20,4 +22,4 @@ For any operad \(\rO\) in ??, the degree involution functor induces a equivalenc
 \end{tikzcd}
 \]
 
-The degree involution functor is also an equivalence of categories between chain complexes and cochain complexes.
+The degree involution functor is also an equivalence of symmetric monoidal categories between chain complexes and cochain complexes.
