@@ -1,6 +1,19 @@
 % !TEX root = ../bv_bd.tex
 
-\section{Koszul duality}
+\section{Koszul duality between BV and BD}
+
+\subsection{Koszul duality for operads}
+
+Given an operad presented by a quadratic data \(\mathrm{O} \cong \P(E, R)\), 
+its Koszul dual cooperad is 
+\[
+\mathrm{O}^\ac \defeq \cC(sE; s^{2}R),
+\]
+and its Koszul dual cooperad is 
+\[
+	\mathrm{O}^! \defeq \mathrm{S} \otimes_H \big(\mathrm{O}^{\ac}\big)^*,
+\]
+where \(\mathrm{S} \defeq \mathrm{End}_{\KK s^{-1}}\) is the suspension operad, see \cite[Chapter~7]{LodayVallette12} for more details. 
 
 \begin{example}
 	As explained in \cite[\S13.3.16]{LodayVallette12}, we have
@@ -9,20 +22,23 @@
 	\]
 \end{example}
 
-\subsection{Algebras over cooperads}
+For operads presented by inhomogeneous quadratic data \(\mathrm{O} \cong \P(E,R)\), with \(R\subset E \oplus \cT(E)^{(2)}\), we consider the projection 
+\(\q \colon \cT(E) \to \cT(E)^{(2)}\) and we define its \defn{analogue quadratic data} as \((E, \q R)\).
+The \defn{quadratic analogue operad} of \(\rO\) is \(\q\mathrm{O} \defeq \P(E,\q R)\).
+Under some conditions \cite[Lemma~37]{GCTV12}, satisfied by the inhomogeneous quadratic data defining the operad \(\BV\), the Koszul dual cooperad \(\q \mathrm{O}^\ac\) admits a square-zero codifferential \(d_\varphi\) which extends the map \(\varphi \colon \q R \to E\) whose graph gives \(R\). In this case, the Koszul dual cooperad is defined by
+\[
+\mathrm{O}^\ac \defeq \big(\q \mathrm{O}^\ac, d_\varphi\big) = \big(\cC(sE, s^2 \q R), d_\varphi\big)
+\]
+and the Koszul dual operad \(\mathrm{O}^!\) is defined by the same dualisation and suspension as above. 
 
-Review of \cite{rocailucio2025absolute}.
+%\subsection{Extending scalars}
+%
+%We will be interested in algebras over the category of graded \(\KK[[h\hbar]]\)-modules.
+%Given an operad \(\rO\) over \(\gVec\), an \(\rO{[\hbar]}\)-algebra is ...
 
-\textcolor{blue}{To do!}
+\subsection{Koszul dual Batalin--Vilkovisky algebras}
 
-\subsection{Extending scalars}
-
-We will be interested in algebras over the category of graded \(\KK[[h\hbar]]\)-modules.
-Given an operad \(\rO\) over \(\gVec\), an \(\rO{[\hbar]}\)-algebra is ...
-
-\subsection{Batalin--Vilkovisky Algebras}
-
-For the first time, we make fully explicit the notion of a dg \(\BV^!\)-algebra.
+For the first time, we make fully explicit the notion of a \(\BV^!\)-algebra.
 
 \begin{proposition}\label{prop:DualBValg}
 	The desuspension of a differential graded \(\BV^!\)-algebra structure on \(sA\) is a Gerstenhaber \(\KK[\hbar]\)-algebra \((A, m ,\{\, , \,\})\) on a chain \(\KK[\hbar]\)-complex \((A,d)\), with \(|\hbar|=-2\), such that the differential \(d\) is a derivation with respect to \(\{\, , \,\}\) and such that
@@ -34,7 +50,7 @@ For the first time, we make fully explicit the notion of a dg \(\BV^!\)-algebra.
 \begin{proof}
 	By \cite[Proposition~7.2.1]{LodayVallette12}, the dg operad Koszul dual to the Batalin--Vilkovisky operad admits the presentation
 	\[
-	\BV^! \cong \bigl(\mathcal{P}(s^{-1}\mathrm{S}\otimes_H E^*,\, s^{-2}\mathrm{S}\otimes_H(\q R)^{\perp}),\, (d_\varphi)^*\bigr).
+	\BV^! \cong \bigl(\mathcal{P}(s^{-1}\mathrm{S}\otimes_H E_{\BV}^*,\, s^{-2}\mathrm{S}\otimes_H(\q R_{\BV})^{\perp}),\, (d_\varphi)^*\bigr).
 	\]
 	On the desuspension \(A\) of \(sA\), the linear duals \(\b^*\) and \(\m^*\) induce symmetric binary operations \(m\) and \(\{\, , \,\}\) of respective degrees \(0\) and \(1\), and the linear dual \(\Delta^*\) induces a degree \(-2\) linear operator \(\tau\).
 	The relations orthogonal to the quadratic analogues of the relations \(R\) assert that \((A, m, \{\, , \,\})\) is a Gerstenhaber algebra with which \(\tau\) commutes, that is, a Gerstenhaber \(\KK[\hbar]\)-algebra with \(|\hbar|=-2\).
@@ -47,6 +63,12 @@ In short plain words, the desuspension of a \(\KK\)-algebra over the operad \(\B
 \[
 [d, m] = \hbar\,\{\, , \,\}.
 \]
+
+\subsection{Algebras over cooperads}
+
+Review of \cite{rocailucio2025absolute}.
+
+\textcolor{blue}{To do!}
 
 \subsection{Main theorem}
 
