@@ -41,10 +41,14 @@ and the Koszul dual operad \(\mathrm{O}^!\) is defined by the same dualisation a
 For the first time, we make fully explicit the notion of a \(\BV^!\)-algebra.
 
 \begin{proposition}\label{prop:DualBValg}
-	The desuspension of a differential graded \(\BV^!\)-algebra structure on \(sA\) is a Gerstenhaber \(\KK[\hbar]\)-algebra \((A, m ,\{\, , \,\})\) on a chain \(\KK[\hbar]\)-complex \((A,d)\), with \(|\hbar|=-2\), such that the differential \(d\) is a derivation with respect to \(\{\, , \,\}\) and such that
-	\[
-	d(m(a,b)) = m\bigl(d(a),b\bigr) + (-1)^{|a|} m\bigl(a,d(b)\bigr) + \hbar\,\{a,b\}.
-	\]
+	A \(\BV^!\)-algebra structure on \(sA\) is equivalent, under desuspension, to a Gerstenhaber \(\KK[\hbar]\)-algebra structure 
+	\((A, m , b %\{\, , \,\})
+         )\)\Bruno{Shall we use \(b\) or \(\{\, , \,\}\)} on the chain \(\KK[\hbar]\)-complex \((A,d)\), with \(|\hbar|=-2\), such that the differential \(d\) is a derivation with respect to the shifted brack \(b\) %\(\{\, , \,\}\) 
+         and such that
+	\begin{equation}\label{eq:dKoszuldual}
+		d(m(x,y)) = m\bigl(d(x),y\bigr) + (-1)^{|x|} m\bigl(x,d(y)\bigr) + \hbar\,b(x,y), %\,\{a,b\}
+	\end{equation}
+for any homogeneous elements \(x, y \in A\).	
 \end{proposition}
 
 \begin{proof}
@@ -52,16 +56,20 @@ For the first time, we make fully explicit the notion of a \(\BV^!\)-algebra.
 	\[
 	\BV^! \cong \bigl(\mathcal{P}(s^{-1}\mathrm{S}\otimes_H E_{\BV}^*,\, s^{-2}\mathrm{S}\otimes_H(\q R_{\BV})^{\perp}),\, (d_\varphi)^*\bigr).
 	\]
-	On the desuspension \(A\) of \(sA\), the linear duals \(\b^*\) and \(\m^*\) induce symmetric binary operations \(m\) and \(\{\, , \,\}\) of respective degrees \(0\) and \(1\), and the linear dual \(\Delta^*\) induces a degree \(-2\) linear operator \(\tau\).
-	The relations orthogonal to the quadratic analogues of the relations \(R\) assert that \((A, m, \{\, , \,\})\) is a Gerstenhaber algebra with which \(\tau\) commutes, that is, a Gerstenhaber \(\KK[\hbar]\)-algebra with \(|\hbar|=-2\).
+	On the desuspension \(A\) of \(sA\), the linear duals \(\b^*\) and \(\m^*\) induce binary symmetric operations \(m\) and \(b\) 
+	%\(\{\, , \,\}\) 
+	of respective degrees \(0\) and \(1\), and the linear dual \(\Delta^*\) induces a degree \(-2\) linear operator \(\tau\).
+	The relations orthogonal to the quadratic analogues of the relations \(R_{\BV}\) assert that \((A, m, b)\) %\{\, , \,\})\) 
+	is a Gerstenhaber algebra with which \(\tau\) commutes, that is, a Gerstenhaber \(\KK[\hbar]\)-algebra with \(|\hbar|=-2\).
 	The induced differential \((d_\varphi)^*\) on the linear dual operad \(\bigl(\q\BV^{\ac}\bigr)^*\) is the unique derivation sending \(s^{-1}\b^*\) to \(-s^{-1}\Delta^* \circ s^{-1}\m^*\) and the other generators to \(0\).
 	This produces Relation~\eqref{eq:dKoszuldual} and the fact that the differential \(d\) commutes with the action of \(\hbar\) and with the commutative product.
-	The sign in Relation~\eqref{eq:dKoszuldual} comes from the fact that the differential on \(A\) is the opposite of the differential on \(sA\).
+	The sign in Relation~\eqref{eq:dKoszuldual} comes from the fact that the differential on \(A\) is opposite to the differential on \(sA\).
 \end{proof}
 
-In short plain words, the desuspension of a \(\KK\)-algebra over the operad \(\BV^!\) is a differential graded Gerstenhaber \(\KK[\hbar]\)-algebra \((A, d, m, \{\, , \,\})\), with \(|\hbar|=-2\), except that the derivation relation with respect to the commutative product \(m\) is replaced by
+In plain words, the desuspension of a \(\KK\)-algebra over the operad \(\BV^!\) is a differential graded Gerstenhaber \(\KK[\hbar]\)-algebra \((A, d, m, b %\{\, , \,\})
+)\), with \(|\hbar|=-2\), except that the derivation relation with respect to the commutative product \(m\) is replaced by
 \[
-[d, m] = \hbar\,\{\, , \,\}.
+[d, m] = \hbar \cdot b. %\{\, , \,\}.
 \]
 
 \subsection{Algebras over cooperads}
